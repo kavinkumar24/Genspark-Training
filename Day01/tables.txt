@@ -1,0 +1,83 @@
+Case 1: A Simple Case
+•	A video store rents movies to members.
+•	Each movie in the store has a title and is identified by a unique movie number.
+•	A movie can be in VHS, VCD, or DVD format.
+•	Each movie belongs to one of a given set of categories (action, adventure, comedy, ... )
+•	The store has a name and a (unique) phone number for each member.n
+•	Each member may provide a favorite movie category (used for marketing purposes).
+•	There are two types of members: 
+	o	Golden Members:
+	o	Bronze Members:
+•	Using  their credit cards gold members can rent one or more movies and bronze members max. of one movie.  
+•	A member may have a number of dependents (with known names).
+•	Each dependent is allowed to rent one (1) movie at a time.
+
+Movie
+- Movie_Number, 
+- Title, 
+- Category_ID,
+- Format_ID
+
+Categories
+- ID,
+- Category_Name
+
+Format
+- ID, 
+- Format_Name
+
+MemberType
+- ID, 
+- Memebers_Name (Golden, Bronze)
+- Max_No_Movies
+
+User
+- ID,
+- Name, 
+- Phone_Number,
+- MemberType_ID,
+- Favorite_ID,
+- RentedMoviesMembers_ID,
+- No_of_Dependent,
+- Dependent_ID
+
+Dependent
+- ID,
+- Name,
+- User_ID,
+- RentedMoviesDependents_ID,
+- isrent (boolean)
+
+FavoriteMovie
+- ID,
+- User_ID,
+- Movie_Number
+
+RentedMoviesMembers
+- ID,
+- User_ID,
+- {
+   Movie_Number,   --- JSON format
+   From_Date,
+   To_Date
+  }
+
+RentedMoviesDependents
+- ID,
+- Dependent_ID,
+- {
+   Movie_Number,   --- JSON format
+   From_Date,
+   To_Date 
+  }
+
+PaymentType
+- ID,
+- Payment_Type (Cash, Credit, Debit)
+
+Payment
+- ID,
+- User_ID,
+- Amount,
+- Payment_Date,
+- Payment_Type_ID,
