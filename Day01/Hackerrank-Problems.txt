@@ -1,0 +1,220 @@
+
+1) https://www.hackerrank.com/challenges/plus-minus/problem?isFullScreen=true
+
+## Solution:
+public static void plusMinus(List<int> arr)
+    {
+        double positive = 0, negative = 0, zero = 0;
+        foreach(int a in arr){
+            if(a==0) 
+             zero++;
+            else if(a>0)
+             positive++;
+            else
+             negative++;   
+        }
+        Console.WriteLine((positive/arr.Count).ToString("F6"));
+        Console.WriteLine((negative/arr.Count).ToString("F6"));
+        Console.WriteLine((zero/arr.Count).ToString("F6"));
+    }
+
+
+
+2) https://www.hackerrank.com/challenges/staircase/problem?isFullScreen=true
+
+## Solution:
+ public static void staircase(int n)
+    {
+        for(int outer_ptr = 1; outer_ptr<=n; outer_ptr++){
+            for(int inner_space_ptr = outer_ptr; inner_space_ptr < n; inner_space_ptr++){
+                Console.Write(" ");
+            }
+            for(int inner_hash_ptr = 1; inner_hash_ptr<=outer_ptr; inner_hash_ptr++){
+                Console.Write("#");
+            }
+            
+            Console.WriteLine();
+        }
+    }
+
+ 
+3) https://www.hackerrank.com/challenges/mini-max-sum/problem?isFullScreen=true
+
+## Solution:
+ public static void miniMaxSum(List<int> arr)
+    {
+     long totalSum = 0;
+     int minval = arr[0],maxval = arr[0];
+     foreach(int a in arr){
+        totalSum+=a;
+        if(a < minval) minval = a;
+        if(a > maxval) maxval = a;
+     }
+     long minsum = totalSum - maxval;
+     long maxsum = totalSum - minval;
+     
+     Console.Write(minsum+ " " + maxsum);
+    }
+ 
+4) https://www.hackerrank.com/challenges/birthday-cake-candles/problem?isFullScreen=true
+
+## Solution:
+ public static int birthdayCakeCandles(List<int> candles)
+    {
+        candles.Sort();
+        int maxVal = candles[candles.Count()-1], countVal = 0;
+        foreach(int c in candles){
+            if(maxVal == c){
+                countVal++;
+            }
+        }
+         
+        return countVal;
+    }
+ 
+5) https://www.hackerrank.com/challenges/time-conversion/problem?isFullScreen=true
+
+## Solution -- first approach:
+public static string timeConversion(string s)
+    {
+        string[] time = s.Split(':');
+        int hour = Convert.ToInt32(time[0]);
+        string minute = time[1];
+        string second = time[2].Substring(0, 2);
+        string ampm = time[2].Substring(2);
+        
+        if(ampm == "PM" && hour != 12){
+            hour += 12;
+        }else if(ampm == "AM" && hour == 12){
+            hour = 0;
+        }
+        
+        return String.Format("{0:D2}:{1}:{2}", hour, minute, second);
+    }
+
+    ## Solution -- second approach:
+     public static string timeConversion(string s)
+    {
+       
+      DateTime d = DateTime.ParseExact(s, "hh:mm:sstt", CultureInfo.InvariantCulture);
+      return d.ToString("HH:mm:ss");
+       
+    }
+ 
+6) https://www.hackerrank.com/challenges/grading/problem?isFullScreen=true
+
+## Solution:
+ public static List<int> gradingStudents(List<int> grades)
+    {
+        List<int> passGrades = new();
+        int MulFive = 0;
+        foreach(int g in grades){
+            if(g < 38){
+               passGrades.Add(g);
+            }
+            else{
+                MulFive = (g/5+1)*5;
+                if(MulFive-g<3){
+                    passGrades.Add(MulFive);
+                }
+                else{
+                    passGrades.Add(g);
+                }
+            }
+        }
+        return passGrades;
+    }
+
+ 
+7) https://www.hackerrank.com/challenges/apple-and-orange/problem?isFullScreen=true
+
+## Solution:
+ public static void countApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
+    {
+        int no_of_apples = 0, no_of_oranges =0;
+        foreach(int app in apples){
+            if((a+app>=s) && (a+app <= t)){
+                no_of_apples++;
+            }
+        }
+        foreach(int org in oranges){
+            if((b+org) >=s && (b+org) <= t){
+                no_of_oranges++;
+            }
+        }
+        Console.WriteLine(no_of_apples);
+        Console.WriteLine(no_of_oranges);
+    }
+
+
+ 
+8) https://www.hackerrank.com/challenges/kangaroo/problem?isFullScreen=true
+
+## Solution:
+public static string kangaroo(int x1, int v1, int x2, int v2)
+    {
+        int ThresJumps = 10000;
+        
+        for(int i = 0; i<ThresJumps; i++){
+            int p1 = x1+v1*i;
+            int p2 = x2+v2*i;
+            if(p1==p2) return "YES";
+        }
+        return "NO";
+    }
+ 
+9) https://www.hackerrank.com/challenges/between-two-sets/problem?isFullScreen=true
+
+## Solution:
+  public static int getTotalX(List<int> a, List<int> b)
+    {
+      int lcmVal = a[0], gcdval = b[0], count = 0;
+      foreach(int ptr in a){
+        lcmVal = lcm(lcmVal, ptr);
+      }
+      foreach(int ptr in b){
+        gcdval = gcd(gcdval, ptr);
+      }
+      for(int ptr = lcmVal; ptr<= gcdval; ptr+= lcmVal){
+        if(gcdval%ptr ==0){
+            count++;
+        }
+      }
+      return count;
+      
+    }
+
+    public static int gcd(int m,int n){
+            while(n!= 0){
+                int temp = n;
+                n = m%n;
+                m = temp;
+            }
+            return m;
+        }
+    public static int lcm (int m, int n){
+        return (m*n) / gcd(m,n);
+    }
+    
+ 
+10) https://www.hackerrank.com/challenges/breaking-best-and-worst-records/problem?isFullScreen=true
+
+## Solution:
+public static List<int> breakingRecords(List<int> scores)
+    {
+       List<int> Count = new();
+       int mincount = 0, maxcount = 0, minscr = scores[0], maxscr = scores[0];
+       foreach(int scr in scores){
+        if(scr > maxscr){
+            maxscr = scr;
+            maxcount++;
+        }
+        else if(scr < minscr){
+            minscr = scr;
+            mincount++;
+        }
+       }
+       Count.Add(maxcount);
+       Count.Add(mincount);
+       return Count;
+    }
