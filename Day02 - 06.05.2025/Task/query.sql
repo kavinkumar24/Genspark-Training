@@ -148,7 +148,7 @@ VALUES('Pocket Knife-Nile','E', 'Brown'),
 ('Safari cooking kit', 'F', 'Khaki'),
 ('Stetson', 'C', 'Black'),
 ('Tent - 2 person', 'F', 'Khaki'),
-('Tent -8	 personn', 'F', 'Khaki')
+('Tent -8 personn', 'F', 'Khaki')
 
 
 INSERT INTO SALES(saleno, saleqty, itemname, deptname)
