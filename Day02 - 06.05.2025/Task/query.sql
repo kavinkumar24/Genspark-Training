@@ -1,3 +1,10 @@
+-- Table Schema:	 
+-- Create Tables with Integrity Constrains:
+-- a)	EMP (empno - primary key, empname, salary, deptname - references entries in a deptname of department table with null constraint, bossno - references entries in an empno of emp table with null constraint)
+-- b)	DEPARTMENT (deptname - primary key, floor, phone, empno - references entries in an empno of emp table not null)
+-- c)	SALES (salesno - primary key, saleqty, itemname -references entries in a itemname of item table with not null constraint, deptname - references entries in a deptname of department table with not null constraint)
+-- d)	ITEM (itemname - primary key, itemtype, itemcolor)
+
 
 CREATE TABLE EMP(
  empno INT PRIMARY KEY,
