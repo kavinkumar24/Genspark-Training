@@ -55,7 +55,7 @@ SELECT TOP 5 ProductID, ProductName, UnitPrice
 FROM Products
 ORDER BY UnitPrice DESC;
 
--- Return the total sales amount (quantity × unit price) per order.
+-- Return the total sales amount (quantity  unit price) per order.
 SELECT * FROM [Order Details]
 
 SELECT  OrderID, SUM(Quantity * UnitPrice) AS Total_sales_per_order
