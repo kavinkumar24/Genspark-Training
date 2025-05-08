@@ -1,6 +1,6 @@
 # Day 4
 
-## Sessios
+## Sessions
 
 ### Morning 
 
