@@ -1,5 +1,5 @@
 -- Cursor-Based Questions (5)
--- Write a cursor that loops through all films and prints titles longer than 120 minutes.
+-- 1) Write a cursor that loops through all films and prints titles longer than 120 minutes.
 
 DO $$
 DECLARE 
@@ -22,7 +22,7 @@ $$ LANGUAGE plpgsql
 
 SELECT * FROM customer
 
--- Create a cursor that iterates through all customers and counts how many rentals each made.
+-- 2) Create a cursor that iterates through all customers and counts how many rentals each made.
 
 SELECT * FROM rental
 DO $$
@@ -49,7 +49,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 	
--- Using a cursor, update rental rates: Increase rental rate by $1 for films with less than 5 rentals.
+-- 3) Using a cursor, update rental rates: Increase rental rate by $1 for films with less than 5 rentals.
 
 DO $$
 DECLARE
@@ -75,7 +75,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Create a function using a cursor that collects titles of all films FROM a particular category.
+-- 4) Create a function using a cursor that collects titles of all films FROM a particular category.
 
 CREATE OR REPLACE FUNCTION get_flims_categories(category_name_input TEXT)
 RETURNS TABLE(title TEXT, category TEXT) 
@@ -106,7 +106,7 @@ $$ LANGUAGE plpgsql;
 SELECT * FROM get_flims_categories('Action')
 
 
--- Loop through all stores and count how many distinct films are available in each store using a cursor.
+-- 5) Loop through all stores and count how many distinct films are available in each store using a cursor.
 
 SELECT * FROM store
 SELECT * FROM inventory
@@ -147,7 +147,7 @@ SELECT * FROM get_distinct_films_stores()
 
 
 -- Trigger-Based Questions (5)
--- Write a trigger that logs whenever a new customer is inserted.
+-- 6) Write a trigger that logs whenever a new customer is inserted.
 
 SELECT * FROM customer
 
@@ -181,7 +181,7 @@ VALUES (702, 2, 'vemu1', 'P', 'vemu1@customer.org', 118, true,1)
 SELECT * FROM customer
 SELECT * FROM new_customer_logs
 
--- Create a trigger that prevents inserting a payment of amount 0.
+-- 7) Create a trigger that prevents inserting a payment of amount 0.
 
 CREATE OR REPLACE FUNCTION prevent_zero_level_payment ()
 RETURNS TRIGGER
@@ -207,7 +207,7 @@ VALUES (10003, 600, 2, 1778, 1, '2007-02-15 22:25:46.996577')
 SELECT * FROM payment where payment_id = 10003
 
 
--- Set up a trigger to automatically set last_update on the film table before update.
+-- 8) Set up a trigger to automatically set last_update on the film table before update.
 
 SELECT * FROM film
 
@@ -229,7 +229,7 @@ UPDATE film SET release_year = 2025 WHERE film_id = 2
 SELECT * FROM film WHERE film_id = 2;
 
 
--- Create a trigger to log changes in the inventory table (insert/delete)
+-- 9) Create a trigger to log changes in the inventory table (insert/delete)
 
 SELECT * FROM inventory
 
@@ -281,7 +281,7 @@ DELETE FROM inventory WHERE inventory_id = 10011
 
 SELECT * FROM inventory_logs
 
--- Write a trigger that ensures a rental can’t be made for a customer who owes more than $50.
+-- 10) Write a trigger that ensures a rental can’t be made for a customer who owes more than $50.
 
 SELECT * FROM customer
 
@@ -324,7 +324,7 @@ VALUES (1004999, NOW(), 1, 110, NULL, 1, NOW());
 
 
 -- Transaction-Based Questions (5)
--- Write a transaction that inserts a customer and an initial rental in one atomic operation.
+-- 11) Write a transaction that inserts a customer and an initial rental in one atomic operation.
 
 SELECT * FROM customer;
 SELECT * FROM rental;
@@ -345,7 +345,7 @@ SELECT * FROM customer WHERE customer_id = 602;
 SELECT * FROM rental WHERE customer_id = 602;
 
 
--- Simulate a failure in a multi-step transaction (update film + insert into inventory) and roll back.
+-- 12) Simulate a failure in a multi-step transaction (update film + insert into inventory) and roll back.
 
 SELECT * FROM inventory
 
@@ -365,7 +365,7 @@ EXCEPTION
 $$ LANGUAGE plpgsql
 
 
--- Create a transaction that transfers an inventory item FROM one store to another.
+-- 13) Create a transaction that transfers an inventory item FROM one store to another.
 
 DO $$
 DECLARE
@@ -393,7 +393,7 @@ $$;
 SELECT * FROM inventory
 
 
--- Demonstrate SAVEPOINT and ROLLBACK TO SAVEPOINT by updating payment amounts, then undoing one.
+-- 14) Demonstrate SAVEPOINT and ROLLBACK TO SAVEPOINT by updating payment amounts, then undoing one.
 
 SELECT * FROM payment
 
@@ -421,7 +421,7 @@ WHERE payment_id IN (17503,17504,17505)
 
 
 
--- Write a transaction that deletes a customer and all associated rentals and payments, ensuring atomicity.
+-- 15) Write a transaction that deletes a customer and all associated rentals and payments, ensuring atomicity.
 
 DO $$
 DECLARE 
