@@ -1,4 +1,3 @@
-
 -- 1. Question:
 --  In a transaction, if I perform multiple updates and an error happens in the third statement,
 --  but I have not used SAVEPOINT, what will happen if I issue a ROLLBACK?
@@ -11,11 +10,11 @@ BEGIN;
 UPDATE tbl_bank_accounts SET balance = balance - 100 WHERE account_id = 1;
 UPDATE tbl_bank_accounts SET balance = balance + 100 WHERE account_id = 2;
 UPDATE tbl_bank_accounts SET balance = balance - 200 WHERE account_id = 1;
-UPDATE tbl_bank_accounts SET balance = balance + 'eror' WHERE account_id = 2;
+UPDATE tbl_bank_accounts SET balance = balance + 'error' WHERE account_id = 2;
  
 ROLLBACK;
 
-
+------------------------------------------------------------------------------------------
 
 -- 2. Question: 
 -- Suppose Transaction A updates Alice’s balance but does not commit. Can Transaction B read the new balance 
@@ -39,7 +38,7 @@ WHERE account_name = 'Alice'
 
 COMMIT;
 
-
+------------------------------------------------------------------------------------------
 
 -- 3. Question: 
 -- What will happen if two concurrent transactions both execute:
@@ -66,6 +65,7 @@ BEGIN;
 
 SELECT balance FROM tbl_bank_accounts  
 
+------------------------------------------------------------------------------------------
 
 -- 4. Question:
 -- If I issue ROLLBACK TO SAVEPOINT after_alice;, will it only undo changes made after the savepoint or everything?
@@ -83,6 +83,7 @@ BEGIN;
 	ROLLBACK TO SAVEPOINT after_alice;
 COMMIT;
 
+------------------------------------------------------------------------------------------
 
 -- 5. Question:
 -- Which isolation level in PostgreSQL prevents phantom reads?
@@ -93,6 +94,7 @@ SERIALIZABLE - which prevents the phantom reads
 - Trans2 insert row that match the condition
 - Trans1 runs same select query, it sees different rows 
 
+------------------------------------------------------------------------------------------
 
 -- 6. Question: 
 -- Can Postgres perform a dirty read (reading uncommitted data from another transaction)?
@@ -111,6 +113,7 @@ BEGIN;
 SELECT balance FROM tbl_bank_accounts 
 WHERE account_name = 'Alice';
 
+------------------------------------------------------------------------------------------
 
 -- 7. Question:
 -- If autocommit is ON (default in Postgres), and I execute an UPDATE, is it safe to assume the change is immediately committed?
@@ -119,6 +122,7 @@ WHERE account_name = 'Alice';
 - In postgresaql, autocommit is enabled, each individual sql statement is executed and committed
 - No need for explicit commit in the outer transaction queries
 
+------------------------------------------------------------------------------------------
 
 -- 8. Question:
 -- If I do this:
@@ -138,3 +142,4 @@ WHERE account_name = 'Alice';
 - This ensures data consistency and avoid dirty reads
 
 
+------------------------------------------------------------------------------------------
