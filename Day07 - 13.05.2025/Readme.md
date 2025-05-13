@@ -56,3 +56,10 @@ There are certain lock modes present in the table level locking
 - These tables are `cleared` `as soon as` the `triggers` got executed
 - We can able to pass the parameter in a trigger function and retrieves using `TG_ARGV`
 - `row_to_json` is used to convert the entire row data in the format of json
+
+## Cursor
+
+- It is a `database object` used to execute row by row 
+- Initially it stores the SELECT query in the `memory` and a `pointer` points to the memory and executes row by row
+- By using cursors we can able to `fetch` and `insert` the data to the table
+
