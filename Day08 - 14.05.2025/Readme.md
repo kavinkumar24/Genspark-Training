@@ -11,6 +11,11 @@
 - Master and slave
 - Streaming replication - WAL
 
+### Afternoon
+
+- Task based on replication server in a standby mode with primary one
+- Back up in the sql
+- runtime-config-replication 
 
 
 ## Transaction in stored procedure
