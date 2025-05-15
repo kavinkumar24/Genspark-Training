@@ -1,0 +1,70 @@
+-- Grant privileges steps
+
+-- 1. Run a Primary Server with the port of 5433
+pg_ctl -D D:\pri -o "-p 5433" -l d:\pri\logfile start
+
+-- 2. Log into the Primary Server
+psql -p 5433 -d postgres
+
+-- 3. Create a new role for read-only access
+CREATE ROLE readonly WITH LOGIN PASSWORD '123';
+
+-- 4. Create a new database
+CREATE DATABASE sample_db;
+
+-- 5. Grant CONNECT privileges on the database to the readonly role
+GRANT CONNECT ON DATABASE sample_db TO readonly;
+
+-- 6. Make all tables in the public schema owned by the readonly role
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly;
+
+-- 6. connect to postgres database
+psql -p 5433 -p 5433 -d postgres
+ 
+ and verify the privileges
+
+-- 7. Connect to the sample_db database
+psql -p 5433 -d sample_db
+
+-- 8. Create a new table
+CREATE TABLE test_table (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50)
+);
+-- It says that the role does not have permission to create a table
+
+
+--------------------------------------------
+
+Grant command
+
+1. To Granting all privileges on a table to a user:
+GRANT ALL PRIVILEGES ON TABLE test_table TO readonly;
+
+2. To Granting all privileges on a database to a user:
+GRANT ALL PRIVILEGES ON DATABASE sample_db TO readonly;
+
+3. To granting EXECUTE privileges on a function to a user:
+GRANT EXECUTE ON FUNCTION function_name TO readonly;
+
+4. TO Granting connect privileges on a database to a user:
+GRANT CONNECT ON DATABASE db_demo TO readonly;
+
+5. To Granting with GRANT OPTION:
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly WITH GRANT OPTION;
+-- This allows the readonly role to grant SELECT privileges to other roles.
+
+6. Inheriting privileges:
+CREATE ROLE readonly NOINHERIT;
+-- This means that the readonly role will not automatically inherit the privileges of roles it is a member of.
+-- To allow the readonly role to inherit privileges, you can use the INHERIT option:
+CREATE ROLE readonly INHERIT;
+-- This means that the readonly role will automatically inherit the privileges of roles it is a member of.
+
+7. To revoke privileges:
+REVOKE SELECT ON TABLE demo_tbl FROM readonly;
+-- This will remove the SELECT privilege from the readonly role on the demo_tbl table.
+
+-- 8. To revoke all privileges on a table from a user:
+REVOKE ALL PRIVILEGES ON TABLE test_table FROM readonly;
+-- This will remove all privileges on the test_table table from the readonly role.
