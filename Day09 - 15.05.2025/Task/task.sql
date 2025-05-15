@@ -98,7 +98,7 @@ DO $$
 DECLARE 
 	masked_text_out TEXT;
 BEGIN
-	CALL sp_mask_text('sam', masked_text_out);
+	CALL sp_mask_text('john.doe@example.com', masked_text_out);
 	RAISE NOTICE 'masked text - %', masked_text_out;
 END;
 $$;
