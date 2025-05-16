@@ -75,7 +75,6 @@ CREATE TABLE trainers(
 	expertise TEXT NOT NULL
 );
 ---------------------------------------------------------------
-DROP TABLE enrollments
 CREATE TABLE enrollments(
 	enrollment_id SERIAL CONSTRAINT pk_enroll_id PRIMARY KEY,
 	student_id INT NOT NULL,
@@ -88,7 +87,6 @@ CREATE TABLE enrollments(
 ALTER TABLE enrollments
 ADD COLUMN status boolean;
 ---------------------------------------------------------------
-DROP TABLE certificates
 CREATE TABLE certificates(
 	certificate_id SERIAL CONSTRAINT pk_cert_id PRIMARY KEY,
 	enrollment_id INT NOT NULL,
@@ -386,8 +384,7 @@ REVOKE INSERT ON students, enrollments FROM data_entry_user;
 -- -- insert into enrollments
 -- -- insert into certificates
 -- -- COMMIT or ROLLBACK on error
-```
-SELECT * FROM enrollments
+
 -- Transaction in stored procedure (solution 1 with condition)
 
 CREATE OR REPLACE PROCEDURE sp_enroll_and_issue_certification (p_student_id INT, p_course_id INT,p_flag TEXT)
@@ -468,5 +465,5 @@ BEGIN
 		RAISE NOTICE 'Transaction failed and rolled back';
 	END;
 END $$;
-		
+
 ---------------------------------------------------------------------------------------------------------
