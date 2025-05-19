@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.AssemblyInfo.cs
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\CSharpPractice.exe
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\CSharpPractice.deps.json
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\CSharpPractice.runtimeconfig.json
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\CSharpPractice.dll
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\CSharpPractice.pdb
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.dll
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\refint\CSharpPractice.dll
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.pdb
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\CSharpPractice.genruntimeconfig.cache
+D:\C#-Projects\source\repo\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ref\CSharpPractice.dll
