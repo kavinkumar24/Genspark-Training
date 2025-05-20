@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\bin\Debug\net8.0\1_InstagramPosts.exe
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\bin\Debug\net8.0\1_InstagramPosts.deps.json
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\bin\Debug\net8.0\1_InstagramPosts.runtimeconfig.json
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\bin\Debug\net8.0\1_InstagramPosts.dll
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\bin\Debug\net8.0\1_InstagramPosts.pdb
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.AssemblyInfo.cs
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.dll
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\refint\1_InstagramPosts.dll
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.pdb
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\1_InstagramPosts.genruntimeconfig.cache
+D:\C#-Projects\source\repo\C#-Day2\C#-Day2\obj\Debug\net8.0\ref\1_InstagramPosts.dll

@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.AssemblyInfo.cs
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\bin\Debug\net8.0\Dictionary_Products.exe
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\bin\Debug\net8.0\Dictionary_Products.deps.json
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\bin\Debug\net8.0\Dictionary_Products.runtimeconfig.json
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\bin\Debug\net8.0\Dictionary_Products.dll
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\bin\Debug\net8.0\Dictionary_Products.pdb
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.dll
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\refint\Dictionary_Products.dll
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.pdb
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\Dictionary_Products.genruntimeconfig.cache
+D:\C#-Projects\source\repo\C#-Day2\Dictionary_Products\obj\Debug\net8.0\ref\Dictionary_Products.dll

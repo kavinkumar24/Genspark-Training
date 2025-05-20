@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\bin\Debug\net8.0\2_EmployeePromotion.exe
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\bin\Debug\net8.0\2_EmployeePromotion.deps.json
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\bin\Debug\net8.0\2_EmployeePromotion.runtimeconfig.json
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\bin\Debug\net8.0\2_EmployeePromotion.dll
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\bin\Debug\net8.0\2_EmployeePromotion.pdb
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.AssemblyInfo.cs
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.dll
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\refint\2_EmployeePromotion.dll
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.pdb
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\2_EmployeePromotion.genruntimeconfig.cache
+D:\C#-Projects\source\repo\C#-Day2\EmployeePromotion\obj\Debug\net8.0\ref\2_EmployeePromotion.dll

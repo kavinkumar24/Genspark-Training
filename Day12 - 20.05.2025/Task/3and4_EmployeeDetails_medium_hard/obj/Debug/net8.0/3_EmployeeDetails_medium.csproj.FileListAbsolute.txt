@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\bin\Debug\net8.0\3_EmployeeDetails_medium.exe
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\bin\Debug\net8.0\3_EmployeeDetails_medium.deps.json
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\bin\Debug\net8.0\3_EmployeeDetails_medium.runtimeconfig.json
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\bin\Debug\net8.0\3_EmployeeDetails_medium.dll
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\bin\Debug\net8.0\3_EmployeeDetails_medium.pdb
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.AssemblyInfo.cs
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.dll
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\refint\3_EmployeeDetails_medium.dll
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.pdb
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\3_EmployeeDetails_medium.genruntimeconfig.cache
+D:\C#-Projects\source\repo\C#-Day2\3_EmployeeDetails_medium\obj\Debug\net8.0\ref\3_EmployeeDetails_medium.dll
