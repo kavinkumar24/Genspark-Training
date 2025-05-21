@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\interface\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\interface\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\interface\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\interface\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\helper\\datehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\helper\\datehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\ui\\mangeappointments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\ui\\mangeappointments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\models\\sortmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\models\\sortmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|d:\\c#-projects\\source\\repo\\manageappoinmentsapp\\manageappoinmentsapp\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F77E2CF9-B388-4DA5-AB01-0ED2209B51FA}|ManageAppoinmentsApp\\ManageAppoinmentsApp.csproj|solutionrelative:manageappoinmentsapp\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Interface\\IRepository.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Interface\\IRepository.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Interface\\IRepository.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Interface\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:30:11.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppointmentService.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Services\\AppointmentService.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Services\\AppointmentService.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Services\\AppointmentService.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Services\\AppointmentService.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAowB4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:19:11.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Models\\Appointment.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Models\\Appointment.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Models\\Appointment.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Models\\Appointment.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAqwC4AAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T09:32:45.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IAppointmentService.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Interface\\IAppointmentService.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Interface\\IAppointmentService.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Interface\\IAppointmentService.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Interface\\IAppointmentService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAwwA0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:35:21.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DateHelper.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Helper\\DateHelper.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Helper\\DateHelper.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Helper\\DateHelper.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Helper\\DateHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T12:49:37.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MangeAppointments.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\UI\\MangeAppointments.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\UI\\MangeAppointments.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\UI\\MangeAppointments.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\UI\\MangeAppointments.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAmwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T09:33:14.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SortModel.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Models\\SortModel.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Models\\SortModel.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Models\\SortModel.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Models\\SortModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:40:27.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "ManageAppoinmentsApp\\Repositories\\Repository.cs",
+              "ToolTip": "D:\\C#-Projects\\source\\repo\\ManageAppoinmentsApp\\ManageAppoinmentsApp\\Repositories\\Repository.cs",
+              "RelativeToolTip": "ManageAppoinmentsApp\\Repositories\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:30:39.432Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

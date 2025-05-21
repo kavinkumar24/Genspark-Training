@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.AssemblyInfo.cs
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\bin\Debug\net8.0\ManageAppoinmentsApp.exe
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\bin\Debug\net8.0\ManageAppoinmentsApp.deps.json
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\bin\Debug\net8.0\ManageAppoinmentsApp.runtimeconfig.json
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\bin\Debug\net8.0\ManageAppoinmentsApp.dll
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\bin\Debug\net8.0\ManageAppoinmentsApp.pdb
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.dll
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\refint\ManageAppoinmentsApp.dll
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.pdb
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ManageAppoinmentsApp.genruntimeconfig.cache
+D:\C#-Projects\source\repo\ManageAppoinmentsApp\ManageAppoinmentsApp\obj\Debug\net8.0\ref\ManageAppoinmentsApp.dll

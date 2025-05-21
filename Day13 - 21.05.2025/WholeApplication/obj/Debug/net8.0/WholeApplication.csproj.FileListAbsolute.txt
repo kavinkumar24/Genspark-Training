@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.exe
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.deps.json
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.runtimeconfig.json
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.dll
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.pdb
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.AssemblyInfo.cs
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.dll
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\refint\WholeApplication.dll
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.pdb
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.genruntimeconfig.cache
+D:\C#-Projects\source\repo\WholeApplication\WholeApplication\obj\Debug\net8.0\ref\WholeApplication.dll
