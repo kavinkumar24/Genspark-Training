@@ -34,7 +34,7 @@ namespace ManageAppoinmentsApp.UI
             while (true)
             {
                 ShowMenuOptions();
-                while(!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
+                while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
                 {
                     Console.WriteLine("Invalid input. Please enter a number between 1 and 3.");
                 }
@@ -123,7 +123,7 @@ namespace ManageAppoinmentsApp.UI
         {
             Console.WriteLine("Appointment details");
             Console.WriteLine("-------------------");
-            if(appointments == null)
+            if (appointments == null)
             {
                 Console.WriteLine("No Appointments to show.");
                 return;
@@ -156,7 +156,7 @@ namespace ManageAppoinmentsApp.UI
                     {
                         Console.WriteLine("Invalid entry. Please enter the appointment ID starting from 1.");
                     }
-                    searchModel.Id = id; 
+                    searchModel.Id = id;
                     break;
                 case 2:
                     Console.Write("Please enter patient name: ");
@@ -164,7 +164,7 @@ namespace ManageAppoinmentsApp.UI
                     break;
                 case 3:
                     Console.Write("please enter patient age: ");
-                    
+
                     searchModel.PatientAge = new Range<int>();
                     int age;
                     Console.WriteLine("please enter the min employee age");
@@ -198,6 +198,6 @@ namespace ManageAppoinmentsApp.UI
             return searchModel;
         }
 
-    
+
     }
 }
