@@ -1,0 +1,54 @@
+## Solid Principles
+
+### Single Responsibility Principle (SRP)
+- A class should have one and only one reason to change, meaning that a class should have only one job or responsibility.
+
+### Open/Closed Principle (OCP)
+- Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+
+### Liskov Substitution Principle (LSP)
+- Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+
+### Interface Segregation Principle (ISP)
+- No client should be forced to depend on methods it does not use. This principle is about creating smaller, more specific interfaces rather than a large, general-purpose interface.
+
+### Dependency Inversion Principle (DIP)
+- High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces).
+
+
+SOLID principles in the TASK scenario:
+
+- S (Single Responsibility Principle)
+    - The "Program.cs" file handles the flow of UI related logic which displays the menu and takes user input.
+    - The "ManageBooks" class is responsible for managing books, like adding books, view, purchase
+    - The "BookRepository" class is only responsible for storing and retrieving data (in-memory).
+    - The "EmailNotificationService" is responsible for sending email notifications.
+    - The "SMSNotificationService" is responsible for sending SMS notifications.
+
+So, by separating the responsibility, they have only one reason to change
+
+- O (Open/Closed Principle)
+    - The "INotificationService" interface allows for new notification services to be added without modifying existing code.
+    - Eg: I have implemented two notification services: "EmailNotificationService" and "SMSNotificationService". If I want to add a new notification service, I can create a new class that implements the "INotificationService" interface without modifying the existing classes.
+So, By using interfaces, we can extend the functionality of the system without modifying existing code.
+
+
+- L (Liskov Substitution Principle)
+    - The "INotificationService" interface allows for any class that implements it to be used interchangeably.
+    - Eg: I can use "EmailNotificationService" or "SMSNotificationService" interchangeably in the "ManageBooks" class without affecting the correctness of the program.
+    and in the Program.cs file => Both are interchangeable, because they follow up same contract (INotificationService)
+
+
+- I (Interface Segregation Principle)
+
+    - The "INotificationService" interface is small and specific, allowing for different notification services to implement only the methods they need.
+    - Eg: If I had a large interface with many methods, it would force classes to implement methods they don't need. By keeping interfaces small and focused, we can avoid this problem.
+    - In the TASK scenario, the "INotificationService" interface is small and specific, allowing for different notification services to implement only the methods they need.
+
+- D (Dependency Inversion Principle)
+    - The "ManageBooks" class depends on the "INotificationService" interface rather than concrete implementations.
+    - Eg: The "ManageBooks" class does not depend on the concrete implementation of the notification service. It only depends on the interface, which allows for flexibility and easier testing.
+    - In the TASK scenario, the "ManageBooks" class depends on the "INotificationService" interface rather than concrete implementations, allowing for flexibility and easier testing.
+
+- In can change the instance through by using a constructor injection
+    - Eg: I can pass in different implementations of the "INotificationService" interface to the "ManageBooks" class, allowing for different notification methods to be used without modifying the class itself.

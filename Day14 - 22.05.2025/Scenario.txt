@@ -1,0 +1,5 @@
+For the Task I've choose the topic
+- Book Management System
+- The system allows users to add, view, and purchase books.
+- The system sends notifications to users when a book is added,purchased, viewed.
+- The system uses SOLID principles to ensure maintainability and scalability.
