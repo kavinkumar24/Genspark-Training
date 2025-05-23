@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\bin\Debug\net8.0\AdapterDesign.exe
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\bin\Debug\net8.0\AdapterDesign.deps.json
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\bin\Debug\net8.0\AdapterDesign.runtimeconfig.json
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\bin\Debug\net8.0\AdapterDesign.dll
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\bin\Debug\net8.0\AdapterDesign.pdb
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.AssemblyInfo.cs
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.dll
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\refint\AdapterDesign.dll
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.pdb
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\AdapterDesign.genruntimeconfig.cache
+D:\C#-Projects\source\repo\Adapter_FlyWeight_Design\Adapter_FlyWeight_Design\obj\Debug\net8.0\ref\AdapterDesign.dll

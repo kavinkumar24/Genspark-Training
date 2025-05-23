@@ -1,0 +1,14 @@
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.AssemblyInfoInputs.cache
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.AssemblyInfo.cs
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.csproj.CoreCompileInputs.cache
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\bin\Debug\net8.0\ProxyDesign.exe
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\bin\Debug\net8.0\ProxyDesign.deps.json
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\bin\Debug\net8.0\ProxyDesign.runtimeconfig.json
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\bin\Debug\net8.0\ProxyDesign.dll
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\bin\Debug\net8.0\ProxyDesign.pdb
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.dll
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\refint\ProxyDesign.dll
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.pdb
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ProxyDesign.genruntimeconfig.cache
+D:\C#-Projects\source\repo\ProxyDesign\ProxyDesign\obj\Debug\net8.0\ref\ProxyDesign.dll
