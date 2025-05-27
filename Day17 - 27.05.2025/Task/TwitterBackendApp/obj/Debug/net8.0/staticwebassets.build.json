@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "2XGMvU8/QoL0D0k+kdKdhQhPokYRvp9oOE5g40Nv1cw=",
+  "Source": "TwitterBackendApp",
+  "BasePath": "_content/TwitterBackendApp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
