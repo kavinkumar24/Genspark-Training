@@ -35,5 +35,6 @@ A version-controlled process for updating the database schema in sync with chang
 
 Configured using UseNpgsql in the database context options to establish communication with a PostgreSQL database.
 
+## Annotations
 
 Data annotations like [ForeignKey] and [InverseProperty] define how entity relationships are mapped and linked in the database.
