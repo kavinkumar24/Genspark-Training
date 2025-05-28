@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task", "Task", "{85D98BDA-0DDA-B873-B90D-60F29E2E51CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalAppointments", "Task\HospitalAppointments\HospitalAppointments.csproj", "{A3C7F2A2-B05A-04B8-8333-5214F4E3E578}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3C7F2A2-B05A-04B8-8333-5214F4E3E578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C7F2A2-B05A-04B8-8333-5214F4E3E578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C7F2A2-B05A-04B8-8333-5214F4E3E578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C7F2A2-B05A-04B8-8333-5214F4E3E578}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3C7F2A2-B05A-04B8-8333-5214F4E3E578} = {85D98BDA-0DDA-B873-B90D-60F29E2E51CE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64BE8742-49EE-48B0-8E17-6B87B008FB98}
+	EndGlobalSection
+EndGlobal
