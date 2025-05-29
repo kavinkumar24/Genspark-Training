@@ -16,18 +16,41 @@ namespace BankingApp.Controllers
         {
             _transactionService = transactionService;
         }
+       [HttpPost("credit")]
+public async Task<IActionResult> CreditAmount([FromBody] TransferRequestDto transferRequest)
+{
+    if (transferRequest == null ||
+        string.IsNullOrWhiteSpace(transferRequest.FromAccountNumber) ||
+        string.IsNullOrWhiteSpace(transferRequest.ToAccountNumber) ||
+        transferRequest.Amount <= 0)
+    {
+        return BadRequest("Invalid account number or amount.");
+    }
 
-        [HttpPost("transfer")]
-        public async Task<IActionResult> TransferAmount([FromBody] TransferRequestDto transferRequest)
-        {
-            if (transferRequest == null || transferRequest.Amount <= 0)
-            {
-                return BadRequest("Invalid transfer request.");
-            }
+    try
+    {
+        var transaction = await _transactionService.CreditAmountAsync(transferRequest);
 
-            var transaction = await _transactionService.TransferAmountAsync(transferRequest.FromAccountId, transferRequest.ToAccountId, transferRequest.Amount);
-            return Ok(transaction);
-        }
+        return Ok(transaction);
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
+
+
+        // [HttpPost("debit")]
+        // public async Task<IActionResult> DebitAmount([FromBody] TransferRequestDto transferRequest)
+        // {
+        //     if (transferRequest == null || transferRequest.Amount <= 0)
+        //     {
+        //         return BadRequest("Invalid transfer request.");
+        //     }
+
+        //     var transaction = await _transactionService.DebitAmountAsync(transferRequest.FromAccountId, transferRequest.ToAccountId, transferRequest.Amount);
+        //     return Ok(transaction);
+        // }
 
         [HttpGet("all-transfers")]
         public async Task<IActionResult> GetAllTransfers()

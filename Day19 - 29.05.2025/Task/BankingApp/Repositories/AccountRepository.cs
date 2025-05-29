@@ -1,5 +1,6 @@
 using System;
 using BankingApp.Contexts;
+using BankingApp.Interfaces;
 using BankingApp.Models;
 using BankingApp.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ namespace BankingApp.Repositories;
 
 public class AccountRepository : Repository<int, Account>
 {
-  
+
 
     public AccountRepository(BankingContext context) : base(context)
     {
@@ -39,4 +40,11 @@ public class AccountRepository : Repository<int, Account>
             throw new Exception($"Error retrieving all accounts: {ex.Message}");
         }
     }
+    
+  public async Task<Account> GetByAccountNumberAsync(string accountNumber)
+{
+    return await _bankingContext.Accounts
+                         .FirstOrDefaultAsync(a => a.AccountNumber == accountNumber);
+}
+
 }

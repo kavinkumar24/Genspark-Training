@@ -6,8 +6,8 @@ namespace BankingApp.Models
         public DateTime TransactionDate { get; set; }
         public decimal Amount { get; set; }
         public TransactionType Type { get; set; }
-
-        public int AccountId { get; set; }
+        public int FromAccountId { get; set; }
+        public int ToAccountId { get; set; }
         public Account Account { get; set; } = new Account();
     }
 }

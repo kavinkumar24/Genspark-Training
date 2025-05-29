@@ -22,13 +22,15 @@ namespace BankingApp.Contexts
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Account>().HasKey(a => a.Id);
-            modelBuilder.Entity<Account>().HasMany(a => a.Transactions)
-                .WithOne(t => t.Account)
-                .HasForeignKey(t => t.AccountId)
-                .OnDelete(DeleteBehavior.Cascade);
-            
+
+           
+            modelBuilder.Entity<Account>()
+                        .HasMany(a => a.Transactions)
+                        .WithOne(t => t.Account)
+                        .HasForeignKey(t => t.ToAccountId)
+                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Transaction>().HasKey(t => t.Id);
+
         }
-
-
     }
 }

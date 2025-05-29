@@ -1,5 +1,7 @@
 using BankingApp.Interfaces;
 using BankingApp.Models;
+using BankingApp.Models.DTOs;
+using BankingApp.Repositories;
 
 
 namespace BankingApp.Services
@@ -12,102 +14,77 @@ namespace BankingApp.Services
 
         public TransactionService(
             IRepository<int, Account> accountRepository,
-            IRepository<int, Transaction> transactionRepository)
+            IRepository<int, Transaction> transactionRepository
+            )
         {
             _accountRepository = accountRepository;
             _transactionRepository = transactionRepository;
         }
 
-        public async Task<Transaction> TransferAmountAsync(int fromAccountId, int toAccountId, decimal amount)
+    public async Task<Transaction> CreditAmountAsync(TransferRequestDto transferRequest)
+    {
+    try
+    {
+        if (string.IsNullOrWhiteSpace(transferRequest.FromAccountNumber) || string.IsNullOrWhiteSpace(transferRequest.ToAccountNumber) || transferRequest.Amount <= 0)
         {
-            if (fromAccountId <= 0 || toAccountId <= 0)
-                throw new ArgumentException("Account IDs must be positive.");
-
-
-            if (amount <= 0)
-                throw new ArgumentException("Transfer amount must be positive.");
-
-
-            if (fromAccountId == toAccountId)
-                throw new ArgumentException("Cannot transfer to the same account.");
-
-
-            var fromAccount = await _accountRepository.Get(fromAccountId);
-            var toAccount = await _accountRepository.Get(toAccountId);
-
-
-            if (fromAccount == null)
-                throw new Exception("From account not found.");
-            if (toAccount == null)
-                throw new Exception("To account not found.");
-
-
-            if (fromAccount.Balance < amount)
-                throw new Exception("Insufficient balance.");
-
-
-            fromAccount.Balance -= amount;
-            toAccount.Balance += amount;
-
-
-            await _accountRepository.Update(fromAccount.Id, fromAccount);
-            await _accountRepository.Update(toAccount.Id, toAccount);
-
-
-            var transaction = new Transaction
-            {
-                AccountId = fromAccountId,
-                TransactionDate = DateTime.UtcNow,
-                Amount = amount,
-                Type = TransactionType.Debit
-            };
-
-
-            await _transactionRepository.Add(transaction);
-
-
-            var creditTransaction = new Transaction
-            {
-                AccountId = toAccountId,
-                TransactionDate = DateTime.UtcNow,
-                Amount = amount,
-                Type = TransactionType.Credit
-            };
-
-
-            await _transactionRepository.Add(creditTransaction);
-
-
-            return transaction;
+            throw new ArgumentException("Invalid account numbers or amount.");
         }
 
-        Task<IEnumerable<Transaction>> ITransactionService.GetAllTransfersAsync()
+        var repo = _accountRepository as AccountRepository
+                   ?? throw new InvalidOperationException("Repository cast failed.");
+
+        var fromAccount = await repo.GetByAccountNumberAsync(transferRequest.FromAccountNumber);
+        var toAccount = await repo.GetByAccountNumberAsync(transferRequest.ToAccountNumber);
+
+        if (fromAccount == null || toAccount == null)
         {
-            try
-            {
-                return _transactionRepository.GetAll();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error retrieving all transactions: {ex.Message}", ex);
-            }
+            throw new Exception("One or both accounts not found.");
         }
 
-        Task<Transaction> ITransactionService.GetTransferByIdAsync(int transactionId)
+        if (fromAccount.Balance < transferRequest.Amount)
         {
-            if (transactionId <= 0)
-            {
-                throw new ArgumentException("Transaction ID must be greater than zero.");
-            }
+            throw new InvalidOperationException("Insufficient funds in the source account.");
+        }
 
-            try
-            {
-                return _transactionRepository.Get(transactionId);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error retrieving transaction by ID: {ex.Message}", ex);
-            }
+        fromAccount.Balance -= transferRequest.Amount;
+        toAccount.Balance += transferRequest.Amount;
+
+        await _accountRepository.Update(fromAccount.Id, fromAccount);
+        await _accountRepository.Update(toAccount.Id, toAccount);
+
+        var transaction = new Transaction
+        {
+            TransactionDate = DateTime.UtcNow,
+            Amount = transferRequest.Amount,
+            Type = TransactionType.Credit,
+            FromAccountId = int.Parse(transferRequest.FromAccountNumber),
+            ToAccountId = int.Parse(transferRequest.ToAccountNumber),
+            Account = toAccount
+        };
+
+        return await _transactionRepository.Add(transaction);
+    }
+    catch (Exception ex)
+    {
+        throw new Exception($"Error processing credit transaction: {ex.Message}", ex);
+    }
+}
+
+       
+
+        public Task<Transaction> DebitAmountAsync(string fromAccountNumber, string toAccountNumber, decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Transaction>> GetAllTransfersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Transaction> GetTransferByIdAsync(int transactionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

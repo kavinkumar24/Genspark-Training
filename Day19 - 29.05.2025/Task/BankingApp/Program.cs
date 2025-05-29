@@ -29,8 +29,11 @@ builder.Services.AddDbContext<BankingContext>(opts =>
 
 builder.Services.AddTransient<IRepository<int, Customer>, CustomerRepository>();
 builder.Services.AddTransient<IRepository<int, Account>, AccountRepository>();
+builder.Services.AddTransient<IRepository<int, Transaction>, TransactionRepository>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IRepository<int, Account>, AccountRepository>();
+
 
 
 var app = builder.Build();
