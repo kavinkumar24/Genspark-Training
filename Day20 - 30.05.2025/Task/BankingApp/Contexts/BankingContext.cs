@@ -14,9 +14,9 @@ namespace BankingApp.Contexts
         public DbSet<Account> Accounts { get; set; } = null!;
         public DbSet<Transaction> Transactions { get; set; } = null!;
         public DbSet<AccountResponseDto> AccountResponseDtos { get; set; } = null!;
-        public DbSet<ChatData> ChatData { get; set; } = null!;
-
+        public DbSet<ChatResponse> ChatResponses { get; set; }
         public DbSet<ChatTrainingData> ChatTrainingData { get; set; } = null!;
+        public DbSet<ChatPredictionLog> ChatPredictionLogs { get; set; }
 
         
 
@@ -61,10 +61,6 @@ namespace BankingApp.Contexts
 
             modelBuilder.Entity<Transaction>().HasKey(t => t.Id);
 
-
-       
-
-            modelBuilder.Entity<ChatData>().HasKey(c => c.Id);
             
             
 

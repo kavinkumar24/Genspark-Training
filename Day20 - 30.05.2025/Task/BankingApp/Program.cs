@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 builder.Services.AddControllers()
                 .AddJsonOptions(opts =>
                 {
@@ -35,7 +36,7 @@ builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IRepository<int, Account>, AccountRepository>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddScoped<IOtherFunctionalitiesInterface, OtherFunctionalities>();
-builder.Services.AddSingleton<ChatbotService>();
+builder.Services.AddScoped<ChatbotService>();
 builder.Services.AddScoped<ModelTrainer>();
 
 
