@@ -20,15 +20,22 @@ namespace FirstAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Patient,Admin,Doctor")]
+        [Authorize]
         public async Task<ActionResult<Patient>> GetPatientById([FromQuery] int id)
         {
-            if (id <= 0)
-                return BadRequest("Invalid patient ID");
-            var patient = await _patientService.GetPatientById(id);
-            if (patient == null)
-                return NotFound("Patient not found");
-            return Ok(patient);
+            try
+            {
+                if (id <= 0)
+                    return BadRequest("Invalid patient ID");
+                var patient = await _patientService.GetPatientById(id);
+                if (patient == null)
+                    return NotFound("Patient not found");
+                return Ok(patient);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]
