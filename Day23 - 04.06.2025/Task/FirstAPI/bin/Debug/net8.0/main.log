@@ -1,0 +1,242 @@
+2025-06-04 12:27:54,523 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 12:27:54,562 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 12:27:54,563 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 12:27:54,563 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 13:01:47,594 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 13:01:55,642 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 13:01:55,676 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 13:01:55,677 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 13:01:55,677 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 13:02:15,270 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (58ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 13:02:20,304 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 13:02:20,306 [.NET TP Worker] ERROR FirstAPI.Services.AuthenticationService - Invalid login attempt
+2025-06-04 13:02:33,992 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 13:02:41,672 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 13:02:41,710 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 13:02:41,710 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 13:02:41,710 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 13:02:46,785 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (68ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 13:02:46,865 [.NET TP Worker] ERROR FirstAPI.Services.AuthenticationService - Invalid login attempt
+2025-06-04 13:02:52,858 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 13:03:00,888 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 13:03:00,925 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 13:03:00,926 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 13:03:00,926 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 13:23:10,558 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:04:09,989 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:04:10,027 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:04:10,028 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:04:10,028 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:13:36,429 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:17:22,183 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:17:22,220 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:17:22,221 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:17:22,221 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:21:32,472 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:21:37,528 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:21:37,567 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:21:37,568 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:21:37,568 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:22:40,974 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:22:47,590 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:22:47,625 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:22:47,626 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:22:47,626 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:24:37,343 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:24:41,714 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:24:41,753 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:24:41,754 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:24:41,754 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:26:51,763 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:29:04,161 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:29:04,231 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:29:04,232 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:29:04,232 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:29:22,989 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (52ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 15:38:29,952 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (9ms) [Parameters=[@p0='?', @p1='?' (DbType = Binary), @p2='?' (DbType = Binary), @p3='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" ("Username", "HashKey", "Password", "Role")
+VALUES (@p0, @p1, @p2, @p3);
+2025-06-04 15:38:30,043 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (22ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?' (DbType = Single)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Doctors" ("Email", "Name", "Status", "YearsOfExperience")
+VALUES (@p0, @p1, @p2, @p3)
+RETURNING "Id";
+2025-06-04 15:38:30,109 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Specialities" AS s
+2025-06-04 15:38:30,132 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Status"
+FROM "Specialities" AS s
+2025-06-04 15:38:30,154 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[@p0='?', @p1='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Specialities" ("Name", "Status")
+VALUES (@p0, @p1)
+RETURNING "Id";
+2025-06-04 15:38:30,186 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "DoctorSpecialities" ("DoctorId", "SpecialityId")
+VALUES (@p0, @p1)
+RETURNING "SerialNumber";
+2025-06-04 15:38:50,112 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 15:47:31,204 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 15:48:36,253 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 15:49:21,648 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 15:49:36,146 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 15:49:36,187 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 15:49:36,188 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 15:49:36,188 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 15:50:00,777 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (60ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u."Username", u."HashKey", u."Password", u."Role"
+FROM "Users" AS u
+WHERE u."Username" = @__key_0
+LIMIT 2
+2025-06-04 15:50:22,626 [.NET TP Worker] ERROR Microsoft.EntityFrameworkCore.Database.Command - Failed executing DbCommand (7ms) [Parameters=[p0='?'], CommandType='Text', CommandTimeout='30']
+select * from proc_GetDoctorsBySpeciality(@p0)
+2025-06-04 15:50:22,652 [.NET TP Worker] ERROR Microsoft.EntityFrameworkCore.Query - An exception occurred while iterating over the results of a query for context type 'FirstAPI.Contexts.ClinicContext'.
+Npgsql.PostgresException (0x80004005): 42883: function proc_getdoctorsbyspeciality(text) does not exist
+
+POSITION: 15
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function proc_getdoctorsbyspeciality(text) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 15
+    File: parse_func.c
+    Line: 636
+    Routine: ParseFuncOrColumn
+Npgsql.PostgresException (0x80004005): 42883: function proc_getdoctorsbyspeciality(text) does not exist
+
+POSITION: 15
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function proc_getdoctorsbyspeciality(text) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 15
+    File: parse_func.c
+    Line: 636
+    Routine: ParseFuncOrColumn
+2025-06-04 15:50:22,671 [.NET TP Worker] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware - An unhandled exception has occurred while executing the request.
+Npgsql.PostgresException (0x80004005): 42883: function proc_getdoctorsbyspeciality(text) does not exist
+
+POSITION: 15
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at FirstAPI.Contexts.ClinicContext.GetDoctorsBySpeciality(String speciality) in /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI/Contexts/ClinicContext.cs:line 25
+   at FirstAPI.Misc.OtherFuncinalitiesImplementation.GetDoctorsBySpeciality(String specilaity) in /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI/Misc/OtherFuncinalitiesImplementation.cs:line 19
+   at FirstAPI.Services.DoctorService.GetDoctorsBySpeciality(String speciality) in /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI/Services/DoctorService.cs:line 114
+   at FirstAPI.Controllers.DoctorController.GetDoctors(String speciality) in /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI/Controllers/DoctorController.cs:line 30
+   at lambda_method78(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function proc_getdoctorsbyspeciality(text) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 15
+    File: parse_func.c
+    Line: 636
+    Routine: ParseFuncOrColumn
+2025-06-04 15:50:32,599 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT a."AppointmnetNumber", a."AppointmnetDateTime", a."DoctorId", a."PatientId", a."Status"
+FROM "Appointmnets" AS a
+2025-06-04 17:36:14,749 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 17:36:22,496 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 17:36:22,533 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 17:36:22,533 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 17:36:22,533 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 17:38:03,999 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 17:38:11,186 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 17:38:11,223 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 17:38:11,223 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 17:38:11,224 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 17:38:44,092 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 17:38:51,260 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 17:38:51,298 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 17:38:51,298 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 17:38:51,298 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 17:41:10,247 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 17:41:17,429 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 17:41:17,461 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 17:41:17,461 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 17:41:17,461 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
+2025-06-04 18:39:03,525 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-04 18:39:08,083 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-04 18:39:08,116 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-04 18:39:08,117 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-04 18:39:08,117 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Documents/Auth/PresidioMay25/UnitTesting/FirstAPI
