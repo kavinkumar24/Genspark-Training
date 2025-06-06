@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notify.Models;
 using Notify.Interfaces;
 using Notify.Models.DTO;
+using Notify.Misc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Notify.Controllers;
 
@@ -17,6 +19,8 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
+    [CustomExceptionFilter]
     public async Task<ActionResult<User?>> GetUserById(int id)
     {
         var user = await _userService.GetUserByIdAsync(id);
@@ -26,6 +30,8 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
+    [CustomExceptionFilter]
     public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
     {
         var users = await _userService.GetAllUsersAsync();
@@ -33,6 +39,8 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
+    [CustomExceptionFilter]
     public async Task<ActionResult> AddUser([FromBody] UserRegisterdto user)
     {
         await _userService.AddUserAsync(user);
@@ -40,6 +48,8 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize]
+    [CustomExceptionFilter]
     public async Task<ActionResult> UpdateUser(int id, [FromBody] User user)
     {
         if (id != user.Id)
@@ -49,6 +59,8 @@ public class UserController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
+    [CustomExceptionFilter]
     public async Task<ActionResult> DeleteUser(int id)
     {
         await _userService.DeleteUserAsync(id);

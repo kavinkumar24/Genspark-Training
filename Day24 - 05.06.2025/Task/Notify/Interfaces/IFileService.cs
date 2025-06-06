@@ -7,4 +7,5 @@ public interface IFileService
 {
     Task<FileMetaData> UploadFileAsync(IFormFile file);
     Task<FileMetaData?> DownloadFileAsync(int id);
+    Task SaveAsync(Notification notification);
 }

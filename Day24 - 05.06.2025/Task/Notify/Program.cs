@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Notify.Hub;
+using Notify.Misc;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +51,8 @@ builder.Services.AddDbContext<NotifyContext>(opts =>
 
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
+
+
 #region Repositories
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<FileRepository>();
@@ -62,6 +65,10 @@ builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IFileService, FileService>();
+#endregion
+
+#region  Misc
+builder.Services.AddScoped<CustomExceptionFilter>();
 #endregion
 
 
