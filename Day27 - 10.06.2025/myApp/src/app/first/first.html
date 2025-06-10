@@ -1,0 +1,18 @@
+<p>first works!</p>
+<h2>
+    <!-- interpolation -->
+    Hello {{name}}
+</h2>
+<!-- -- Property Binding -->
+ <label name ="name">Name </label>
+<input type="text" #uname [value]="name" />
+<br>
+<!-- -- Two Way binding -->
+ <label name ="name">Name </label>
+<input type ="text" #uname [(ngModel)]="name" />
+<br>
+<label name="like">Like</label>
+<i [class]="className" (click)="toggleLike()"></i>
+<br>
+<!-- -- Event Binding -->
+<button (click) = "onButtonClick(uname.value)">Click to change</button>

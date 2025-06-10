@@ -1,0 +1,22 @@
+
+
+<div class="customer-layout-grid">
+  <div *ngFor="let customer of customerList" class="customer-card">
+   <div class="profile-section">
+      <img [src]="customer.profileImage" alt="{{ customer.name }}" class="profile-pic" />
+      <div>
+        <h3>{{ customer.name }}</h3>
+        <p>Age: {{ customer.age }}</p>
+        <p>Phone: {{ customer.phone }}</p>
+      </div>
+    </div>
+
+  <div class="feedback_container">
+    <button (click)="like(customer.id)"><i class="bi bi-hand-thumbs-up-fill"></i></button>
+    <span>{{ customer.likes }}</span>
+    <button (click)="dislike(customer.id)"><i class="bi bi-hand-thumbs-down-fill"></i></button>
+    <span>{{ customer.dislikes }}</span>
+  </div>
+</div>
+</div>
+

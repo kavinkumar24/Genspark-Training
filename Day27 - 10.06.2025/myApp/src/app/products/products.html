@@ -1,0 +1,17 @@
+
+<div class="cart-header">
+    <div class="cart-item">
+        <span class="cart-icon"><i class="bi bi-cart3"></i></span>
+        <span class="cart-count">{{cartCount}}</span>
+    </div>
+</div>
+<div class="product-layout-grid">
+    <div class="product-card" *ngFor="let product of productsList">
+        <img [src] = "product.image" alt="{{product.title}}">
+        <h3>{{product.title}}</h3>
+        <p>{{product.description}}</p>
+        <p><strong>Rating </strong> {{product.rating}}</p>
+        <p><strong>Price </strong> {{product.price}}</p>
+        <button (click)="addToCart(product)">Add to cart</button>
+    </div>
+</div>
