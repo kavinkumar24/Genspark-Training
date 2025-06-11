@@ -1,0 +1,17 @@
+<!-- <p>receipes works!</p>
+
+<app-receipe></app-receipe> -->
+
+
+@if (receipes) {
+    <div class = "receipes-grid-layout">
+        @for (item of receipes; track item.id) {
+            <app-receipe [receipe]="item"></app-receipe>
+        }
+    </div>
+}
+@else {
+    <div class="error-message-container">
+        <h1>No receipes available <i class="bi bi-emoji-frown"></i></h1>
+    </div>
+}

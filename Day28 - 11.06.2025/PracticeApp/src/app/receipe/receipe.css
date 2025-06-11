@@ -1,0 +1,117 @@
+.receipe-card {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    height: 500px;              
+    display: flex;               
+    flex-direction: column;       
+    overflow: auto;   
+    width: 18rem;          
+}
+
+.receipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.receipe-card-img{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.receipe-card-content{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.receipe-card-content h5{
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+    color: #be185d;
+}
+
+.receipe-card-content label{
+    align-items:flex-start !important;
+}
+
+.label-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-radius: 16px;
+    padding: 6px;
+}
+.label-container-cuisine {
+    border: 1px solid #fbcfe8;
+    background-color: #fdf2f8;
+}
+.label-container-cuisine i{
+    color: #be185d;
+}
+.label-container-timing {
+    border: 1px solid #fde68a;
+    background-color: #fffbeb;
+}
+.label-container-timing i{
+    color: #d97706;
+}
+
+.receipe-secondary-container{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.ingredients {
+    align-items: center;
+    text-align: justify;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    margin: 10px 0;
+    background-color: #f9fafb;
+    flex: 1 1 auto;    
+}
+.ingredients label{
+    border-bottom: 1px solid #fbcfe8;
+}
+
+.ingredients p{
+    font-style: italic;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.read-more-btn {
+  background: none;
+  border: none;
+  color: #be185d;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    
+    .receipe-card-content h5 {
+        font-size: 1.1rem;
+    }
+    .ingredients {
+        font-size: 14px;
+    }
+
+    .receipe-card{
+        width: 20rem;
+    }
+    
+}

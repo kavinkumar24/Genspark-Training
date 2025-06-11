@@ -1,0 +1,25 @@
+
+<div class="receipe-card">
+  <div class="receipe-card-content">
+  <img class="receipe-card-img" [src]="receipe?.image" [alt] = "receipe?.name">
+  
+    <h5>{{receipe?.name}}</h5>
+    <div class="receipe-secondary-container">
+    <p class="label-container label-container-cuisine"><span><i class="bi bi-geo-fill"></i></span>{{receipe?.cuisine}}</p>
+    <p class="label-container label-container-timing"><span><i class="bi bi-clock-history"></i></span> {{receipe?.cookTimeMinutes}} mins</p>
+    </div>
+  </div>
+ <div class="ingredients">
+  <label>Ingredients:</label>
+  <p>
+    {{ displayedIngredients.join(', ') }}
+    @if (!showAllIngredients && (receipe?.ingredients?.length ?? 0) > 4) {
+      <span>...</span>
+    }
+  </p>
+  @if ((receipe?.ingredients?.length ?? 0) > 4) {
+    <button (click)="showAllIngredients = !showAllIngredients" class="read-more-btn">
+      {{ showAllIngredients ? 'Read less' : 'Read more' }}
+    </button>
+  }
+</div>
