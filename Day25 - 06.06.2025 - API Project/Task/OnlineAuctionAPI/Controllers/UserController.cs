@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Seller,Bidder,Admin")]
     public async Task<ActionResult<User>> GetUserById(Guid id)
     {
         var user = await _userService.GetUserByIdAsync(id);
@@ -40,7 +40,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetByEmail")]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Seller,Bidder,Admin")]
     public async Task<ActionResult> GetByEmail([FromQuery] string email)
     {
         var user = await _userService.GetUserByEmailAsync(email);
@@ -95,7 +95,7 @@ public class UserController : ControllerBase
         });
     }
 
-    [HttpPost("change-password")]
+    [HttpPatch("change-password")]
     [Authorize(Roles = "Seller,Bidder")]
     public async Task<IActionResult> ChangePassword(Guid userId, [FromBody] ChangePasswordRequestDto dto)
     {

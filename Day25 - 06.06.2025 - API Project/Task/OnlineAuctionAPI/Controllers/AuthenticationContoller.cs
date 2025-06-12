@@ -37,7 +37,8 @@ public class AuthenticationController : ControllerBase
     }
 
     [HttpPost("logout")]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Admin,Seller,Bidder")]
+
     public async Task<ActionResult> Logout([FromBody] string refreshToken)
     {
        await _authenticationService.LogoutAsync(refreshToken);
