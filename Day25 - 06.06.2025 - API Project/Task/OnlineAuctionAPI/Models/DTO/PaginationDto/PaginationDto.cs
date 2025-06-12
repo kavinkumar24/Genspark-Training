@@ -7,5 +7,6 @@ public class PaginationDto
 
     public DateTime? StartTime { get; set; }
     public DateTime? EndTime { get; set; }
-   
+    public string? SortBy { get; set; }   
+    public string? SortDirection { get; set; } = "asc"; 
 }

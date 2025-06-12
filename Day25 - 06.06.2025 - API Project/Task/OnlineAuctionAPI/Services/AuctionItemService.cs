@@ -234,6 +234,33 @@ public class AuctionItemService : IAuctionItemService
             query = query.Where(a => a.EndTime <= endDate);
         }
 
+        if (!string.IsNullOrWhiteSpace(pagination.SortBy))
+        {
+            bool ascending = pagination.SortDirection?.ToLower() != "desc";
+            switch (pagination.SortBy.ToLower())
+            {
+                case "name":
+                    query = ascending ? query.OrderBy(a => a.Name) : query.OrderByDescending(a => a.Name);
+                    break;
+                case "starttime":
+                    query = ascending ? query.OrderBy(a => a.StartTime) : query.OrderByDescending(a => a.StartTime);
+                    break;
+                case "endtime":
+                    query = ascending ? query.OrderBy(a => a.EndTime) : query.OrderByDescending(a => a.EndTime);
+                    break;
+                case "createdat":
+                    query = ascending ? query.OrderBy(a => a.CreatedAt) : query.OrderByDescending(a => a.CreatedAt);
+                    break;
+                default:
+                    query = ascending ? query.OrderBy(a => a.Name) : query.OrderByDescending(a => a.Name);
+                    break;
+            }
+        }
+        else
+        {
+            query = query.OrderBy(a => a.Name);
+        }
+
         int totalRecords = await query.CountAsync();
         int totalPages = (int)Math.Ceiling(totalRecords / (double)pagination.PageSize);
 
@@ -259,7 +286,6 @@ public class AuctionItemService : IAuctionItemService
             }
         };
     }
-
     public async Task<WinnerIdResponseDto> UpdateWinningId(WinningIdUpdateDto winningIdUpdateDto)
     {
         if (winningIdUpdateDto == null)

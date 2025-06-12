@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj": {}
+    "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj": {}
   },
   "projects": {
-    "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj": {
+    "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj",
+        "projectUniqueName": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj",
         "projectName": "OnlineAuctionAPI",
-        "projectPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj",
+        "projectPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj",
         "packagesPath": "/Users/presidio/.nuget/packages/",
-        "outputPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/obj/",
+        "outputPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/presidio/.nuget/NuGet/NuGet.Config"

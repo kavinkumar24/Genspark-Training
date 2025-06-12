@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gkYTO2EEfXs=",
+  "dgSpecHash": "OIyjy5yfTsQ=",
   "success": true,
-  "projectFilePath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj",
+  "projectFilePath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj",
   "expectedPackageFiles": [
     "/Users/presidio/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
