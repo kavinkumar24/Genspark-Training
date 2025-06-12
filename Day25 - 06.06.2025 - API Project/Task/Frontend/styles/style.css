@@ -1,0 +1,100 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7fafc;
+  margin: 0;
+  padding: 2rem;
+  color: #222;
+}
+
+#auctionList, #bidList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+#auctionList li, #bidList li {
+  background: #fff;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: background 0.2s;
+}
+
+#auctionList li:hover, #bidList li:hover {
+  background: #e6f7ff;
+}
+
+div {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input[type="text"], input[type="number"] {
+  padding: 0.7rem;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: #1890ff;
+}
+
+button#bidBtn {
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button#bidBtn:hover {
+  background: #40a9ff;
+}
+
+
+.auction-name {
+    color: #222;
+    font-weight: 600;
+}
+.auction-id {
+    color: #888;
+    margin-left: 6px;
+}
+.auction-time .time {
+    color: #0078d7;
+    font-weight: 500;
+}
+.auction-bid .amount {
+    color: #2e7d32;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+.bid-auction-id {
+    color: #0078d7;
+    font-weight: 500;
+}
+.bid-amount {
+    color: #2e7d32;
+    font-weight: 600;
+    margin-left: 2px;
+}
+.bid-bidder {
+    color: #d84315;
+    font-weight: 500;
+    margin-left: 2px;
+}
