@@ -3643,11 +3643,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI.Tests/OnlineAuctionAPI.Tests.csproj",
+      "projectUniqueName": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI.Tests/OnlineAuctionAPI.Tests.csproj",
       "projectName": "OnlineAuctionAPI.Tests",
-      "projectPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI.Tests/OnlineAuctionAPI.Tests.csproj",
+      "projectPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI.Tests/OnlineAuctionAPI.Tests.csproj",
       "packagesPath": "/Users/presidio/.nuget/packages/",
-      "outputPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI.Tests/obj/",
+      "outputPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/presidio/.nuget/NuGet/NuGet.Config"
@@ -3662,8 +3662,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj": {
-              "projectPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj"
+            "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj": {
+              "projectPath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/OnlineAuctionAPI.csproj"
             }
           }
         }

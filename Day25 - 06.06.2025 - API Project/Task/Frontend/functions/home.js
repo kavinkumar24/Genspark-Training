@@ -27,6 +27,7 @@ connection.on("AuctionItemAdded", function(response) {
         <span class="auction-id">(ID: ${auctionItem.id})</span>
         <span class="auction-time">| Start: <span class="time">${start}</span> | End: <span class="time">${end}</span></span>
         <span class="auction-bid">| Current Bid: <span class="amount">${currentBid}</span></span>
+        <span class = "auction-amount">| Starting Price: <span class="amount">${auctionItem.startingPrice}</span></span>
         ${attachmentsHtml}
     `;
     item.setAttribute("data-highest-bid", auctionItem.currentBid || 0);
@@ -56,6 +57,38 @@ connection.on("ReceiveBidUpdate", function(auctionItemId, bidAmount, bidderId) {
         }
     }
 });
+
+connection.on("WinningIdUpdated", function(auctionItem) {
+    const list = document.getElementById("winningIdUpdates");
+    const item = document.createElement("li");
+    item.classList.add("winner");
+    item.innerHTML = `
+       <span class="notification-icon"><i class="fa-solid fa-trophy"></i></span>
+        <span>
+            <strong>Winner Updated:</strong> Auction <span class="auction-id">${auctionItem.auctionItemId}</span>
+            <br>
+            Winner: <span class="winner">${auctionItem.winnerName || auctionItem.winnerId || "N/A"}</span>
+            <br>
+            Amount: <span class="amount">$${auctionItem.winningPrice || "N/A"}</span>
+        </span>
+    `;
+    list.prepend(item);
+});
+
+connection.on("AuctionStatusUpdated", function(auctionItem) {
+    const list = document.getElementById("statusUpdates");
+    const item = document.createElement("li");
+    item.classList.add("status");
+    item.innerHTML = `
+        <span class="notification-icon">i class="fa-solid fa-bell"></i></span>
+        <span>
+            <strong>Status Changed:</strong> Auction <span class="auction-id">${auctionItem.id}</span>
+            <br>
+            Status: <span class="status">${auctionItem.status}</span>
+        </span>
+    `;
+    list.prepend(item);
+});
 connection.start().catch(err => console.error(err));
 
 document.getElementById("bidBtn").addEventListener("click", function(e) {
@@ -64,12 +97,14 @@ document.getElementById("bidBtn").addEventListener("click", function(e) {
     const bidAmount = parseFloat(document.getElementById("bidAmount").value);
     const bidderId = document.getElementById("bidderId").value;
     const errorDiv = document.getElementById("bidError");
-    errorDiv.textContent = "";
+    errorDiv.textContent = "";  
+
 
     const auctionList = document.getElementById("auctionList");
     const auctionExists = Array.from(auctionList.children).some(li =>
         li.textContent.includes(auctionItemId)
     );
+
 
     if (!auctionItemId) {
         errorDiv.textContent = "Auction ID is required.";
@@ -93,4 +128,9 @@ document.getElementById("bidBtn").addEventListener("click", function(e) {
             errorDiv.textContent = "Error sending bid: " + err;
             console.error(err);
         });
+
+    document.getElementById("bidAmount").value = ""; 
+    document.getElementById("bidderId").value = ""; 
+    document.getElementById("auctionItemId").value = ""; 
+
 });

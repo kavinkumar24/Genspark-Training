@@ -116,7 +116,7 @@ namespace OnlineAuctionAPI.Tests.Services
                 SellerId = seller.Id,
                 StartingPrice = 100,
                 ReservePrice = 150,
-                StartTime = DateTime.UtcNow,
+                StartTime = DateTime.UtcNow.AddMinutes(5),
                 EndTime = DateTime.UtcNow.AddDays(1)
             };
 
@@ -160,7 +160,7 @@ namespace OnlineAuctionAPI.Tests.Services
                 SellerId = invalidSellerId,
                 StartingPrice = 100,
                 ReservePrice = 150,
-                StartTime = DateTime.UtcNow,
+                StartTime = DateTime.UtcNow.AddMinutes(5),
                 EndTime = DateTime.UtcNow.AddDays(1)
             };
 

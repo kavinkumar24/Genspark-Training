@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   
 </head>
 
@@ -19,10 +21,16 @@
   <input type="text" id="bidderId" placeholder="Your User ID" />
   <button type="button" id="bidBtn">Bid</button>
 </div>
+
 <div id="bidError" style="color: red; margin-top: 10px;"></div>
 
 <ul id="bidList"></ul>
 
+<h3>Winning ID Updates</h3>
+<ul id="winningIdUpdates" class="notification-list"></ul>
+
+<h3>Status Updates</h3>
+<ul id="statusUpdates" class="notification-list"></ul>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 <script src="../functions/home.js"></script>
   

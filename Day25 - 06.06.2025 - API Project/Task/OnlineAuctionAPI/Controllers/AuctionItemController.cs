@@ -142,6 +142,7 @@ public class AuctionItemController : ControllerBase
     {
         var result = await _auctionItemService.UpdateWinningId(winningIdUpdateDto);
         _logger.LogInformation("Winning ID updated for auction item {AuctionItemId}", winningIdUpdateDto.AuctionItemId);
+        await _hubContext.Clients.All.SendAsync("WinningIdUpdated", result);
         return Ok(new ApiResponse<WinnerIdResponseDto>
         {
             Success = true,
@@ -155,6 +156,7 @@ public class AuctionItemController : ControllerBase
     public async Task<ActionResult<AuctionItemResponseDto>> UpdateAuctionStatus(Guid id, [FromQuery] AuctionStatus newStatus)
     {
         var result = await _auctionItemService.UpdateAuctionStatusAsync(id, newStatus);
+        await _hubContext.Clients.All.SendAsync("AuctionStatusUpdated", result);
         _logger.LogInformation("Auction item with ID {AuctionId} status updated to {Status}", id, newStatus);
         return Ok(new ApiResponse<AuctionItemResponseDto>
         {

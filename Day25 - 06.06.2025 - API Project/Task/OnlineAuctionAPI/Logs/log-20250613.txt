@@ -1,0 +1,648 @@
+2025-06-13 06:57:44 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 06:57:44 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 06:57:44 [Information] Hosting environment: "Development"
+2025-06-13 06:57:44 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:06:58 [Information] Application is shutting down...
+2025-06-13 07:07:10 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:07:10 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:07:10 [Information] Hosting environment: "Development"
+2025-06-13 07:07:10 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:10:16 [Information] Application is shutting down...
+2025-06-13 07:10:21 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:10:21 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:10:21 [Information] Hosting environment: "Development"
+2025-06-13 07:10:21 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:12:28 [Information] Application is shutting down...
+2025-06-13 07:26:00 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:26:00 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:26:00 [Information] Hosting environment: "Development"
+2025-06-13 07:26:00 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:26:28 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:26:28 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:26:28 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:26:29 [Information] Executed DbCommand ("55"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 07:26:29 [Information] Executed DbCommand ("11"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 07:26:29 [Information] User "ram@gmail.com" logged in successfully
+2025-06-13 07:26:33 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:26:33 [Information] Attempted to retrieve user with ID 6c62f90f-eb84-4dec-b07b-a949d4fd0b11
+2025-06-13 07:26:33 [Information] User with ID 6c62f90f-eb84-4dec-b07b-a949d4fd0b11 retrieved successfully
+2025-06-13 07:27:49 [Information] Application is shutting down...
+2025-06-13 07:27:54 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:27:54 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:27:54 [Information] Hosting environment: "Development"
+2025-06-13 07:27:54 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:28:11 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:28:11 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:28:11 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:28:12 [Information] Executed DbCommand ("52"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:28:44 [Information] Executed DbCommand ("3"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:28:57 [Information] Application is shutting down...
+2025-06-13 07:29:01 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:29:01 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:29:01 [Information] Hosting environment: "Development"
+2025-06-13 07:29:01 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:29:09 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:29:09 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:29:09 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:29:10 [Information] Executed DbCommand ("56"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:29:30 [Information] Executed DbCommand ("3"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:29:30 [Information] Executed DbCommand ("4"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"Users\" SET \"Password\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 07:29:30 [Information] Password changed successfully for user 503df00c-6e82-406f-a3d9-a459372410ed
+2025-06-13 07:29:35 [Information] Application is shutting down...
+2025-06-13 07:29:39 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:29:39 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:29:39 [Information] Hosting environment: "Development"
+2025-06-13 07:29:39 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:29:50 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:29:50 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:29:50 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:29:51 [Information] Executed DbCommand ("54"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:29:52 [Information] Executed DbCommand ("4"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"Users\" SET \"Password\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 07:29:52 [Information] Password changed successfully for user 503df00c-6e82-406f-a3d9-a459372410ed
+2025-06-13 07:30:57 [Information] Application is shutting down...
+2025-06-13 07:31:01 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:31:01 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:31:01 [Information] Hosting environment: "Development"
+2025-06-13 07:31:01 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:31:11 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:31:11 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:31:11 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:31:11 [Information] Executed DbCommand ("50"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:33:13 [Information] Application is shutting down...
+2025-06-13 07:33:17 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:33:18 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:33:18 [Information] Hosting environment: "Development"
+2025-06-13 07:33:18 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:35:01 [Information] Application is shutting down...
+2025-06-13 07:35:05 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:35:05 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:35:05 [Information] Hosting environment: "Development"
+2025-06-13 07:35:05 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:35:49 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:35:49 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:35:49 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:35:50 [Information] Executed DbCommand ("53"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:35:50 [Information] Executed DbCommand ("4"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"Users\" SET \"UpdatedAt\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 07:35:50 [Information] User with ID aebb2615-a136-4ecf-afd7-a4b2450a498c updated successfully
+2025-06-13 07:43:22 [Information] Application is shutting down...
+2025-06-13 07:45:59 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 07:46:00 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 07:46:00 [Information] Hosting environment: "Development"
+2025-06-13 07:46:00 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 07:46:40 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:46:40 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:46:40 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 07:46:41 [Information] Executed DbCommand ("48"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 07:46:41 [Information] Executed DbCommand ("5"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 07:46:41 [Information] User "ram@gmail.com" logged in successfully
+2025-06-13 07:46:44 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 07:46:44 [Information] Executed DbCommand ("10"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 07:46:44 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 07:46:44 [Information] Auction item created successfully with ID 7a6dd035-461e-4b4e-b2f4-03c3c02ee0a6
+2025-06-13 07:51:03 [Information] Executed DbCommand ("11"ms) [Parameters=["@__id_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"CreatedAt\", s.\"Description\", s.\"EndTime\", s.\"Name\", s.\"ReservePrice\", s.\"SellerId\", s.\"StartTime\", s.\"StartingPrice\", s.\"Status\", s.\"UpdatedAt\", s.\"WinnerId\", s.\"Id0\", f.\"Id\", f.\"AuctionItemId\", f.\"ContentType\", f.\"Data\", f.\"Name\", s.\"CreatedAt0\", s.\"Email\", s.\"Password\", s.\"Role\", s.\"StatusId\", s.\"UpdatedAt0\", s.\"Username\"
+FROM (
+    SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\", u0.\"Id\" AS \"Id0\", u0.\"CreatedAt\" AS \"CreatedAt0\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\" AS \"UpdatedAt0\", u0.\"Username\"
+    FROM \"AuctionItems\" AS a
+    INNER JOIN (
+        SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+        FROM \"Users\" AS u
+        WHERE u.\"StatusId\" <> 2
+    ) AS u0 ON a.\"SellerId\" = u0.\"Id\"
+    WHERE a.\"Id\" = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN \"Files\" AS f ON s.\"Id\" = f.\"AuctionItemId\"
+ORDER BY s.\"Id\", s.\"Id0\""
+2025-06-13 07:51:08 [Information] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"CreatedAt\", s.\"Description\", s.\"EndTime\", s.\"Name\", s.\"ReservePrice\", s.\"SellerId\", s.\"StartTime\", s.\"StartingPrice\", s.\"Status\", s.\"UpdatedAt\", s.\"WinnerId\", s.\"Id0\", f.\"Id\", f.\"AuctionItemId\", f.\"ContentType\", f.\"Data\", f.\"Name\", s.\"CreatedAt0\", s.\"Email\", s.\"Password\", s.\"Role\", s.\"StatusId\", s.\"UpdatedAt0\", s.\"Username\"
+FROM (
+    SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\", u0.\"Id\" AS \"Id0\", u0.\"CreatedAt\" AS \"CreatedAt0\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\" AS \"UpdatedAt0\", u0.\"Username\"
+    FROM \"AuctionItems\" AS a
+    INNER JOIN (
+        SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+        FROM \"Users\" AS u
+        WHERE u.\"StatusId\" <> 2
+    ) AS u0 ON a.\"SellerId\" = u0.\"Id\"
+    WHERE a.\"Id\" = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN \"Files\" AS f ON s.\"Id\" = f.\"AuctionItemId\"
+ORDER BY s.\"Id\", s.\"Id0\""
+2025-06-13 07:51:08 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"UpdatedAt\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 07:51:08 [Information] Auction item with ID 97c3a9c7-b93e-4618-b928-540f1eb6f7f1 status updated to Completed
+2025-06-13 07:52:28 [Information] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"CreatedAt\", s.\"Description\", s.\"EndTime\", s.\"Name\", s.\"ReservePrice\", s.\"SellerId\", s.\"StartTime\", s.\"StartingPrice\", s.\"Status\", s.\"UpdatedAt\", s.\"WinnerId\", s.\"Id0\", f.\"Id\", f.\"AuctionItemId\", f.\"ContentType\", f.\"Data\", f.\"Name\", s.\"CreatedAt0\", s.\"Email\", s.\"Password\", s.\"Role\", s.\"StatusId\", s.\"UpdatedAt0\", s.\"Username\"
+FROM (
+    SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\", u0.\"Id\" AS \"Id0\", u0.\"CreatedAt\" AS \"CreatedAt0\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\" AS \"UpdatedAt0\", u0.\"Username\"
+    FROM \"AuctionItems\" AS a
+    INNER JOIN (
+        SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+        FROM \"Users\" AS u
+        WHERE u.\"StatusId\" <> 2
+    ) AS u0 ON a.\"SellerId\" = u0.\"Id\"
+    WHERE a.\"Id\" = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN \"Files\" AS f ON s.\"Id\" = f.\"AuctionItemId\"
+ORDER BY s.\"Id\", s.\"Id0\""
+2025-06-13 07:55:24 [Information] Executed DbCommand ("3"ms) [Parameters=["@__id_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"CreatedAt\", s.\"Description\", s.\"EndTime\", s.\"Name\", s.\"ReservePrice\", s.\"SellerId\", s.\"StartTime\", s.\"StartingPrice\", s.\"Status\", s.\"UpdatedAt\", s.\"WinnerId\", s.\"Id0\", f.\"Id\", f.\"AuctionItemId\", f.\"ContentType\", f.\"Data\", f.\"Name\", s.\"CreatedAt0\", s.\"Email\", s.\"Password\", s.\"Role\", s.\"StatusId\", s.\"UpdatedAt0\", s.\"Username\"
+FROM (
+    SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\", u0.\"Id\" AS \"Id0\", u0.\"CreatedAt\" AS \"CreatedAt0\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\" AS \"UpdatedAt0\", u0.\"Username\"
+    FROM \"AuctionItems\" AS a
+    INNER JOIN (
+        SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+        FROM \"Users\" AS u
+        WHERE u.\"StatusId\" <> 2
+    ) AS u0 ON a.\"SellerId\" = u0.\"Id\"
+    WHERE a.\"Id\" = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN \"Files\" AS f ON s.\"Id\" = f.\"AuctionItemId\"
+ORDER BY s.\"Id\", s.\"Id0\""
+2025-06-13 07:55:24 [Information] Executed DbCommand ("3"ms) [Parameters=["@p2='?' (DbType = Guid), @p0='?', @p1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0, \"UpdatedAt\" = @p1
+WHERE \"Id\" = @p2;"
+2025-06-13 07:55:24 [Information] Auction item with ID 7ce1c82a-b059-479c-9bcb-4b84acf383c9 status updated to Cancelled
+2025-06-13 07:55:55 [Information] Executed DbCommand ("1"ms) [Parameters=["@__id_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"CreatedAt\", s.\"Description\", s.\"EndTime\", s.\"Name\", s.\"ReservePrice\", s.\"SellerId\", s.\"StartTime\", s.\"StartingPrice\", s.\"Status\", s.\"UpdatedAt\", s.\"WinnerId\", s.\"Id0\", f.\"Id\", f.\"AuctionItemId\", f.\"ContentType\", f.\"Data\", f.\"Name\", s.\"CreatedAt0\", s.\"Email\", s.\"Password\", s.\"Role\", s.\"StatusId\", s.\"UpdatedAt0\", s.\"Username\"
+FROM (
+    SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\", u0.\"Id\" AS \"Id0\", u0.\"CreatedAt\" AS \"CreatedAt0\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\" AS \"UpdatedAt0\", u0.\"Username\"
+    FROM \"AuctionItems\" AS a
+    INNER JOIN (
+        SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+        FROM \"Users\" AS u
+        WHERE u.\"StatusId\" <> 2
+    ) AS u0 ON a.\"SellerId\" = u0.\"Id\"
+    WHERE a.\"Id\" = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN \"Files\" AS f ON s.\"Id\" = f.\"AuctionItemId\"
+ORDER BY s.\"Id\", s.\"Id0\""
+2025-06-13 08:01:47 [Information] Application is shutting down...
+2025-06-13 08:01:55 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 08:01:55 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 08:01:55 [Information] Hosting environment: "Development"
+2025-06-13 08:01:55 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 08:02:36 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 08:02:36 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 08:02:36 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 08:02:37 [Information] Executed DbCommand ("47"ms) [Parameters=["@__bidId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__bidId_0
+LIMIT 1"
+2025-06-13 08:02:37 [Information] Executed DbCommand ("3"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 08:02:37 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_WinningId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__dto_WinningId_0
+LIMIT 1"
+2025-06-13 08:02:37 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__dto_AuctionItemId_0
+LIMIT 1"
+2025-06-13 08:02:37 [Information] Executed DbCommand ("4"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT max(b.\"Amount\")
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1"
+2025-06-13 08:02:37 [Information] Executed DbCommand ("3"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime), @__maxAmount_2='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1 AND b.\"Amount\" = @__maxAmount_2
+ORDER BY b.\"BidTime\""
+2025-06-13 08:02:37 [Information] Executed DbCommand ("3"ms) [Parameters=["@p11='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Decimal), @p5='?' (DbType = Guid), @p6='?' (DbType = DateTime), @p7='?' (DbType = Decimal), @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"CreatedAt\" = @p0, \"Description\" = @p1, \"EndTime\" = @p2, \"Name\" = @p3, \"ReservePrice\" = @p4, \"SellerId\" = @p5, \"StartTime\" = @p6, \"StartingPrice\" = @p7, \"Status\" = @p8, \"UpdatedAt\" = @p9, \"WinnerId\" = @p10
+WHERE \"Id\" = @p11;"
+2025-06-13 08:02:37 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bid_BidderId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__bid_BidderId_0
+LIMIT 1"
+2025-06-13 08:02:37 [Information] Winning ID updated for auction item b91f8537-7487-4960-99b0-bdcf91b8e63a
+2025-06-13 08:02:51 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bidId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__bidId_0
+LIMIT 1"
+2025-06-13 08:02:51 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 08:02:51 [Information] Executed DbCommand ("0"ms) [Parameters=["@__dto_WinningId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__dto_WinningId_0
+LIMIT 1"
+2025-06-13 08:02:51 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__dto_AuctionItemId_0
+LIMIT 1"
+2025-06-13 08:02:51 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT max(b.\"Amount\")
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1"
+2025-06-13 08:02:51 [Information] Executed DbCommand ("0"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime), @__maxAmount_2='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1 AND b.\"Amount\" = @__maxAmount_2
+ORDER BY b.\"BidTime\""
+2025-06-13 08:03:25 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bidId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__bidId_0
+LIMIT 1"
+2025-06-13 08:03:25 [Information] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 08:03:25 [Information] Executed DbCommand ("0"ms) [Parameters=["@__dto_WinningId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__dto_WinningId_0
+LIMIT 1"
+2025-06-13 08:03:25 [Information] Executed DbCommand ("0"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__dto_AuctionItemId_0
+LIMIT 1"
+2025-06-13 08:03:25 [Information] Executed DbCommand ("0"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT max(b.\"Amount\")
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1"
+2025-06-13 08:03:25 [Information] Executed DbCommand ("0"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime), @__maxAmount_2='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1 AND b.\"Amount\" = @__maxAmount_2
+ORDER BY b.\"BidTime\""
+2025-06-13 08:03:25 [Information] Executed DbCommand ("1"ms) [Parameters=["@p11='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Decimal), @p5='?' (DbType = Guid), @p6='?' (DbType = DateTime), @p7='?' (DbType = Decimal), @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"CreatedAt\" = @p0, \"Description\" = @p1, \"EndTime\" = @p2, \"Name\" = @p3, \"ReservePrice\" = @p4, \"SellerId\" = @p5, \"StartTime\" = @p6, \"StartingPrice\" = @p7, \"Status\" = @p8, \"UpdatedAt\" = @p9, \"WinnerId\" = @p10
+WHERE \"Id\" = @p11;"
+2025-06-13 08:03:25 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bid_BidderId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__bid_BidderId_0
+LIMIT 1"
+2025-06-13 08:03:25 [Information] Winning ID updated for auction item b91f8537-7487-4960-99b0-bdcf91b8e63a
+2025-06-13 08:14:18 [Information] Application is shutting down...
+2025-06-13 08:14:25 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 08:14:25 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 08:14:25 [Information] Hosting environment: "Development"
+2025-06-13 08:14:25 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 08:14:32 [Information] Application is shutting down...
+2025-06-13 08:35:24 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 08:35:24 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 08:35:24 [Information] Hosting environment: "Development"
+2025-06-13 08:35:24 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 08:35:34 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 08:35:34 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 08:35:34 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 08:35:35 [Information] Executed DbCommand ("58"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 08:35:35 [Information] Executed DbCommand ("8"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 08:35:35 [Information] User "ram@gmail.com" logged in successfully
+2025-06-13 08:35:39 [Information] Executed DbCommand ("2"ms) [Parameters=["@__bidId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__bidId_0
+LIMIT 1"
+2025-06-13 08:35:39 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 08:35:39 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_WinningId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__dto_WinningId_0
+LIMIT 1"
+2025-06-13 08:35:39 [Information] Executed DbCommand ("2"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__dto_AuctionItemId_0
+LIMIT 1"
+2025-06-13 08:35:39 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT max(b.\"Amount\")
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1"
+2025-06-13 08:35:39 [Information] Executed DbCommand ("3"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime), @__maxAmount_2='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1 AND b.\"Amount\" = @__maxAmount_2
+ORDER BY b.\"BidTime\""
+2025-06-13 08:35:39 [Information] Executed DbCommand ("2"ms) [Parameters=["@p11='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Decimal), @p5='?' (DbType = Guid), @p6='?' (DbType = DateTime), @p7='?' (DbType = Decimal), @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"CreatedAt\" = @p0, \"Description\" = @p1, \"EndTime\" = @p2, \"Name\" = @p3, \"ReservePrice\" = @p4, \"SellerId\" = @p5, \"StartTime\" = @p6, \"StartingPrice\" = @p7, \"Status\" = @p8, \"UpdatedAt\" = @p9, \"WinnerId\" = @p10
+WHERE \"Id\" = @p11;"
+2025-06-13 08:35:39 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bid_BidderId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__bid_BidderId_0
+LIMIT 1"
+2025-06-13 08:35:39 [Information] Winning ID updated for auction item b91f8537-7487-4960-99b0-bdcf91b8e63a
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bidId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__bidId_0
+LIMIT 1"
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_WinningId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__dto_WinningId_0
+LIMIT 1"
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__dto_AuctionItemId_0
+LIMIT 1"
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT max(b.\"Amount\")
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1"
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__dto_AuctionItemId_0='?' (DbType = Guid), @__auctionItem_EndTime_1='?' (DbType = DateTime), @__maxAmount_2='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__dto_AuctionItemId_0 AND b.\"BidTime\" <= @__auctionItem_EndTime_1 AND b.\"Amount\" = @__maxAmount_2
+ORDER BY b.\"BidTime\""
+2025-06-13 08:36:01 [Information] Executed DbCommand ("2"ms) [Parameters=["@p11='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Decimal), @p5='?' (DbType = Guid), @p6='?' (DbType = DateTime), @p7='?' (DbType = Decimal), @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"CreatedAt\" = @p0, \"Description\" = @p1, \"EndTime\" = @p2, \"Name\" = @p3, \"ReservePrice\" = @p4, \"SellerId\" = @p5, \"StartTime\" = @p6, \"StartingPrice\" = @p7, \"Status\" = @p8, \"UpdatedAt\" = @p9, \"WinnerId\" = @p10
+WHERE \"Id\" = @p11;"
+2025-06-13 08:36:01 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bid_BidderId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__bid_BidderId_0
+LIMIT 1"
+2025-06-13 08:36:01 [Information] Winning ID updated for auction item b91f8537-7487-4960-99b0-bdcf91b8e63a
+2025-06-13 08:36:23 [Information] Application is shutting down...
+2025-06-13 09:29:33 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 09:29:33 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 09:29:33 [Information] Hosting environment: "Development"
+2025-06-13 09:29:33 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 09:30:02 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 09:30:02 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 09:30:02 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 09:30:03 [Information] Executed DbCommand ("57"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 09:30:03 [Information] Executed DbCommand ("9"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 09:30:03 [Information] User "ram@gmail.com" logged in successfully
+2025-06-13 09:30:14 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 09:30:14 [Information] Executed DbCommand ("6"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 09:30:14 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 09:30:14 [Information] Auction item created successfully with ID f9049e9c-888b-485d-a6a2-56361006fdfa
+2025-06-13 09:30:33 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 09:30:33 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 09:30:33 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 09:30:33 [Information] Auction item created successfully with ID 1a6bb473-4e10-4a30-8fb0-8d39393c107f
+2025-06-13 10:13:44 [Information] Application is shutting down...
+2025-06-13 14:03:09 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 14:03:09 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 14:03:09 [Information] Hosting environment: "Development"
+2025-06-13 14:03:09 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 14:03:49 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 14:03:49 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 14:03:49 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 14:03:49 [Information] Executed DbCommand ("56"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 14:03:50 [Information] Executed DbCommand ("8"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 14:03:50 [Information] User "ram@gmail.com" logged in successfully
+2025-06-13 14:03:54 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:03:54 [Information] Executed DbCommand ("6"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:03:54 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:03:54 [Information] Auction item created successfully with ID 0b477bde-de6f-4cbf-bab7-1e6d5ce1b4eb
+2025-06-13 14:04:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:04:36 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:04:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:04:36 [Information] Auction item created successfully with ID 6db32e23-de94-4bee-8490-38b392575fba
+2025-06-13 14:05:15 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:05:15 [Information] Executed DbCommand ("9"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:05:15 [Information] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:05:15 [Information] Auction item created successfully with ID 77a095f3-e9d4-4642-9ed6-243f4d0b6497
+2025-06-13 14:06:19 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:06:19 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:06:19 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:06:19 [Information] Auction item created successfully with ID 2ce08c7d-b8b7-4f12-90e1-2b9f477b3515
+2025-06-13 14:06:25 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:06:25 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:06:25 [Information] Executed DbCommand ("5"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:06:25 [Information] Auction item created successfully with ID 51bd0d16-6884-4720-a5de-b65478c2bf07
+2025-06-13 14:06:31 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:06:31 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:06:31 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:06:31 [Information] Auction item created successfully with ID 92e6bc5f-87b3-4645-92f5-278d5bb208e6
+2025-06-13 14:07:08 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:07:08 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:07:08 [Information] Executed DbCommand ("95"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:07:08 [Information] Auction item created successfully with ID 2db638e8-281c-4791-a48f-a87895042110
+2025-06-13 14:09:34 [Information] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:09:34 [Information] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:09:34 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:09:34 [Information] Auction item created successfully with ID 42b04db6-349b-4807-917f-356cfa277e3f
+2025-06-13 14:11:56 [Information] Application is shutting down...
+2025-06-13 14:12:00 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 14:12:00 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 14:12:00 [Information] Hosting environment: "Development"
+2025-06-13 14:12:00 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 14:12:18 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 14:12:18 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 14:12:18 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 14:12:19 [Information] Executed DbCommand ("54"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:12:19 [Information] Executed DbCommand ("9"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:12:19 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:12:19 [Information] Auction item created successfully with ID 182b07b0-1415-4e52-a86e-76f4cd3292a3
+2025-06-13 14:13:07 [Information] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT count(*)::int
+FROM \"AuctionItems\" AS a"
+2025-06-13 14:13:07 [Information] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+ORDER BY a.\"Name\"
+LIMIT @__p_0 OFFSET @__p_0"
+2025-06-13 14:13:08 [Information] Paged auction items retrieved successfully
+2025-06-13 14:15:37 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 14:15:37 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
+2025-06-13 14:15:37 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 14:15:37 [Information] Auction item created successfully with ID d7e05d0e-842b-4153-a37d-fe8a548d2a52

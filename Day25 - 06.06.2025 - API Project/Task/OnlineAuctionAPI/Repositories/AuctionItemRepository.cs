@@ -115,19 +115,27 @@ public class AuctionRepository : Repository<Guid, AuctionItem>, IAuctionItemRepo
         if (auctionItem == null)
             throw new NotFoundException($"Auction item with ID {dto.AuctionItemId} not found");
 
-        var highestBid = await _auctionContext.BidItems
+        var maxAmount = await _auctionContext.BidItems
             .Where(b => b.AuctionItemId == dto.AuctionItemId && b.BidTime <= auctionItem.EndTime)
-            .OrderByDescending(b => b.Amount)
-            .FirstOrDefaultAsync();
+            .MaxAsync(b => (decimal?)b.Amount);
 
-        if (highestBid == null)
+        if (maxAmount == null)
             throw new InvalidException("No valid bids found for this auction item.");
 
-        if (bid.BidTime > auctionItem.EndTime)
-            throw new InvalidException("This bid was placed after the auction ended and cannot be declared as the winner.");
+        var highestBids = await _auctionContext.BidItems
+            .Where(b => b.AuctionItemId == dto.AuctionItemId && b.BidTime <= auctionItem.EndTime && b.Amount == maxAmount)
+            .OrderBy(b => b.BidTime)
+            .ToListAsync();
 
-        if (bid.Id != highestBid.Id)
-            throw new InvalidException("Only the highest valid bid can be declared as the winner.");
+        var isWinningBid = highestBids.Any(b => b.Id == bid.Id);
+
+        if (!isWinningBid)
+            throw new InvalidException("Only a bid with the highest amount can be declared as the winner.");
+
+        var winningBid = highestBids.First();
+
+        if (bid.Id != winningBid.Id)
+            throw new InvalidException("Only the earliest bid with the highest amount can be declared as the winner.");
 
         auctionItem.WinnerId = bid.Id;
         _auctionContext.AuctionItems.Update(auctionItem);

@@ -101,7 +101,7 @@ public class UserService : IUserService
             throw new NotFoundException("User not found");
 
         if (!_passwordService.VerifyPassword(user.Password, currentPassword))
-            throw new Exception("Current password is incorrect");
+            throw new InvalidException("Current password is incorrect");
 
         user.Password = _passwordService.HashPassword(newPassword);
         await _userRepository.Update(userId, user);

@@ -7,6 +7,7 @@ using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
 using OnlineAuctionAPI.Repositories;
+using OnlineAuctionAPI.Helpers;
 
 public class AuctionItemService : IAuctionItemService
 {
@@ -33,11 +34,28 @@ public class AuctionItemService : IAuctionItemService
     public async Task<AuctionItemResponseDto> AddAuctionItemAsync(AuctionItemAddDto auctionDto)
     {
 
-    var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "UserId");
-    if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var sellerId))
-    {
-        throw new InvalidDataException("You are not authorized to add an auction.");
-    }
+        var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "UserId");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var sellerId))
+        {
+            throw new InvalidDataException("You are not authorized to add an auction.");
+        }
+        if (auctionDto.StartTime < DateTime.UtcNow)
+        {
+            throw new InvalidException("Auction start time cannot be in the past.");
+        }
+        if (auctionDto.EndTime <= auctionDto.StartTime)
+        {
+            throw new InvalidException("Auction end time must be after the start time.");
+        }
+        if (auctionDto.StartingPrice <= 0)
+        {
+            throw new InvalidException("Starting price must be greater than zero.");
+        }
+        if (auctionDto.ReservePrice != null && auctionDto.ReservePrice < auctionDto.StartingPrice)
+        {
+            throw new InvalidException("Reserve price cannot be less than starting price.");
+        }
+        InputValidator.ValidateString(auctionDto.Name, nameof(auctionDto.Name));
 
         auctionDto.SellerId = sellerId;
         var seller = await _userRepository.Get(auctionDto.SellerId);
@@ -320,7 +338,8 @@ public class AuctionItemService : IAuctionItemService
         }
 
         if ((auctionItem.Status == AuctionStatus.Completed && newStatus != AuctionStatus.Completed) ||
-        (auctionItem.Status == AuctionStatus.Cancelled && newStatus != AuctionStatus.Cancelled))            throw new InvalidException("Cannot change status of a completed auction.");
+        (auctionItem.Status == AuctionStatus.Cancelled && newStatus != AuctionStatus.Cancelled))
+            throw new InvalidException("Cannot change status of a completed auction or cancelled auction.");
 
         auctionItem.Status = newStatus;
         auctionItem.UpdatedAt = DateTime.UtcNow;

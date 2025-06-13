@@ -1,35 +1,61 @@
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f7fafc;
-  margin: 0;
-  padding: 2rem;
-  color: #222;
+:root {
+  --font-family: 'Segoe UI', Arial, sans-serif;
+  --bg-main: #f7fafc;
+  --bg-card: #fff;
+  --bg-card-hover: #e6f7ff;
+  --color-text: #222;
+  --color-muted: #888;
+  --color-primary: #1890ff;
+  --color-success: #2e7d32;
+  --color-danger: #d84315;
+  --color-time: #0078d7;
+  --radius: 8px;
+  --shadow: 0 1px 4px rgba(0,0,0,0.05);
+  --shadow-lg: 0 2px 8px rgba(0,0,0,0.07);
+  --font-weight-bold: 600;
+  --font-weight-normal: 500;
+
+  --notification-bg: #fffbe6;
+  --notification-border: #ffe58f;
+  --notification-shadow: 0 4px 16px rgba(255, 215, 0, 0.12);
+  --notification-success: #e6fffb;
+  --notification-success-border: #87e8de;
+  --notification-info: #e6f7ff;
+  --notification-info-border: #91d5ff;
 }
 
-#auctionList, #bidList {
+body {
+  font-family: var(--font-family);
+  background: var(--bg-main);
+  margin: 0;
+  padding: 2rem;
+  color: var(--color-text);
+}
+
+#auctionList, #bidList, #winningIdUpdates, #statusUpdates {
   list-style: none;
   padding: 0;
   margin-bottom: 2rem;
 }
 
-#auctionList li, #bidList li {
-  background: #fff;
+#auctionList li, #bidList li, #winningIdUpdates li, #statusUpdates li {
+  background: var(--bg-card);
   margin-bottom: 0.5rem;
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   transition: background 0.2s;
 }
 
-#auctionList li:hover, #bidList li:hover {
-  background: #e6f7ff;
+#auctionList li:hover, #bidList li:hover, #winningIdUpdates li:hover, #statusUpdates li:hover {
+  background: var(--bg-card-hover);
 }
 
 div {
-  background: #fff;
+  background: var(--bg-card);
   padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow-lg);
   margin-bottom: 2rem;
   display: flex;
   gap: 1rem;
@@ -47,11 +73,11 @@ input[type="text"], input[type="number"] {
 }
 
 input[type="text"]:focus, input[type="number"]:focus {
-  border-color: #1890ff;
+  border-color: var(--color-primary);
 }
 
 button#bidBtn {
-  background: #1890ff;
+  background: var(--color-primary);
   color: #fff;
   border: none;
   padding: 0.7rem 1.5rem;
@@ -65,36 +91,90 @@ button#bidBtn:hover {
   background: #40a9ff;
 }
 
-
 .auction-name {
-    color: #222;
-    font-weight: 600;
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
 }
 .auction-id {
-    color: #888;
-    margin-left: 6px;
+  color: var(--color-muted);
+  margin-left: 6px;
 }
 .auction-time .time {
-    color: #0078d7;
-    font-weight: 500;
+  color: var(--color-time);
+  font-weight: var(--font-weight-normal);
 }
-.auction-bid .amount {
-    color: #2e7d32;
-    font-weight: 600;
-    margin-left: 2px;
-}
-
-.bid-auction-id {
-    color: #0078d7;
-    font-weight: 500;
-}
+.auction-bid .amount,
+.winning-amount .amount,
 .bid-amount {
-    color: #2e7d32;
-    font-weight: 600;
-    margin-left: 2px;
+  color: var(--color-success);
+  font-weight: var(--font-weight-bold);
+  margin-left: 2px;
+}
+.bid-auction-id {
+  color: var(--color-time);
+  font-weight: var(--font-weight-normal);
 }
 .bid-bidder {
-    color: #d84315;
-    font-weight: 500;
-    margin-left: 2px;
+  color: var(--color-danger);
+  font-weight: var(--font-weight-normal);
+  margin-left: 2px;
+}
+.winner-id, .winner-name {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-normal);
+  margin-left: 6px;
+}
+.status {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  margin-left: 6px;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  max-width: 420px;
+}
+
+.notification-list li {
+  background: var(--notification-bg);
+  border-left: 6px solid var(--notification-border);
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--notification-shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeIn 0.7s;
+  font-size: 1rem;
+  position: relative;
+}
+
+.notification-list li.status {
+  background: var(--notification-info);
+  border-left-color: var(--notification-info-border);
+}
+
+.notification-list li.winner {
+  background: var(--notification-success);
+  border-left-color: var(--notification-success-border);
+}
+
+.notification-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.bid-error {
+  color: red;
+  margin-top: 10px;
+  font-weight: 600;
+  display: none;
 }

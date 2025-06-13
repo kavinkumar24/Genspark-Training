@@ -66,7 +66,7 @@ public class ExceptionMiddleware
         }
         catch (UnauthorizedAccessException ex)
         {
-            await HandleExceptionAsync(context, StatusCodes.Status403Forbidden, ex.Message);
+            await HandleExceptionAsync(context, StatusCodes.Status401Unauthorized, ex.Message);
         }
         
         catch(BadHttpRequestException ex)

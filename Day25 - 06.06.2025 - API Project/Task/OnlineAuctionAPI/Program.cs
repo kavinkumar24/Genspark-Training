@@ -37,6 +37,8 @@ builder.Logging.AddSerilog(logger);
 
 
 builder.Services.AddEndpointsApiExplorer();
+
+#region Swagger
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -47,7 +49,7 @@ builder.Services.AddSwaggerGen(opt =>
         Type = SecuritySchemeType.Http,
         BearerFormat = "JWT",
         Scheme = "bearer"
-    });
+    }); 
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -63,6 +65,7 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 });
+#endregion
 
 builder.Services.AddDbContext<AuctionContext>(opts =>
 {
@@ -84,6 +87,8 @@ builder.Services.AddDbContext<AuctionContext>(opts =>
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
+
+#region Controllers
 builder.Services.AddControllers()
                 .AddJsonOptions(opts =>
                 {
@@ -96,8 +101,9 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<CustomValidationFilter>();
 });
+#endregion
 
-
+#region  API Versioning
 builder.Services.AddApiVersioning(opt =>
 {
     opt.DefaultApiVersion = new ApiVersion(1, 0);
@@ -109,6 +115,7 @@ builder.Services.AddVersionedApiExplorer(opt =>
     opt.GroupNameFormat = "'v'VVV";
     opt.SubstituteApiVersionInUrl = true;
 });
+#endregion
 
 #region AuthenticationFilter
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -121,6 +128,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnChallenge = context =>
+                        {
+                            context.HandleResponse();
+                            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                            context.Response.ContentType = "application/json";
+                            var result = System.Text.Json.JsonSerializer.Serialize(new
+                            {
+                                success = false,
+                                message = "Unauthorized",
+                                data = (object)null,
+                                errors = (object)null
+                            });
+                            return context.Response.WriteAsync(result);
+                        }
                     };
                 });
 #endregion
@@ -145,7 +169,7 @@ builder.Services.AddTransient<IBidItemService, BidItemService>();
 #region CORS
 builder.Services.AddCors(options=>{
     options.AddDefaultPolicy(policy=>{
-        policy.WithOrigins("http://127.0.0.1:5500")
+        policy.WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -155,7 +179,7 @@ builder.Services.AddCors(options=>{
 
 builder.Services.AddSignalR();
 
-
+#region Rate Limiting
 builder.Services.AddRateLimiter(options =>
 {
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
@@ -165,10 +189,10 @@ builder.Services.AddRateLimiter(options =>
         {
             return new TokenBucketRateLimiterOptions
             {
-                TokenLimit = 10, 
-                TokensPerPeriod = 1000, 
+                TokenLimit = 10,
+                TokensPerPeriod = 1000,
                 ReplenishmentPeriod = TimeSpan.FromHours(1),
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst, 
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 0,
             };
         });
@@ -176,6 +200,7 @@ builder.Services.AddRateLimiter(options =>
 
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 });
+#endregion
 
 builder.Services.AddHttpContextAccessor();
 
