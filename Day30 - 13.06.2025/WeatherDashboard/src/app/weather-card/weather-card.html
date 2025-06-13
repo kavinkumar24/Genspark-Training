@@ -1,0 +1,9 @@
+
+<div class="weather-card">
+    <i class="bi bi-cloud-fog2-fill"></i>
+    <h2>{{ weatherData?.name }}</h2>
+    <p><i class="bi bi-thermometer-sun"></i>Temperature: <span>{{ weatherData?.main?.temp }} °C</span></p>
+    <p><i class="bi bi-moisture"></i> Humidity: <span>{{ weatherData?.main?.humidity }} %</span></p>
+    <p><i class="bi bi-cloud-sun"></i>Weather: <span>{{ weatherData?.weather[0]?.description }}</span></p>
+    <p><i class="bi bi-wind"></i>Wind Speed: <span>{{ weatherData?.wind?.speed }} m/s</span></p>
+</div>

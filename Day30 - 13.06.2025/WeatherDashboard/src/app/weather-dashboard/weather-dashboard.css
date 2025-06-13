@@ -1,0 +1,15 @@
+.error-message{
+    color: red;
+    margin-top: 10px;
+    background-color: #fecaca;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f87171;
+    margin-top: 30px;
+
+}

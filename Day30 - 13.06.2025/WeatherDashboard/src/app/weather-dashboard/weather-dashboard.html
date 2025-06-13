@@ -1,0 +1,9 @@
+
+@if (weatherData) {
+    <app-weather-card [weatherData] = "weatherData"></app-weather-card>
+}
+
+@if(errorMessage) {
+    <div class="error-message">
+    <p>{{ errorMessage }}</p></div>
+}
