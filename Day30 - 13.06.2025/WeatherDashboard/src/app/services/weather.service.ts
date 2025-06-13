@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class WeatherService{
-    private apiKey = "a085c269f6f4e916cf90c254897ec036";
+    private apiKey = "_your_key_";
     private apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 
     private http = inject(HttpClient);
