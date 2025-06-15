@@ -13,4 +13,8 @@ public interface IAuctionItemRepository : IRepository<Guid, AuctionItem>
     Task<(IEnumerable<AuctionItem>, int)> GetPagedItemsAsync(int page, int pageSize);
     public IQueryable<AuctionItem> GetAllQueryable();
     Task<WinnerIdResponseDto> UpdateWinningId(WinningIdUpdateDto dto);
+
+    Task<IEnumerable<AuctionItem>> GetAllEndedAndNotCompletedAsync(DateTime currentTime);
+    Task<IEnumerable<AuctionItem>> GetAllUpcomingAndShouldBeLiveAsync(DateTime now);
+
 }

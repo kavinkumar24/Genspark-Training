@@ -13,5 +13,9 @@ public interface IUserService
     Task<User> UpdateUserInfoAsync(Guid id, UserUpdateRequestDto updateuserdto);
     Task<User> DeleteUserAsync(Guid id);
     Task<bool> ChangePasswordAsync(Guid userId, string currentPassword, string newPassword);
+    Task<User> GetUserWithWalletByUserIdAsync(Guid virtualWalletId);
+    Task<User> AddVirtualWalletToUserAsync(Guid userId, VirtualWalletAddDto virtualWalletDto);
+
+    Task<User> AddFundsToVirtualWalletAsync(Guid userId, decimal amount);
 
 }

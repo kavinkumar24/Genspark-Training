@@ -15,7 +15,7 @@ public interface IAuctionItemService
     Task<IEnumerable<AuctionItemResponseDto>> GetActiveAuctionsAsync();
     Task<AuctionItemResponseDto> UpdateAuctionStatusAsync(Guid auctionItemId, AuctionStatus newStatus);
     Task<WinnerIdResponseDto> GetAuctionWinnerAsync(Guid auctionItemId);
-
     Task<bool> DeleteAuctionItemAsync(Guid id);
+    
 
 }

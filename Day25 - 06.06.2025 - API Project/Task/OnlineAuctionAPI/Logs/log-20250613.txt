@@ -646,3 +646,1725 @@ VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);"
 ""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
 VALUES (@p0, @p1, @p2);"
 2025-06-13 14:15:37 [Information] Auction item created successfully with ID d7e05d0e-842b-4153-a37d-fe8a548d2a52
+2025-06-13 18:52:30 [Information] Application is shutting down...
+2025-06-13 21:50:34 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 21:50:34 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 21:50:34 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 21:50:35 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 21:50:35 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 21:50:35 [Information] Hosting environment: "Development"
+2025-06-13 21:50:35 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("53"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("4"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("5"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("2"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("2"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("2"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("2"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("2"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("3"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:50:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:50:36 [Error] Failed executing DbCommand ("5"ms) [Parameters=["@p2='?' (DbType = Guid), @p0='?', @p1='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0, \"WinnerId\" = @p1
+WHERE \"Id\" = @p2;"
+2025-06-13 21:50:36 [Error] An exception occurred in the database while saving changes for context type '"OnlineAuctionAPI.Contexts.AuctionContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table \"AuctionItems\" violates foreign key constraint \"FK_AuctionItems_BidItems_WinnerId\"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table \"AuctionItems\" violates foreign key constraint \"FK_AuctionItems_BidItems_WinnerId\"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: AuctionItems
+    ConstraintName: FK_AuctionItems_BidItems_WinnerId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)"
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "AuctionItems" violates foreign key constraint "FK_AuctionItems_BidItems_WinnerId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "AuctionItems" violates foreign key constraint "FK_AuctionItems_BidItems_WinnerId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: AuctionItems
+    ConstraintName: FK_AuctionItems_BidItems_WinnerId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-06-13 21:50:36 [Error] BackgroundService failed
+OnlineAuctionAPI.Exceptions.RepositoryOperationException: An error occured while performing the operation : Updating the data..
+ ---> Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "AuctionItems" violates foreign key constraint "FK_AuctionItems_BidItems_WinnerId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "AuctionItems" violates foreign key constraint "FK_AuctionItems_BidItems_WinnerId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: AuctionItems
+    ConstraintName: FK_AuctionItems_BidItems_WinnerId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at OnlineAuctionAPI.Repositories.Repository`2.Update(K key, T item) in /Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/Repositories/Repository.cs:line 80
+   --- End of inner exception stack trace ---
+   at OnlineAuctionAPI.Repositories.Repository`2.Update(K key, T item) in /Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/Repositories/Repository.cs:line 85
+   at OnlineAuctionAPI.Service.AuctionCheckService.ExecuteAsync(CancellationToken stoppingToken) in /Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/Services/AuctionCheckService.cs:line 41
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2025-06-13 21:50:36 [Fatal] The HostOptions.BackgroundServiceExceptionBehavior is configured to StopHost. A BackgroundService has thrown an unhandled exception, and the IHost instance is stopping. To avoid this behavior, configure this to Ignore; however the BackgroundService will not be restarted.
+OnlineAuctionAPI.Exceptions.RepositoryOperationException: An error occured while performing the operation : Updating the data..
+ ---> Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "AuctionItems" violates foreign key constraint "FK_AuctionItems_BidItems_WinnerId"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "AuctionItems" violates foreign key constraint "FK_AuctionItems_BidItems_WinnerId"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: AuctionItems
+    ConstraintName: FK_AuctionItems_BidItems_WinnerId
+    File: ri_triggers.c
+    Line: 2610
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at OnlineAuctionAPI.Repositories.Repository`2.Update(K key, T item) in /Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/Repositories/Repository.cs:line 80
+   --- End of inner exception stack trace ---
+   at OnlineAuctionAPI.Repositories.Repository`2.Update(K key, T item) in /Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/Repositories/Repository.cs:line 85
+   at OnlineAuctionAPI.Service.AuctionCheckService.ExecuteAsync(CancellationToken stoppingToken) in /Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI/Services/AuctionCheckService.cs:line 41
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2025-06-13 21:50:36 [Information] Application is shutting down...
+2025-06-13 21:51:02 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"AuctionItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 21:51:02 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"BidItem"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 21:51:02 [Warning] Entity '"User"' has a global query filter defined and is the required end of a relationship with the entity '"RefreshToken"'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-06-13 21:51:02 [Information] Now listening on: "http://localhost:5230"
+2025-06-13 21:51:02 [Information] Application started. Press Ctrl+C to shut down.
+2025-06-13 21:51:02 [Information] Hosting environment: "Development"
+2025-06-13 21:51:02 [Information] Content root path: "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI"
+2025-06-13 21:51:02 [Information] Executed DbCommand ("54"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("4"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@p2='?' (DbType = Guid), @p0='?', @p1='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0, \"WinnerId\" = @p1
+WHERE \"Id\" = @p2;"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("0"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("0"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 21:51:03 [Information] Executed DbCommand ("0"ms) [Parameters=["@p1='?' (DbType = Guid), @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0
+WHERE \"Id\" = @p1;"
+2025-06-13 21:52:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:53:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:54:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:55:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:56:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:57:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:57:40 [Information] Executed DbCommand ("5"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 21:57:41 [Information] Executed DbCommand ("6"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 21:57:41 [Information] User "ram@gmail.com" logged in successfully
+2025-06-13 21:58:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 21:58:38 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 21:58:38 [Information] Executed DbCommand ("19"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Decimal), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime), @p8='?' (DbType = Decimal), @p9='?', @p10='?' (DbType = DateTime), @p11='?' (DbType = Guid), @p12='?' (DbType = Guid), @p13='?', @p14='?' (DbType = Binary), @p15='?', @p16='?' (DbType = Guid), @p17='?', @p18='?' (DbType = Binary), @p19='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"AuctionItems\" (\"Id\", \"CreatedAt\", \"Description\", \"EndTime\", \"Name\", \"ReservePrice\", \"SellerId\", \"StartTime\", \"StartingPrice\", \"Status\", \"UpdatedAt\", \"WinnerId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+INSERT INTO \"Files\" (\"AuctionItemId\", \"ContentType\", \"Data\", \"Name\")
+VALUES (@p12, @p13, @p14, @p15)
+RETURNING \"Id\";
+INSERT INTO \"Files\" (\"AuctionItemId\", \"ContentType\", \"Data\", \"Name\")
+VALUES (@p16, @p17, @p18, @p19)
+RETURNING \"Id\";"
+2025-06-13 21:58:38 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Notifications\" (\"Id\", \"CreatedAt\", \"Message\")
+VALUES (@p0, @p1, @p2);"
+2025-06-13 21:58:38 [Information] Auction item created successfully with ID 6373839b-e07d-4bcf-995c-c27509672d9c
+2025-06-13 21:59:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:00:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:00:35 [Information] Executed DbCommand ("1"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:00:36 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 22:00:36 [Information] User "kumar@gmail.com" logged in successfully
+2025-06-13 22:00:41 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:00:48 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:00:48 [Information] Executed DbCommand ("2"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\", u0.\"Id\", u0.\"CreatedAt\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\", u0.\"Username\"
+FROM \"BidItems\" AS b
+INNER JOIN (
+    SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+    FROM \"Users\" AS u
+    WHERE u.\"StatusId\" <> 2
+) AS u0 ON b.\"BidderId\" = u0.\"Id\"
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC"
+2025-06-13 22:00:48 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = Decimal), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"BidItems\" (\"Id\", \"Amount\", \"AuctionItemId\", \"BidTime\", \"BidderId\")
+VALUES (@p0, @p1, @p2, @p3, @p4);"
+2025-06-13 22:00:48 [Information] Bid placed successfully for auction item 6373839b-e07d-4bcf-995c-c27509672d9c by user aebb2615-a136-4ecf-afd7-a4b2450a498c
+2025-06-13 22:01:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:02:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:02:52 [Information] Executed DbCommand ("1"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:02:52 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 22:02:52 [Information] User "som@gmail.com" logged in successfully
+2025-06-13 22:03:00 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:03:00 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\", u0.\"Id\", u0.\"CreatedAt\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\", u0.\"Username\"
+FROM \"BidItems\" AS b
+INNER JOIN (
+    SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+    FROM \"Users\" AS u
+    WHERE u.\"StatusId\" <> 2
+) AS u0 ON b.\"BidderId\" = u0.\"Id\"
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC"
+2025-06-13 22:03:00 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = Decimal), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"BidItems\" (\"Id\", \"Amount\", \"AuctionItemId\", \"BidTime\", \"BidderId\")
+VALUES (@p0, @p1, @p2, @p3, @p4);"
+2025-06-13 22:03:00 [Information] Bid placed successfully for auction item 6373839b-e07d-4bcf-995c-c27509672d9c by user 0a5fdd31-5f42-47e8-9d16-7e37525ae312
+2025-06-13 22:03:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:04:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:04:11 [Information] Executed DbCommand ("1"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:04:18 [Information] Executed DbCommand ("1"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:04:25 [Information] Executed DbCommand ("1"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:04:32 [Information] Executed DbCommand ("0"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:04:57 [Information] Executed DbCommand ("1"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:04:57 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 22:04:57 [Information] User "kumar@gmail.com" logged in successfully
+2025-06-13 22:05:02 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:05:02 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\", u0.\"Id\", u0.\"CreatedAt\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\", u0.\"Username\"
+FROM \"BidItems\" AS b
+INNER JOIN (
+    SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+    FROM \"Users\" AS u
+    WHERE u.\"StatusId\" <> 2
+) AS u0 ON b.\"BidderId\" = u0.\"Id\"
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC"
+2025-06-13 22:05:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:05:18 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:05:18 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\", u0.\"Id\", u0.\"CreatedAt\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\", u0.\"Username\"
+FROM \"BidItems\" AS b
+INNER JOIN (
+    SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+    FROM \"Users\" AS u
+    WHERE u.\"StatusId\" <> 2
+) AS u0 ON b.\"BidderId\" = u0.\"Id\"
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC"
+2025-06-13 22:05:18 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = Decimal), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"BidItems\" (\"Id\", \"Amount\", \"AuctionItemId\", \"BidTime\", \"BidderId\")
+VALUES (@p0, @p1, @p2, @p3, @p4);"
+2025-06-13 22:05:18 [Information] Bid placed successfully for auction item 6373839b-e07d-4bcf-995c-c27509672d9c by user aebb2615-a136-4ecf-afd7-a4b2450a498c
+2025-06-13 22:06:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:06:05 [Information] Executed DbCommand ("2"ms) [Parameters=["@__email_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Email\" = @__email_0
+LIMIT 1"
+2025-06-13 22:06:06 [Information] Executed DbCommand ("2"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"RefreshTokens\" (\"Id\", \"CreatedAt\", \"ExpiresAt\", \"IsRevoked\", \"RevokedAt\", \"Token\", \"UserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);"
+2025-06-13 22:06:06 [Information] User "som@gmail.com" logged in successfully
+2025-06-13 22:06:21 [Information] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:06:21 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\", u0.\"Id\", u0.\"CreatedAt\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\", u0.\"Username\"
+FROM \"BidItems\" AS b
+INNER JOIN (
+    SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+    FROM \"Users\" AS u
+    WHERE u.\"StatusId\" <> 2
+) AS u0 ON b.\"BidderId\" = u0.\"Id\"
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC"
+2025-06-13 22:06:21 [Information] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (DbType = Guid), @p1='?' (DbType = Decimal), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime), @p4='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"BidItems\" (\"Id\", \"Amount\", \"AuctionItemId\", \"BidTime\", \"BidderId\")
+VALUES (@p0, @p1, @p2, @p3, @p4);"
+2025-06-13 22:06:21 [Information] Bid placed successfully for auction item 6373839b-e07d-4bcf-995c-c27509672d9c by user 0a5fdd31-5f42-47e8-9d16-7e37525ae312
+2025-06-13 22:07:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:08:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:09:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:10:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:10:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__auctionItemId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"AuctionItemId\" = @__auctionItemId_0
+ORDER BY b.\"Amount\" DESC, b.\"BidTime\"
+LIMIT 1"
+2025-06-13 22:10:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@p2='?' (DbType = Guid), @p0='?', @p1='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"AuctionItems\" SET \"Status\" = @p0, \"WinnerId\" = @p1
+WHERE \"Id\" = @p2;"
+2025-06-13 22:11:03 [Information] Executed DbCommand ("3"ms) [Parameters=["@__id_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"Id\", s.\"CreatedAt\", s.\"Description\", s.\"EndTime\", s.\"Name\", s.\"ReservePrice\", s.\"SellerId\", s.\"StartTime\", s.\"StartingPrice\", s.\"Status\", s.\"UpdatedAt\", s.\"WinnerId\", s.\"Id0\", f.\"Id\", f.\"AuctionItemId\", f.\"ContentType\", f.\"Data\", f.\"Name\", s.\"CreatedAt0\", s.\"Email\", s.\"Password\", s.\"Role\", s.\"StatusId\", s.\"UpdatedAt0\", s.\"Username\"
+FROM (
+    SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\", u0.\"Id\" AS \"Id0\", u0.\"CreatedAt\" AS \"CreatedAt0\", u0.\"Email\", u0.\"Password\", u0.\"Role\", u0.\"StatusId\", u0.\"UpdatedAt\" AS \"UpdatedAt0\", u0.\"Username\"
+    FROM \"AuctionItems\" AS a
+    INNER JOIN (
+        SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+        FROM \"Users\" AS u
+        WHERE u.\"StatusId\" <> 2
+    ) AS u0 ON a.\"SellerId\" = u0.\"Id\"
+    WHERE a.\"Id\" = @__id_0
+    LIMIT 1
+) AS s
+LEFT JOIN \"Files\" AS f ON s.\"Id\" = f.\"AuctionItemId\"
+ORDER BY s.\"Id\", s.\"Id0\""
+2025-06-13 22:11:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__bidId_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT b.\"Id\", b.\"Amount\", b.\"AuctionItemId\", b.\"BidTime\", b.\"BidderId\"
+FROM \"BidItems\" AS b
+WHERE b.\"Id\" = @__bidId_0
+LIMIT 1"
+2025-06-13 22:11:03 [Information] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Guid)"], CommandType='Text', CommandTimeout='30']"
+""SELECT u.\"Id\", u.\"CreatedAt\", u.\"Email\", u.\"Password\", u.\"Role\", u.\"StatusId\", u.\"UpdatedAt\", u.\"Username\"
+FROM \"Users\" AS u
+WHERE u.\"StatusId\" <> 2 AND u.\"Id\" = @__p_0
+LIMIT 1"
+2025-06-13 22:11:03 [Information] Winner retrieved successfully for auction item 6373839b-e07d-4bcf-995c-c27509672d9c
+2025-06-13 22:11:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:12:03 [Information] Executed DbCommand ("3"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:13:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:14:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:15:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:16:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:17:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:18:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:19:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:20:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:21:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:22:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:23:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:24:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:25:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:26:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:27:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:28:03 [Information] Executed DbCommand ("2"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:29:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:30:03 [Information] Executed DbCommand ("1"ms) [Parameters=["@__now_0='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT a.\"Id\", a.\"CreatedAt\", a.\"Description\", a.\"EndTime\", a.\"Name\", a.\"ReservePrice\", a.\"SellerId\", a.\"StartTime\", a.\"StartingPrice\", a.\"Status\", a.\"UpdatedAt\", a.\"WinnerId\"
+FROM \"AuctionItems\" AS a
+WHERE a.\"EndTime\" <= @__now_0 AND a.\"Status\" <> 'Completed'"
+2025-06-13 22:39:54 [Information] Application is shutting down...

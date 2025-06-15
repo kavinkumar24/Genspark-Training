@@ -123,7 +123,7 @@ public class AuctionItemController : ControllerBase
     }
 
     [HttpDelete("{auctionId}")]
-    [Authorize(Roles = "Seller")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> DeleteAuctionItem(Guid auctionId)
     {
         var result = await _auctionItemService.DeleteAuctionItemAsync(auctionId);

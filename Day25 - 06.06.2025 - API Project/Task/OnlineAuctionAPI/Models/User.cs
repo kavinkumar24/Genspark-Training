@@ -24,6 +24,7 @@ namespace OnlineAuctionAPI.Models
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+        public VirtualWallet? VirtualWallet { get; set; }
         
     }
 }

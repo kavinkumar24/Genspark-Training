@@ -5,6 +5,8 @@ namespace OnlineAuctionAPI.Models
         Upcoming,
         Live,
         Completed,
-        Cancelled
+        Closed,
+        Cancelled,
+
     }
 }

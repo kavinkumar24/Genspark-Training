@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wsSzAwVEbHs=",
+  "dgSpecHash": "2gEOWnC14lQ=",
   "success": true,
   "projectFilePath": "/Users/presidio/Documents/Genspark-Training/Day25 - 06.06.2025 - API Project/Task/OnlineAuctionAPI.Tests/OnlineAuctionAPI.Tests.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "/Users/presidio/.nuget/packages/nunit/3.14.0/nunit.3.14.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/nunit.analyzers/3.9.0/nunit.analyzers.3.9.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/nunit3testadapter/4.5.0/nunit3testadapter.4.5.0.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/questpdf/2025.5.1/questpdf.2025.5.1.nupkg.sha512",
     "/Users/presidio/.nuget/packages/serilog/4.2.0/serilog.4.2.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/serilog.aspnetcore/9.0.0/serilog.aspnetcore.9.0.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/serilog.extensions.hosting/9.0.0/serilog.extensions.hosting.9.0.0.nupkg.sha512",

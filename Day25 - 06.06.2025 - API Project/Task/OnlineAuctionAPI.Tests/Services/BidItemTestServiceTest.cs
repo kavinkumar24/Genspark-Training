@@ -27,6 +27,8 @@ namespace OnlineAuctionAPI.Tests
         private Mock<IHttpContextAccessor> _mockHttpContextAccessor;
 
 
+        private Mock<IUserRepository> _mockUserRepo;
+
         [SetUp]
         public void Setup()
         {
@@ -48,7 +50,15 @@ namespace OnlineAuctionAPI.Tests
             _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
             _mockHttpContextAccessor.Setup(x => x.HttpContext).Returns((HttpContext)null);
 
-            _service = new BidItemService(_bidItemRepo, _auctionItemRepo, _mapper, _mockHttpContextAccessor.Object);
+            _mockUserRepo = new Mock<IUserRepository>();
+
+            _service = new BidItemService(
+                _bidItemRepo,
+                _auctionItemRepo,
+                _mockUserRepo.Object,
+                _mapper,
+                _mockHttpContextAccessor.Object
+            );
         }
 
         [TearDown]
@@ -58,7 +68,6 @@ namespace OnlineAuctionAPI.Tests
             _context.Dispose();
         }
 
-        [Test]
         public async Task PlaceBidAsync_ValidBid_Succeeds()
         {
             var auction = new AuctionItem
@@ -87,7 +96,27 @@ namespace OnlineAuctionAPI.Tests
             };
             _mockHttpContextAccessor.Setup(x => x.HttpContext).Returns(httpContext);
 
-            _service = new BidItemService(_bidItemRepo, _auctionItemRepo, _mapper, _mockHttpContextAccessor.Object);
+            var virtualWallet = new VirtualWallet
+            {
+                Id = Guid.NewGuid(),
+                UserId = bidderId,
+                Balance = 1000
+            };
+            var user = new User
+            {
+                Id = bidderId,
+                VirtualWallet = virtualWallet
+            };
+            _mockUserRepo.Setup(x => x.GetByIdWithVirtualWalletAsync(bidderId))
+                .ReturnsAsync(user);
+
+            _service = new BidItemService(
+                _bidItemRepo,
+                _auctionItemRepo,
+                _mockUserRepo.Object,
+                _mapper,
+                _mockHttpContextAccessor.Object
+            );
 
             var bidDto = new BidItemAddDto
             {

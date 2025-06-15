@@ -68,6 +68,15 @@ public class AuctionItemService : IAuctionItemService
         var auctionItem = _mapper.Map<AuctionItem>(auctionDto);
         auctionItem.CreatedAt = DateTime.UtcNow;
         auctionItem.UpdatedAt = DateTime.UtcNow;
+        
+        if (auctionItem.Status == AuctionStatus.Live && auctionItem.StartTime > DateTime.UtcNow)
+        {
+            throw new InvalidException("Auction cannot be set to Live if the start time is in the future.");
+        }
+        if (auctionItem.Status == AuctionStatus.Upcoming && auctionItem.StartTime <= DateTime.UtcNow)
+        {
+            throw new InvalidException("Auction cannot be set to Scheduled if the start time is now or in the past.");
+        }
 
         if (auctionItem.FileAttachments == null)
         {

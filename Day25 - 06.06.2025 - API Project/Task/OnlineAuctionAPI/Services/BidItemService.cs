@@ -14,14 +14,16 @@ public class BidItemService : IBidItemService
 {
     private readonly IBidItemRepository _bidItemRepository;
     private readonly IAuctionItemRepository _auctionItemRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-    public BidItemService(IBidItemRepository bidItemRepository, IAuctionItemRepository auctionItemRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+    public BidItemService(IBidItemRepository bidItemRepository, IAuctionItemRepository auctionItemRepository,IUserRepository userRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
     {
         _bidItemRepository = bidItemRepository;
         _auctionItemRepository = auctionItemRepository;
+        _userRepository = userRepository;
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
     }
@@ -65,7 +67,24 @@ public class BidItemService : IBidItemService
         }
 
         bidDto.BidderId = loggedInUserId;
+        var user = await _userRepository.GetByIdWithVirtualWalletAsync(loggedInUserId);
+        if (user?.VirtualWallet == null)
+            throw new InvalidDataException("You do not have a virtual wallet. Please create one before bidding.");
+        if (user.VirtualWallet.Balance < bidDto.Amount)
+            throw new InvalidDataException("Insufficient wallet balance to place this bid.");
 
+        var highestBid = await _bidItemRepository.GetHighestBidAsync(bidDto.AuctionItemId);
+
+        if (highestBid != null)
+        {
+            if (bidDto.Amount <= highestBid.Amount)
+                throw new InvalidDataException($"Your bid must be higher than the current highest bid ({highestBid.Amount}) - for the auction {bidDto.AuctionItemId}.");
+        }
+        else
+        {
+            if (bidDto.Amount < auctionItem.StartingPrice)
+                throw new InvalidDataException("Please place the bid above the starting price of the auction.");
+        }
         var existingBids = await _bidItemRepository.GetBidsByAuctionAsync(bidDto.AuctionItemId);
         var userPreviousBid = existingBids?.FirstOrDefault(b => b.BidderId == bidDto.BidderId);
 
@@ -77,8 +96,6 @@ public class BidItemService : IBidItemService
         var bidItem = _mapper.Map<BidItem>(bidDto);
         await _bidItemRepository.Add(bidItem);
         return _mapper.Map<BidItemResponseDto>(bidItem);
-       
-        
     }
 
     public async Task<IEnumerable<BidItemResponseDto>> GetAllBidAsync()

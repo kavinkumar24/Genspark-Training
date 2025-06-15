@@ -151,4 +151,34 @@ public class AuctionRepository : Repository<Guid, AuctionItem>, IAuctionItemRepo
             WinningPrice = bid.Amount
         };
     }
+
+
+    public async Task<IEnumerable<AuctionItem>> GetAllEndedAndNotCompletedAsync(DateTime now)
+    {
+        try
+        {
+            var auctions = await _auctionContext.AuctionItems
+                .Where(a => a.EndTime <= now && a.Status != AuctionStatus.Completed)
+                .ToListAsync();
+            return auctions;
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Error fetching ended and not completed auctions", ex);
+        }
+    }
+
+    public async Task<IEnumerable<AuctionItem>> GetAllUpcomingAndShouldBeLiveAsync(DateTime now)
+    {
+        try
+        {
+            return await _auctionContext.AuctionItems
+                .Where(a => a.Status == AuctionStatus.Upcoming && a.StartTime <= now)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Error fetching auctions that should go live", ex);
+        }
+    }
 }

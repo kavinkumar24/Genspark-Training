@@ -99,7 +99,7 @@ public class UserController : ControllerBase
     [Authorize(Roles = "Seller,Bidder")]
     public async Task<IActionResult> ChangePassword(Guid userId, [FromBody] ChangePasswordRequestDto dto)
     {
-        
+
         await _userService.ChangePasswordAsync(userId, dto.CurrentPassword, dto.NewPassword);
         _logger.LogInformation("Password changed successfully for user {UserId}", userId);
         return Ok(new ApiResponse<string>
@@ -107,6 +107,127 @@ public class UserController : ControllerBase
             Success = true,
             Message = "Password changed successfully",
             Data = null
+        });
+    }
+
+    [HttpGet("GetWalletByUserId")]
+    [Authorize(Roles = "Bidder")]
+    public async Task<ActionResult<VirtualWalletResponseDto>> GetUserWithWalletByUserId()
+    {
+        var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            _logger.LogWarning("Invalid or missing userId in token");
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "Please provide a valid userId.",
+                Data = null
+            });
+        }
+
+        var user = await _userService.GetUserWithWalletByUserIdAsync(userId);
+        if (user == null)
+        {
+            _logger.LogWarning("No user found with User ID {UserId}", userId);
+            return NotFound(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "No user found with the given User Id",
+                Data = null
+            });
+        }
+        if (user.VirtualWallet == null)
+        {
+            _logger.LogWarning("No virtual wallet found for user {UserId}", userId);
+            return NotFound(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "No virtual wallet found for the given User Id",
+                Data = null
+            });
+        }
+        _logger.LogInformation("User with User ID {UserId} retrieved successfully", userId);
+        return Ok(new ApiResponse<VirtualWalletResponseDto>
+        {
+            Success = true,
+            Message = "User with wallet retrieved successfully",
+            Data = new VirtualWalletResponseDto
+            {
+                Id = user.VirtualWallet.Id,
+                UserId = user.Id,
+                Balance = user.VirtualWallet.Balance,
+            }
+        });
+    }
+
+    [HttpPost("AddVirtualWalletToUser")]
+    [Authorize(Roles = "Bidder")]
+    public async Task<ActionResult<VirtualWalletResponseDto>> AddVirtualWalletToUser([FromBody] VirtualWalletAddDto virtualWallet)
+    {
+        var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            _logger.LogWarning("Invalid or missing userId in token");
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "Please provide a valid userId.",
+                Data = null
+            });
+        }
+
+        var user = await _userService.AddVirtualWalletToUserAsync(userId, virtualWallet);
+
+        _logger.LogInformation("Virtual wallet added to user with ID {UserId} successfully", userId);
+
+        var wallet = user.VirtualWallet!;
+        var walletDto = new VirtualWalletResponseDto
+        {
+            Id = wallet.Id,
+            UserId = wallet.UserId,
+            Balance = wallet.Balance,
+            UpdatedAt = wallet.UpdatedAt
+        };
+
+        return Ok(new ApiResponse<VirtualWalletResponseDto>
+        {
+            Success = true,
+            Message = "Virtual wallet added successfully",
+            Data = walletDto
+        });
+    }
+
+    [HttpPatch("AddFundsToWallet")]
+    [Authorize(Roles = "Bidder")]
+    public async Task<ActionResult<VirtualWalletResponseDto>> AddFundsToWallet([FromQuery] decimal amount)
+    {
+        var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "Please provide a valid userId.",
+                Data = null
+            });
+        }
+
+        var user = await _userService.AddFundsToVirtualWalletAsync(userId, amount);
+        var wallet = user.VirtualWallet!;
+        var walletDto = new VirtualWalletResponseDto
+        {
+            Id = wallet.Id,
+            UserId = wallet.UserId,
+            Balance = wallet.Balance,
+            UpdatedAt = wallet.UpdatedAt
+        };
+
+        return Ok(new ApiResponse<VirtualWalletResponseDto>
+        {
+            Success = true,
+            Message = "Funds added successfully",
+            Data = walletDto
         });
     }
 }

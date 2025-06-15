@@ -120,6 +120,33 @@ namespace OnlineAuctionAPI.Migrations
                     b.ToTable("BidItems");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.EAgreement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AuctionItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BiddingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("bytea");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuctionItemId");
+
+                    b.HasIndex("BiddingId");
+
+                    b.ToTable("EAgreements");
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.FileData", b =>
                 {
                     b.Property<int>("Id")
@@ -251,6 +278,57 @@ namespace OnlineAuctionAPI.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.VirtualWallet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("VirtualWallets");
+                });
+
+            modelBuilder.Entity("OnlineAuctionAPI.Models.VirtualWalletHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("VirtualWalletId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VirtualWalletId");
+
+                    b.ToTable("VirtualWalletHistories");
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionItem", b =>
                 {
                     b.HasOne("OnlineAuctionAPI.Models.User", "Seller")
@@ -288,6 +366,25 @@ namespace OnlineAuctionAPI.Migrations
                     b.Navigation("Bidder");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.EAgreement", b =>
+                {
+                    b.HasOne("OnlineAuctionAPI.Models.AuctionItem", "AuctionItem")
+                        .WithMany()
+                        .HasForeignKey("AuctionItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineAuctionAPI.Models.BidItem", "Bidding")
+                        .WithMany()
+                        .HasForeignKey("BiddingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuctionItem");
+
+                    b.Navigation("Bidding");
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.FileData", b =>
                 {
                     b.HasOne("OnlineAuctionAPI.Models.AuctionItem", "AuctionItem")
@@ -321,6 +418,28 @@ namespace OnlineAuctionAPI.Migrations
                     b.Navigation("Status");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.VirtualWallet", b =>
+                {
+                    b.HasOne("OnlineAuctionAPI.Models.User", "User")
+                        .WithOne("VirtualWallet")
+                        .HasForeignKey("OnlineAuctionAPI.Models.VirtualWallet", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OnlineAuctionAPI.Models.VirtualWalletHistory", b =>
+                {
+                    b.HasOne("OnlineAuctionAPI.Models.VirtualWallet", "VirtualWallet")
+                        .WithMany()
+                        .HasForeignKey("VirtualWalletId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VirtualWallet");
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionItem", b =>
                 {
                     b.Navigation("Bids");
@@ -335,6 +454,8 @@ namespace OnlineAuctionAPI.Migrations
                     b.Navigation("Bids");
 
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("VirtualWallet");
                 });
 #pragma warning restore 612, 618
         }

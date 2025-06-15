@@ -66,7 +66,7 @@ public class BidItemController : ControllerBase
     }
 
     [HttpDelete("{bidId}")]
-    [Authorize(Roles = "Bidder")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> DeleteBid(Guid bidId)
     {
         var result = await _bidItemService.DeleteBidAsync(bidId);

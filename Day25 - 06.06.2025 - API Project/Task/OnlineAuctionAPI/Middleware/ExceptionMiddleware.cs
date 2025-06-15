@@ -40,21 +40,25 @@ public class ExceptionMiddleware
         {
             await HandleExceptionAsync(context, StatusCodes.Status400BadRequest, ex.Message);
         }
+        catch(InvalidOperationException ex)
+        {
+            await HandleExceptionAsync(context, StatusCodes.Status400BadRequest, ex.Message);
+        }
         catch (RepositoryOperationException ex)
         {
-        if (ex.InnerException is NotFoundException notFoundEx)
-        {
-            await HandleExceptionAsync(context, StatusCodes.Status404NotFound, notFoundEx.Message);
-        }
-        else
-        {
-            var message = ex.Message;
-            if (ex.InnerException != null)
+            if (ex.InnerException is NotFoundException notFoundEx)
             {
-                message += $" Inner exception: {ex.InnerException.Message}";
+                await HandleExceptionAsync(context, StatusCodes.Status404NotFound, notFoundEx.Message);
             }
-            await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, message);
-        }
+            else
+            {
+                var message = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    message += $" Inner exception: {ex.InnerException.Message}";
+                }
+                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, message);
+            }
         }
         catch (InvalidException ex)
         {

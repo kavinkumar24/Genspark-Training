@@ -50,7 +50,7 @@ public class BidItemRepository : Repository<Guid, BidItem>, IBidItemRepository
 
     public async Task<IEnumerable<BidItem>> GetBidsByUserIdAsync(Guid userId)
     {
-        return await _auctionContext.BidItems.Where(b => b.Id == userId).ToListAsync();
+        return await _auctionContext.BidItems.Where(b => b.BidderId == userId).ToListAsync();
     }
 
     public async Task<BidItem?> GetByIdAsync(Guid bidId)

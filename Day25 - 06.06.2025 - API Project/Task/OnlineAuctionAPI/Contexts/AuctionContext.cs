@@ -15,6 +15,9 @@ public class AuctionContext : DbContext
     public DbSet<FileData> Files { get;  set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Notification> Notifications { get; set; }
+    public DbSet<VirtualWallet> VirtualWallets { get; set; }
+    public DbSet<VirtualWalletHistory> VirtualWalletHistories { get; set; }
+    public DbSet<EAgreement> EAgreements { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Status>()

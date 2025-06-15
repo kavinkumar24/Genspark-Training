@@ -20,10 +20,11 @@ using Serilog.Events;
 using System.Threading.RateLimiting;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
+using QuestPDF.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+QuestPDF.Settings.License = LicenseType.Community;
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
@@ -144,6 +145,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                                 errors = (object)null
                             });
                             return context.Response.WriteAsync(result);
+                        },
+                        OnForbidden = context =>
+                        {
+                             context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                            context.Response.ContentType = "application/json";
+                            var result = System.Text.Json.JsonSerializer.Serialize(new
+                            {
+                                success = false,
+                                message = "Forbidden",
+                                data = (object)null,
+                                errors = (object)null
+                            });
+                            return context.Response.WriteAsync(result);
                         }
                     };
                 });
@@ -154,6 +168,8 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IAuctionItemRepository, AuctionRepository>();
 builder.Services.AddTransient<IBidItemRepository, BidItemRepository>();
 builder.Services.AddTransient<AuctionRepository>();
+builder.Services.AddTransient<IEAgreementRepository, EAgreementRepository>();
+builder.Services.AddTransient<IVirtualWalletRepository, VirtualWalletRepository>();
 
 #endregion
 
@@ -164,6 +180,8 @@ builder.Services.AddTransient<IAuctionItemService, AuctionItemService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IAuthService, OnlineAuctionAPI.Service.AuthenticationService>();
 builder.Services.AddTransient<IBidItemService, BidItemService>();
+builder.Services.AddHostedService<AuctionCheckService>();
+builder.Services.AddTransient<IEAgreementService, EAgreementService>();
 #endregion
 
 #region CORS

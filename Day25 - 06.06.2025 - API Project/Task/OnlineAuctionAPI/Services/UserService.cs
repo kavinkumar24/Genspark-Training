@@ -107,5 +107,37 @@ public class UserService : IUserService
         await _userRepository.Update(userId, user);
         return true;
     }
+
+    public async Task<User> GetUserWithWalletByUserIdAsync(Guid userId)
+    {
+        var user = await _userRepository.GetByIdWithVirtualWalletAsync(userId);
+        if (user == null)
+        {
+            throw new NotFoundException($"No user found with the given User Id: {userId}");
+        }
+        return user;
+    }
+
+    public async Task<User> AddVirtualWalletToUserAsync(Guid userId, VirtualWalletAddDto virtualWalletDto)
+    {
+        var user = await _userRepository.GetByIdWithVirtualWalletAsync(userId);
+        if (user == null)
+            throw new NotFoundException($"User with Id {userId} not found");
+
+        if (user.VirtualWallet != null)
+            throw new InvalidOperationException("User already has a virtual wallet.");
+
+        await _userRepository.AddVirtualWalletAsync(userId, virtualWalletDto);
+
+        var updatedUser = await _userRepository.GetByIdWithVirtualWalletAsync(userId);
+        return updatedUser!;
+    }
+    
+    public async Task<User> AddFundsToVirtualWalletAsync(Guid userId, decimal amount)
+    {
+        await _userRepository.AddFundsToWalletAndHistoryAsync(userId, amount);
+        var updatedUser = await _userRepository.GetByIdWithVirtualWalletAsync(userId);
+        return updatedUser!;
+    }
     
 }
