@@ -1,0 +1,31 @@
+<div class="search-container">
+<input type="text" [(ngModel)]="searchString" (input)="onSearchProducts()" placeholder="Search your products here..."/>
+</div>
+
+@if (!loading) {
+    <div class="fade-in products-grid-layout">
+        @for (item of products; track item.id) {
+            <app-product [product]="item" [searchTerm]="searchString"></app-product>
+        }
+    </div>
+}
+@else {
+    <div>
+        <div class="spinner-container">
+        <div class="spinner-border spinner-purple" role="status">
+            <span class="sr-only"></span>
+        </div>
+        </div>
+    </div>
+}
+
+@if(noData && !loading) {
+    <div class="no-data-container">
+        <h3>No Products Found</h3>
+        <p>Try searching with different keywords.</p>
+    </div>
+}
+
+<button class="back-to-top" (click)="scrollToTop()" title="Back to Top">
+    <i class="bi bi-arrow-up-circle-fill"></i>
+</button>
