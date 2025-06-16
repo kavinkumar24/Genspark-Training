@@ -75,7 +75,7 @@ public class AuctionItemService : IAuctionItemService
         }
         if (auctionItem.Status == AuctionStatus.Upcoming && auctionItem.StartTime <= DateTime.UtcNow)
         {
-            throw new InvalidException("Auction cannot be set to Scheduled if the start time is now or in the past.");
+            throw new InvalidException("Auction cannot be set to Upcoming if the start time is now or in the past.");
         }
 
         if (auctionItem.FileAttachments == null)

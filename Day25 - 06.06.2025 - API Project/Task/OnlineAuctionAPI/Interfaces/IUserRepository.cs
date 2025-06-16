@@ -12,4 +12,5 @@ public interface IUserRepository : IRepository<Guid, User>
 
     Task AddVirtualWalletAsync(Guid userId, VirtualWalletAddDto dto);
     Task AddFundsToWalletAndHistoryAsync(Guid userId, decimal amount);
+    Task<List<VirtualWalletHistory>> GetVirtualWalletHistoryByUserIdAsync(Guid userId);
 }

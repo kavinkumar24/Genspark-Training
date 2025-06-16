@@ -146,4 +146,36 @@ public class UserRepository : Repository<Guid, User>, IUserRepository
         }
     }
 
+    public async Task<List<VirtualWalletHistory>> GetVirtualWalletHistoryByUserIdAsync(Guid userId)
+    {
+        try
+        {
+            var user = await _auctionContext.Users
+                .Include(u => u.VirtualWallet)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null || user.VirtualWallet == null)
+                throw new Exception("User or wallet not found");
+
+            var history = await _auctionContext.VirtualWalletHistories
+                .Where(h => h.VirtualWalletId == user.VirtualWallet.Id)
+                .OrderByDescending(h => h.TransactionDate)
+                .Select(h => new VirtualWalletHistory
+                {
+                    Id = h.Id,
+                    VirtualWalletId = h.VirtualWalletId,
+                    Amount = h.Amount,
+                    Description = h.Description,
+                    TransactionDate = h.TransactionDate
+                })
+                .ToListAsync();
+
+            return history;
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Get virtual wallet history by userId", ex);
+        }
+    }
+
 }

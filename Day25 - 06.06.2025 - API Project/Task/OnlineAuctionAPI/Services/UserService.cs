@@ -132,12 +132,17 @@ public class UserService : IUserService
         var updatedUser = await _userRepository.GetByIdWithVirtualWalletAsync(userId);
         return updatedUser!;
     }
-    
+
     public async Task<User> AddFundsToVirtualWalletAsync(Guid userId, decimal amount)
     {
         await _userRepository.AddFundsToWalletAndHistoryAsync(userId, amount);
         var updatedUser = await _userRepository.GetByIdWithVirtualWalletAsync(userId);
         return updatedUser!;
+    }
+    
+    public async Task<List<VirtualWalletHistory>> GetVirtualWalletHistoryByUserIdAsync(Guid userId)
+    {
+        return await _userRepository.GetVirtualWalletHistoryByUserIdAsync(userId);
     }
     
 }

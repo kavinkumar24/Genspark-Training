@@ -230,4 +230,51 @@ public class UserController : ControllerBase
             Data = walletDto
         });
     }
+
+    [HttpGet("GetWalletHistoryByUserId")]
+    [Authorize(Roles = "Bidder,Admin")]
+    public async Task<ActionResult<List<VirtualWalletHistory>>> GetWalletHistoryByUserId()
+    {
+        var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "Please provide a valid userId.",
+                Data = null
+            });
+        }
+        try
+        {
+            var history = await _userService.GetVirtualWalletHistoryByUserIdAsync(userId);
+            if (history == null || history.Count == 0)
+            {
+                _logger.LogWarning("No wallet history found for user {UserId}", userId);
+                return NotFound(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "No wallet history found for the given User Id",
+                    Data = null
+                });
+            }
+
+            return Ok(new ApiResponse<List<VirtualWalletHistory>>
+            {
+                Success = true,
+                Message = "Wallet history retrieved successfully",
+                Data = history
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving wallet history for user {UserId}", userId);
+            return StatusCode(500, new ApiResponse<string>
+            {
+                Success = false,
+                Message = "An error occurred while retrieving wallet history.",
+                Data = null
+            });
+        }
+    }
 }

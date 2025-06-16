@@ -76,11 +76,13 @@ connection.on("WinningIdUpdated", function(auctionItem) {
 });
 
 connection.on("AuctionStatusUpdated", function(auctionItem) {
+    if (!auctionItem || !auctionItem.id) return; 
+
     const list = document.getElementById("statusUpdates");
     const item = document.createElement("li");
     item.classList.add("status");
     item.innerHTML = `
-        <span class="notification-icon">i class="fa-solid fa-bell"></i></span>
+       <span class="notification-icon"><i class="fa-solid fa-bell"></i></span>
         <span>
             <strong>Status Changed:</strong> Auction <span class="auction-id">${auctionItem.id}</span>
             <br>
@@ -90,6 +92,24 @@ connection.on("AuctionStatusUpdated", function(auctionItem) {
     list.prepend(item);
 });
 connection.start().catch(err => console.error(err));
+
+connection.on("BidPlaced", function(bidItem) {
+    const list = document.getElementById("bidPlacedUpdates");
+    const item = document.createElement("li");
+    item.classList.add("bid-placed");
+    item.innerHTML = `
+        <span class="notification-icon"><i class="fa-solid fa-gavel"></i></span>
+        <span>
+            <strong>Bid Placed:</strong> Auction <span class="auction-id">${bidItem.auctionItemId || bidItem.auctionItemID || bidItem.auctionId}</span>
+            <br>
+            Bidder: <span class="bidder">${bidItem.bidderName || bidItem.userId}</span>
+            <br>
+            Amount: <span class="amount">Rs.${bidItem.amount || bidItem.bidAmount}</span>
+        </span>
+    `;
+    list.prepend(item);
+});
+
 
 document.getElementById("bidBtn").addEventListener("click", function(e) {
     e.preventDefault();

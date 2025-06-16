@@ -6,6 +6,9 @@ using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
 using OnlineAuctionAPI.Services;
+using OnlineAuctionAPI.Hubs;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR;
 
 namespace OnlineAuctionAPI.Controllers;
 
@@ -16,11 +19,13 @@ public class BidItemController : ControllerBase
 {
     private readonly IBidItemService _bidItemService;
     private readonly ILogger<BidItemController> _logger;
+    private readonly IHubContext<AuctionHub> _hubContext;
 
-    public BidItemController(IBidItemService bidItemService, ILogger<BidItemController> logger)
+    public BidItemController(IBidItemService bidItemService, ILogger<BidItemController> logger, IHubContext<AuctionHub> hubContext)
     {
         _bidItemService = bidItemService;
         _logger = logger;
+        _hubContext = hubContext;
     }
 
     [HttpPost]
@@ -29,6 +34,7 @@ public class BidItemController : ControllerBase
     {
         var result = await _bidItemService.PlaceBidAsync(bidDto);
         _logger.LogInformation("Bid placed successfully for auction item {AuctionItemId} by user {UserId}", bidDto.AuctionItemId, bidDto.BidderId);
+        await _hubContext.Clients.All.SendAsync("BidPlaced", result);
         return Ok(new ApiResponse<BidItemResponseDto>
         {
             Success = true,

@@ -10,17 +10,20 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System.Globalization;
-
+using Microsoft.AspNetCore.SignalR;
+using OnlineAuctionAPI.Hubs;
 
 namespace OnlineAuctionAPI.Service
 {
     public class AuctionCheckService : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly IHubContext<AuctionHub> _hubContext;
 
-        public AuctionCheckService(IServiceProvider serviceProvider)
+        public AuctionCheckService(IServiceProvider serviceProvider, IHubContext<AuctionHub> hubContext)
         {
             _serviceProvider = serviceProvider;
+            _hubContext = hubContext;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -37,17 +40,38 @@ namespace OnlineAuctionAPI.Service
                     var now = DateTime.UtcNow;
 
                     var toGoLiveAuctions = await auctionItemRepository.GetAllUpcomingAndShouldBeLiveAsync(now);
+
                     foreach (var auction in toGoLiveAuctions)
                     {
-                        auction.Status = AuctionStatus.Live;
-                        await auctionItemRepository.Update(auction.Id, auction);
+                        var previousStatus = auction.Status;
+                        if (previousStatus != AuctionStatus.Live)
+                        {
+                            auction.Status = AuctionStatus.Live;
+                            await auctionItemRepository.Update(auction.Id, auction);
+
+                            var result = new
+                            {
+                                id = auction.Id,
+                                name = auction.Name,
+                                status = auction.Status.ToString(),
+                                winnerId = (Guid?)null,
+                                startTime = auction.StartTime,
+                                endTime = auction.EndTime,
+                                sellerId = auction.SellerId,
+                                createdAt = auction.CreatedAt,
+                                updatedAt = auction.UpdatedAt
+                            };
+                            await _hubContext.Clients.All.SendAsync("AuctionStatusUpdated", result);
+                        }
                     }
 
                     var endedAuctions = await auctionItemRepository.GetAllEndedAndNotCompletedAsync(now);
 
                     foreach (var auction in endedAuctions)
                     {
+                        var previousStatus = auction.Status;
                         var highestBid = await bidItemRepository.GetHighestBidAsync(auction.Id);
+
                         if (highestBid != null && highestBid.Amount >= auction.ReservePrice)
                         {
                             auction.WinnerId = highestBid.Id;
@@ -64,7 +88,7 @@ namespace OnlineAuctionAPI.Service
                                     Description = $"Deducted for winning auction {auction.Id}",
                                     TransactionDate = DateTime.UtcNow
                                 };
-                            await virtualWalletRepository.AddHistoryAsync(history);
+                                await virtualWalletRepository.AddHistoryAsync(history);
                             }
                             else if (winnerWallet == null)
                             {
@@ -97,7 +121,25 @@ namespace OnlineAuctionAPI.Service
                             auction.WinnerId = null;
                             auction.Status = AuctionStatus.Closed;
                         }
-                        await auctionItemRepository.Update(auction.Id, auction);
+
+                        if (auction.Status != previousStatus)
+                        {
+                            await auctionItemRepository.Update(auction.Id, auction);
+
+                            var result = new
+                            {
+                                id = auction.Id,
+                                name = auction.Name,
+                                status = auction.Status.ToString(),
+                                winnerId = auction.WinnerId,
+                                startTime = auction.StartTime,
+                                endTime = auction.EndTime,
+                                sellerId = auction.SellerId,
+                                createdAt = auction.CreatedAt,
+                                updatedAt = auction.UpdatedAt
+                            };
+                            await _hubContext.Clients.All.SendAsync("AuctionStatusUpdated", result);
+                        }
                     }
                 }
 
@@ -105,7 +147,7 @@ namespace OnlineAuctionAPI.Service
             }
         }
 
-       private byte[] GenerateAgreementPdf(AuctionItem auction, BidItem winningBid)
+        private byte[] GenerateAgreementPdf(AuctionItem auction, BidItem winningBid)
         {
             using var ms = new MemoryStream();
             var indiaCulture = new CultureInfo("en-IN");
@@ -142,7 +184,6 @@ namespace OnlineAuctionAPI.Service
                                 .FontColor(Colors.Black)
                                 .Italic();
 
-
                             col.Item().Text($"Start Time: {auction.StartTime:yyyy-MM-dd HH:mm}")
                                 .FontColor(Colors.Black);
                             col.Item().Text($"End Time: {auction.EndTime:yyyy-MM-dd HH:mm}")
@@ -167,8 +208,8 @@ namespace OnlineAuctionAPI.Service
                                 .FontColor(Colors.Black);
                             col.Item().Text($"Bidder ID: {winningBid.BidderId}")
                                 .FontColor(Colors.Black);
-                           col.Item().Text($"Bid Amount: {winningBid.Amount.ToString("C", indiaCulture)}")
-                                .FontColor(Colors.Black);
+                            col.Item().Text($"Bid Amount: {winningBid.Amount.ToString("C", indiaCulture)}")
+                                 .FontColor(Colors.Black);
                             col.Item().Text($"Bid Time: {winningBid.BidTime:yyyy-MM-dd HH:mm}")
                                 .FontColor(Colors.Black);
 
@@ -184,9 +225,9 @@ namespace OnlineAuctionAPI.Service
             return ms.ToArray();
         }
 
-            public override void Dispose()
-            {
-                base.Dispose();
-            }
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
     }
 }
