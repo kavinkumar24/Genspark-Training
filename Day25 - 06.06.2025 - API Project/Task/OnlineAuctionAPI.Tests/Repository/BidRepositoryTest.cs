@@ -77,8 +77,8 @@ namespace OnlineAuctionAPI.Tests
             var auctionId = Guid.NewGuid();
 
             _context.BidItems.AddRange(
-                new BidItem { Id = userId, AuctionItemId = auctionId, Amount = 100 },
-                new BidItem { Id = Guid.NewGuid(), AuctionItemId = auctionId, Amount = 200 }
+            new BidItem { Id = Guid.NewGuid(), AuctionItemId = auctionId, Amount = 100, BidderId = userId }
+                
             );
             await _context.SaveChangesAsync();
 
@@ -86,6 +86,7 @@ namespace OnlineAuctionAPI.Tests
 
             Assert.That(result.Count(), Is.EqualTo(1));
         }
+
 
         [Test]
         public void GetBidsByAuctionAsync_Exception_ThrowsRepositoryOperationException()

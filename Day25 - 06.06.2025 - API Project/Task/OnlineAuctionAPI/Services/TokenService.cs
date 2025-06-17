@@ -30,7 +30,6 @@ public class TokenService : ITokenService
     {
         List<Claim> claims = new List<Claim>
             {
-
                 new Claim(ClaimTypes.NameIdentifier,user.Email),
                 new Claim(ClaimTypes.Role,user.Role.ToString()),
                 new Claim("UserId", user.Id.ToString()),
@@ -92,6 +91,7 @@ public class TokenService : ITokenService
        
 
         storedRefreshToken.IsRevoked = true;
+        storedRefreshToken.RevokedAt = DateTime.UtcNow;
         await _auctionContext.SaveChangesAsync();
 
         var newTokens = await GenerateTokensAsync(user);

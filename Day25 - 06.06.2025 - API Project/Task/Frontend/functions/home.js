@@ -65,11 +65,11 @@ connection.on("WinningIdUpdated", function(auctionItem) {
     item.innerHTML = `
        <span class="notification-icon"><i class="fa-solid fa-trophy"></i></span>
         <span>
-            <strong>Winner Updated:</strong> Auction <span class="auction-id">${auctionItem.auctionItemId}</span>
+            <strong>Winner Updated:</strong> Auction <span class="auction-id">${auctionItem.id}</span>
             <br>
-            Winner: <span class="winner">${auctionItem.winnerName || auctionItem.winnerId || "N/A"}</span>
+            Winner: <span class="winner">${auctionItem.winnerName || auctionItem.winnerId}</span>
             <br>
-            Amount: <span class="amount">$${auctionItem.winningPrice || "N/A"}</span>
+            Amount: <span class="amount">Rs.${auctionItem.amount}</span>
         </span>
     `;
     list.prepend(item);
@@ -100,11 +100,13 @@ connection.on("BidPlaced", function(bidItem) {
     item.innerHTML = `
         <span class="notification-icon"><i class="fa-solid fa-gavel"></i></span>
         <span>
-            <strong>Bid Placed:</strong> Auction <span class="auction-id">${bidItem.auctionItemId || bidItem.auctionItemID || bidItem.auctionId}</span>
+            <strong>Bid Placed:</strong> Auction <span class="auction-id">${bidItem.auctionItemId}</span>
             <br>
-            Bidder: <span class="bidder">${bidItem.bidderName || bidItem.userId}</span>
+            Bidder: <span class="bidder">${bidItem.userId}</span>
             <br>
-            Amount: <span class="amount">Rs.${bidItem.amount || bidItem.bidAmount}</span>
+            Amount: <span class="amount">Rs.${bidItem.amount}</span>
+            <br>
+            Date: <span class="date">Rs.${bidItem.bidTime}</span>
         </span>
     `;
     list.prepend(item);

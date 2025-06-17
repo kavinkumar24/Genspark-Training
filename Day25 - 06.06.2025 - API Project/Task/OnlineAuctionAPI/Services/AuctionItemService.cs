@@ -242,9 +242,6 @@ public class AuctionItemService : IAuctionItemService
     }
 
 
-
-
-
     public async Task<PaginatedResponseDto<AuctionItemResponseDto>> GetPagedAuctionItemsAsync(PaginationDto pagination)
     {
         var query = _auctionRespository.GetAllQueryable();

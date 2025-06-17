@@ -44,11 +44,11 @@ namespace OnlineAuctionAPI.Mapping
                         Name = file.Name,
                         ContentType = file.ContentType,
                         DownloadUrl = string.IsNullOrEmpty(baseUrl)
-    ? string.Empty
-    : $"{baseUrl}/api/v1/AuctionItem/download/{file.AuctionItemId}/{Uri.EscapeDataString(file.Name)}"
-                    };
-                }).ToList();
-            }));
+                ? string.Empty
+                : $"{baseUrl}/api/v1/AuctionItem/download/{file.AuctionItemId}/{Uri.EscapeDataString(file.Name)}"
+                                };
+                            }).ToList();
+                        }));
 
         CreateMap<FileData, FileDataDto>()
             .ForMember(dest => dest.DownloadUrl, opt => opt.Ignore());

@@ -75,6 +75,17 @@ namespace OnlineAuctionAPI.Service
                         if (highestBid != null && highestBid.Amount >= auction.ReservePrice)
                         {
                             auction.WinnerId = highestBid.Id;
+                            var result = new
+                            {
+                                id = auction.Id,
+                                name = auction.Name,
+                                winnerId = auction.WinnerId,
+                                sellerId = auction.SellerId,
+                                createdAt = auction.CreatedAt,
+                                amount = highestBid.Amount
+                            };
+                            await _hubContext.Clients.All.SendAsync("WinningIdUpdated", result);
+
                             var winnerWallet = await virtualWalletRepository.GetByUserIdAsync(highestBid.BidderId);
                             if (winnerWallet != null && winnerWallet.Balance >= highestBid.Amount)
                             {

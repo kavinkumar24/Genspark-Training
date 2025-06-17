@@ -9,6 +9,8 @@ using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR;
+using OnlineAuctionAPI.Hubs; 
 
 namespace OnlineAuctionAPI.Tests.Controller
 {
@@ -17,14 +19,22 @@ namespace OnlineAuctionAPI.Tests.Controller
     {
         private Mock<IBidItemService> _mockBidService;
         private Mock<ILogger<BidItemController>> _mockLogger;
+        private Mock<IHubContext<AuctionHub>> _mockHubContext; 
         private BidItemController _controller;
+        private Mock<IHubClients> _mockClients;
+        private Mock<IClientProxy> _mockClientProxy;
 
         [SetUp]
         public void Setup()
         {
             _mockBidService = new Mock<IBidItemService>();
             _mockLogger = new Mock<ILogger<BidItemController>>(); 
-            _controller = new BidItemController(_mockBidService.Object, _mockLogger.Object); 
+            _mockHubContext = new Mock<IHubContext<AuctionHub>>(); 
+            _mockClients = new Mock<IHubClients>();
+            _mockClientProxy = new Mock<IClientProxy>();
+            _mockClients.Setup(clients => clients.All).Returns(_mockClientProxy.Object);
+            _mockHubContext.Setup(hub => hub.Clients).Returns(_mockClients.Object);
+            _controller = new BidItemController(_mockBidService.Object, _mockLogger.Object, _mockHubContext.Object);
         }
 
         [Test]
