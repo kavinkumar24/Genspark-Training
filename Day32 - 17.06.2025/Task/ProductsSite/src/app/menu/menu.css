@@ -1,0 +1,11 @@
+.nav-bg{
+    background-color: oklch(25.7% 0.09 281.288);
+}
+
+.nav-link {
+  color: rgb(255, 255, 255);
+}
+
+.navbar-brand{
+    color: rgb(255, 255, 255);
+}

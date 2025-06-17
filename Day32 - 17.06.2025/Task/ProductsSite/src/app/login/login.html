@@ -1,0 +1,13 @@
+<div class="login-form">
+    <label>Username</label>
+    <input class="form-control" type="text" [(ngModel)]="user.username"/>
+     <label>Password</label>
+    <input class="form-control" type="text" [(ngModel)]="user.password"/>
+    <button class="btn btn-success" (click)="handleLogin()">Login</button>
+
+    @if(errorMessage) {
+        <div class="alert alert-danger mt-2">
+            {{ errorMessage }}
+        </div>
+    }
+</div>

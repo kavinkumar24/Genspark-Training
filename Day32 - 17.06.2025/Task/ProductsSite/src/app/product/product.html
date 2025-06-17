@@ -1,0 +1,27 @@
+<div class="product-card" (click)="onProductClick(product.id)">
+ <div class="product-card-content">
+  <img class="product-img" [src]="product.thumbnail" alt="Card image cap">
+  <br><br>
+        <h5 class="title" [innerHTML]="highlight(product.title)"></h5>
+    <p class="description">
+    {{ product.description.split('.')[0] + '.' }}
+    </p>
+
+    <div class="footer">
+    <div class="bottom-section">
+    <div>
+        <span class="discount-price"><i class="bi bi-tags-fill"></i> {{product.discountPercentage}}%</span>
+    </div>
+
+    <div>
+        <span class="rating"><i class="bi bi-star-fill"></i> {{product.rating}}</span>
+        </div>
+    </div>
+    <button class="product-buy-btn">Buy for {{product.price | currency:'INR'}}</button>
+  </div>
+  </div>
+</div>
+
+
+
+
