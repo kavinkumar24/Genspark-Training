@@ -4,9 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserModel } from '../models/usermodel';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AddUserService {
   private apiUrl = 'https://dummyjson.com/users/add';
 
