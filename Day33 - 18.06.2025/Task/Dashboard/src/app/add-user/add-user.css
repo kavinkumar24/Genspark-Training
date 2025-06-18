@@ -1,0 +1,36 @@
+.login-form{
+    background-color: white;
+    padding: 20px;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.add-user-btn{
+    background-color: #006665;
+    color: white;
+    opacity: 0.8;
+}
+
+.add-user-btn :hover{
+    opacity: 1;
+}
+
+.sub-heading{
+    color: #006665;
+    text-align: center;
+}
+
+.alert-danger {
+  color: #e53935;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.98rem;
+  font-weight: 500;
+  display: inline;
+}

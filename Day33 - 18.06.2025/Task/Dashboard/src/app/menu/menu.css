@@ -1,0 +1,24 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-option{
+    padding: 10px;
+}
+a{
+    transition: transform 0.3s;
+}
+
+a:hover{
+    color: #006665;
+    cursor: pointer;
+    transform: translateY(-3px);
+}

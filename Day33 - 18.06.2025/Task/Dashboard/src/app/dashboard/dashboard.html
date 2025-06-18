@@ -1,0 +1,126 @@
+<div class="dashboard-container">
+  <div class="welcome-card">
+    <h2>Welcome!</h2>
+    <p>Today is: <b>{{ today | date:'fullDate' }}</b></p>
+    <p>Current time: <b>{{ today | date:'shortTime' }}</b></p>
+  </div>
+
+  <div class="summary-card-section">
+  <div class="summary-card">
+    <b>Gender:</b>
+    <br>
+    <div class="card-row">
+    @for (gender of (genderCounts | keyvalue); track gender.key) {
+     <div 
+    [ngClass]="gender.key === 'female' ? 'pink-label' : 'yellow-label'">
+    {{ gender.key }}: {{ gender.value }}&nbsp;
+    </div>
+    }
+    </div>
+  </div>
+
+  <div class="summary-card">
+    <b>Role:</b>
+    <br>
+    <div class="card-row">
+    @for (role of (roleCounts | keyvalue); track role.key) {
+     <div 
+    [ngClass]="
+        role.key === 'admin' ? 'pink-label' : 
+        role.key === 'user' ? 'yellow-label' : 
+        'blue-label'
+    ">
+     {{ role.key }}: {{ role.value }}&nbsp;
+    </div>
+    }
+    </div>
+  </div>
+</div>
+  
+
+  <div class="user-table-card">
+    <div class="filters">
+      <label>
+        Gender:
+        <select [(ngModel)]="selectedGender" (change)="filterUsers()">
+          <option value="">All</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </label>
+      <label>
+        Role:
+        <select [(ngModel)]="selectedRole" (change)="filterUsers()">
+          <option value="">All</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+      </label>
+      <label>
+        State:
+        <select [(ngModel)]="selectedState" (change)="filterUsers()">
+          <option value="">All</option>
+          <option value="Mississippi">Mississippi</option>
+          <option value="Wisconsin">Wisconsin</option>
+          
+        </select>
+      </label>
+    </div>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Profile image</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Gender</th>
+          <th>Role</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of filteredUsers; track user.id) {
+          <tr>
+            <td>
+            <div class="table-img">
+            <img [src]="user.image" alt="Profile" width="40" height="40" style="object-fit:cover; border-radius:50%;" />
+            </div>
+            </td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.address.state }}</td>
+          </tr>
+        }
+        @if(filteredUsers.length === 0) {
+            <tr>
+            <td colspan="6" style="text-align:center; color:#888; font-style:italic;">
+                No data matched
+            </td>
+            </tr>
+    }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-card">
+     <canvas id="roleBarChart"></canvas>
+     <caption>Role</caption>
+  </div>
+
+  <div class="chart-card">
+      <canvas id="genderPieChart"></canvas>
+  </div>
+</div>
+@if(isLoading){
+<div class="spinner-container">
+<div class="spinner-border spinner-green" role="status">
+    <span class="sr-only"></span>
+</div>
+</div>
+
+
+}
+

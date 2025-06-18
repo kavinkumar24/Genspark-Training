@@ -1,0 +1,63 @@
+<h2 class="sub-heading">Are you ready? <i class="bi bi-emoji-wink-fill"></i></h2>
+
+<form [formGroup]="userForm" class="login-form" (ngSubmit)="onSubmit()">
+    <label class="form-label">First Name</label>
+    <input class="form-control" type="text" formControlName="firstName" placeholder="please enter your first name"/>
+    @if(firstName.touched && firstName.errors)
+    {
+        <span class="alert alert-danger">First Name cannot be empty</span>
+        <br><br>
+    }
+
+    <label class="form-label">Last Name</label>
+    <input class="form-control" type="text" formControlName="lastName" placeholder="please enter your last name" />
+    @if(lastName.touched && lastName.errors)
+    {
+        <span class="alert alert-danger">Last Name cannot be empty</span>
+        <br><br>
+    }
+
+    <label class="form-label">Age</label>
+    <input class="form-control" type="number" formControlName="age" placeholder="please enter your age"/>
+    @if(age.touched && age.errors)
+    {
+        <span class="alert alert-danger">Age cannot be empty</span>
+        <br><br>
+    }
+
+     <label class="form-label">Gender</label>
+    <select class="form-control" formControlName="gender">
+    <option value="">Select gender</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    </select>
+    @if(gender.touched && gender.errors) {
+    <span class="alert alert-danger">Gender is required</span>
+    <br><br>
+    }
+
+    <label class="form-label">Email</label>
+    <input class="form-control" type="email" formControlName="email" placeholder="please enter your email" />
+    @if(email.touched && email.errors) {
+    <span class="alert alert-danger">
+        @if(email.errors['required']) { Email is required. }
+        @if(email.errors['email']) { Please enter a valid email. }
+    </span>
+    <br><br>
+    }
+
+    <label class="form-label">Phone</label>
+    <input class="form-control" type="text" formControlName="phone" placeholder="please enter your phone number" />
+    @if(phone.touched && phone.errors) {
+    <span class="alert alert-danger">Phone is required</span>
+    <br><br>
+    }
+
+    <label class="form-label">Birth Date</label>
+    <input class="form-control" type="date" formControlName="birthDate" />
+    @if(birthDate.touched && birthDate.errors) {
+    <span class="alert alert-danger">Birth Date is required</span>
+    <br><br>
+    }
+    <button class="btn add-user-btn" [disabled]="userForm.invalid">Add User</button>
+</form>

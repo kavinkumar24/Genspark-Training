@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url(../node_modules/bootstrap/dist/css/bootstrap.css);
+@import url(../node_modules/bootstrap-icons/font/bootstrap-icons.css);
+
+body{
+    background-color: #f0f7f7;
+    margin: 20px;
+}
+
+.spinner-green{
+    color: #006665;
+}
+
+i{
+    color: #006665;
+}
