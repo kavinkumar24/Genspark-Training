@@ -1,0 +1,22 @@
+<div class="dashboard-container">
+  <div class="dashboard-left">
+    <input #searchInput type="text" placeholder="Search users..." />
+    <h2>Users</h2>
+    <div class="user-cards-grid">
+     @if (filteredUsers.length === 0) {
+        <div class="no-users-found">No users found for your search.</div>
+      } @else {
+        @for (item of filteredUsers; track $index) {
+          <div class="user-card">
+            <div><strong>Name:</strong> {{ item.username }}</div>
+            <div><strong>Email:</strong> {{ item.email }}</div>
+            <div><strong>Role:</strong> {{ item.role }}</div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+  <div class="dashboard-right">
+    <app-add-user></app-add-user>
+  </div>
+</div>

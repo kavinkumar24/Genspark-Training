@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+body{
+    background-color: #F5F3FF;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+input{
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 0.2rem;
+    border: 1px solid #DDD6FE;
+    outline: none;
+    border-radius: 8px;
+}
+
+
+input:focus{
+    border-color: #A78BFA;
+}

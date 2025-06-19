@@ -1,0 +1,74 @@
+<div class="form-container">
+  <h2>Add User</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+
+    <label class="form-label">Username</label>
+    <input formControlName="username" placeholder="Please enter the username" />
+    @if (userForm.get('username')?.touched && userForm.get('username')?.invalid) {
+      <div class="error">
+        @if (userForm.get('username')?.errors?.['required']) {
+          <div>Username is required.</div>
+        }
+        @if (userForm.get('username')?.errors?.['bannedWord']) {
+          <div>Username contains a banned word.</div>
+        }
+      </div>
+    }
+
+    <label class="form-label">Email</label>
+    <input formControlName="email" placeholder="Please enter the email" />
+    @if (userForm.get('email')?.touched && userForm.get('email')?.invalid) {
+      <div class="error">
+        @if (userForm.get('email')?.errors?.['required']) {
+          <div>Email is required.</div>
+        }
+        @if (userForm.get('email')?.errors?.['email']) {
+          <div>Invalid email format.</div>
+        }
+      </div>
+    }
+
+    <label class="form-label">Password</label>
+    <input type="password" formControlName="password" placeholder="Please enter the password" />
+    @if (userForm.get('password')?.touched && userForm.get('password')?.invalid) {
+      <div class="error">
+        @if (userForm.get('password')?.errors?.['required']) {
+          <div>Password is required.</div>
+        }
+        @if (userForm.get('password')?.errors?.['weakPassword']) {
+          <div>Password must be at least 6 characters, contain a number and symbol.</div>
+        }
+      </div>
+    }
+
+    <label class="form-label">Confirm Password</label>
+    <input type="password" formControlName="confirmPassword" placeholder="Please confirm the password" />
+    @if (userForm.get('confirmPassword')?.touched && userForm.get('confirmPassword')?.invalid) {
+      <div class="error">
+        @if (userForm.get('confirmPassword')?.errors?.['required']) {
+          <div>Confirm Password is required.</div>
+        }
+      </div>
+    }
+    @if (userForm.errors?.['passWordDifferent'] && userForm.get('confirmPassword')?.touched) {
+      <div class="error">Passwords do not match.</div>
+    }
+
+    <label class="form-label">Role</label>
+    <select formControlName="role">
+      <option value="" disabled>Select role</option>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+      <option value="guest">Guest</option>
+    </select>
+    @if (userForm.get('role')?.touched && userForm.get('role')?.invalid) {
+      <div class="error">
+        @if (userForm.get('role')?.errors?.['required']) {
+          <div>Role is required.</div>
+        }
+      </div>
+    }
+
+    <button type="submit" [disabled]="userForm.invalid">Add User</button>
+  </form>
+</div>

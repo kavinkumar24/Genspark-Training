@@ -1,0 +1,10 @@
+.navbar{
+    background-color: #4C1D95;
+    color: white;
+    justify-content: center;
+    display: flex;
+}
+
+.navbar h2{
+    text-align: center;
+}
