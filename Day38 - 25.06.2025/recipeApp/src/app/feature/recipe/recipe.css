@@ -1,0 +1,35 @@
+.recipe-card{
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.recipe-image{
+    border-radius: 8px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+}
+h5{
+    color: #064E3B;
+    font-size: medium;
+}
+
+.recipe-inner-content{
+    width: 10vw;
+    padding: 6px;
+    margin-top: -20px;
+    background-color: #F9FAFB;
+    border: 1px dotted #10B981;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+
+}
+.recipe-inner-content p{
+    color: #6B7280;
+}

@@ -1,0 +1,17 @@
+
+<div class="recipe-card">
+    <div class="container">
+       <img class="recipe-image" [src]="recipe?.image || ''" width="150" height="150" priority placeholder="https://placehold.co/600x400/EEE/31343C"/>
+    
+    <div class="recipe-content">
+        <h5>{{recipe?.name}}</h5>
+        
+        <div class="recipe-inner-content">
+            <p>Cook Time: {{recipe?.cookTimeMinutes}}</p>
+            <p>Difficult: {{recipe?.difficulty}}</p>
+            <p>cuisine: {{recipe?.cuisine}}</p>
+
+        </div>
+        
+    </div>
+</div>

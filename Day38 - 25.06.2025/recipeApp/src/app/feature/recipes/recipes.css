@@ -1,0 +1,8 @@
+.recipe-layout{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+    gap: 50px;
+    padding: 20px 10px;
+    max-width: 1300px;
+    margin: 0 auto;
+}

@@ -1,0 +1,13 @@
+
+@if (recipes) {
+    <div class="recipe-layout">
+        @for (item of recipes; track $index) {
+            <app-recipe [recipe] ="item"></app-recipe>
+        }
+    </div>
+}
+@else {
+    <div class="error-msg">
+        <h1>No available recipes found, please try after some time</h1>
+    </div>
+}
