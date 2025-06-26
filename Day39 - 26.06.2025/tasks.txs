@@ -1,0 +1,9 @@
+Questions:
+1. You have a file with permissions -rw-r--r--, and you run chmod +x file.sh. What happens?
+2. What is the difference between chmod 744 file.txt and chmod u=rwx,go=r file.txt?
+3. What is the sticky bit, and when should you use it?
+4. You are told to give the owner full access, group only execute, and others no permissions. What symbolic command achieves this?
+5. What is umask, and why is it important?
+6. If the umask is 022, what are the default permissions for a new file and a new directory?
+7. Why is umask often set to 002 in development environments but 027 or 077 in production?
+8. useradd vs adduser
