@@ -120,6 +120,29 @@ namespace OnlineAuctionAPI.Migrations
                     b.ToTable("BidItems");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.DeletedUsers", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DeletedUsers");
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.EAgreement", b =>
                 {
                     b.Property<Guid>("Id")
@@ -364,6 +387,17 @@ namespace OnlineAuctionAPI.Migrations
                     b.Navigation("AuctionItem");
 
                     b.Navigation("Bidder");
+                });
+
+            modelBuilder.Entity("OnlineAuctionAPI.Models.DeletedUsers", b =>
+                {
+                    b.HasOne("OnlineAuctionAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OnlineAuctionAPI.Models.EAgreement", b =>

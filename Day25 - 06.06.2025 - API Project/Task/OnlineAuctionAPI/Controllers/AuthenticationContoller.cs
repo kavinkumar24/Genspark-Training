@@ -41,7 +41,7 @@ public class AuthenticationController : ControllerBase
 
     public async Task<ActionResult> Logout([FromBody] string refreshToken)
     {
-       await _authenticationService.LogoutAsync(refreshToken);
+        await _authenticationService.LogoutAsync(refreshToken);
         _logger.LogInformation("Logout successful for refresh token {RefreshToken}", refreshToken);
         return Ok(new ApiResponse<string>
         {
@@ -50,7 +50,7 @@ public class AuthenticationController : ControllerBase
             Data = null
         });
     }
-    
+
     [HttpPost("refresh")]
     public async Task<ActionResult<UserLoginResponseDto>> RefreshToken([FromBody] string refreshToken)
     {

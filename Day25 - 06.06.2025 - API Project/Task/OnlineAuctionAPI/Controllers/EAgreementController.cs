@@ -54,10 +54,32 @@ namespace OnlineAuctionAPI.Controllers
                 return NotFound("Agreement or file not found.");
             }
 
-            var fileName = $"agreement_{agreement.Id}.pdf"; 
-            var contentType = "application/pdf"; 
+            var fileName = $"agreement_{agreement.Id}.pdf";
+            var contentType = "application/pdf";
 
             return File(agreement.File, contentType, fileName);
+        }
+
+        [HttpGet("{biddingId}")]
+        [Authorize(Roles = "Bidder")]
+        public async Task<IActionResult> GetAgreementsByBiddingId(Guid biddingId)
+        {
+            var agreements = await _eAgreementService.GetByBiddingIdAsync(biddingId);
+            if (agreements == null || !agreements.Any())
+            {
+                return NotFound(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "No agreements found for the provided bidding ID.",
+                    Data = null
+                });
+            }
+            return Ok(new ApiResponse<IEnumerable<EAgreement>>
+            {
+                Success = true,
+                Message = "Agreements retrieved successfully.",
+                Data = agreements
+            });
         }
     }
 }

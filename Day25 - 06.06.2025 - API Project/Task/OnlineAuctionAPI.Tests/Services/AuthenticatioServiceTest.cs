@@ -57,7 +57,6 @@ _dbContext = new AuctionContext(options);
             {
                 Email = user.Email,
                 Password = "plain123",
-                Role = "Bidder"
             };
 
             _mockPasswordService.Setup(p => p.VerifyPassword(user.Password, loginDto.Password)).Returns(true);
@@ -95,7 +94,6 @@ _dbContext = new AuctionContext(options);
             {
                 Email = user.Email,
                 Password = "wrong123",
-                Role = "User"
             };
 
             _mockPasswordService.Setup(p => p.VerifyPassword(user.Password, loginDto.Password)).Returns(false);

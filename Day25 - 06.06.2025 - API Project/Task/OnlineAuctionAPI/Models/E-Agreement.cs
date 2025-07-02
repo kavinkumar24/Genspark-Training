@@ -9,4 +9,7 @@ public class EAgreement
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public AuctionItem? AuctionItem { get; set; }
     public BidItem? Bidding { get; set; }
+
+    // public int StatusId { get; set; }
+    // public Status? DeletionStatus { get; set; }
 }

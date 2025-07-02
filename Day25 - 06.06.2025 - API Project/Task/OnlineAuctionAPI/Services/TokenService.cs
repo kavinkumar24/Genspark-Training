@@ -100,7 +100,6 @@ public class TokenService : ITokenService
         {
             UserName = user.Username,
             Email = user.Email,
-            Role = user.Role.ToString(),
             Token = newTokens.AccessToken,
             RefreshToken = newTokens.RefreshToken
         };

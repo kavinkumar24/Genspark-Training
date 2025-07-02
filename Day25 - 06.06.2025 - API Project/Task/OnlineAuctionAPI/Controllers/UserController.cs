@@ -40,7 +40,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetByEmail")]
-    [Authorize(Roles = "Seller,Bidder,Admin")]
+    // [Authorize(Roles = "Seller,Bidder,Admin")]
     public async Task<ActionResult> GetByEmail([FromQuery] string email)
     {
         var user = await _userService.GetUserByEmailAsync(email);
@@ -69,10 +69,10 @@ public class UserController : ControllerBase
 
     [HttpDelete]
     [Authorize(Roles = "Admin")]
-    public async Task<ActionResult> DeleteUser(Guid id)
+    public async Task<ActionResult> DeleteUser(UserDeleteRequest userDeleteDto)
     {
-        var user = await _userService.DeleteUserAsync(id);
-        _logger.LogInformation("User with ID {UserId} deleted successfully", id);
+        var user = await _userService.DeleteUserAsync(userDeleteDto);
+        _logger.LogInformation("User with ID {UserId} deleted successfully", userDeleteDto.UserId);
         return Ok(new ApiResponse<User>
         {
             Success = true,
@@ -82,7 +82,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("UpdateUser")]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Seller,Bidder, Admin")]
     public async Task<ActionResult> Updateuser([FromQuery] Guid id, [FromBody] UserUpdateRequestDto updatedto)
     {
         var user = await _userService.UpdateUserInfoAsync(id, updatedto);
@@ -97,15 +97,49 @@ public class UserController : ControllerBase
 
     [HttpPatch("change-password")]
     [Authorize(Roles = "Seller,Bidder")]
-    public async Task<IActionResult> ChangePassword(Guid userId, [FromBody] ChangePasswordRequestDto dto)
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequestDto dto)
     {
 
-        await _userService.ChangePasswordAsync(userId, dto.CurrentPassword, dto.NewPassword);
-        _logger.LogInformation("Password changed successfully for user {UserId}", userId);
+        await _userService.ChangePasswordAsync(dto);
+        _logger.LogInformation("Password changed successfully for user {UserId}", dto.UserId);
         return Ok(new ApiResponse<string>
         {
             Success = true,
             Message = "Password changed successfully",
+            Data = null
+        });
+    }
+
+    [HttpPatch("forget-password")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ForgetPassword([FromBody] ForgetPasswordRequestDto dto)
+    {
+        if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.NewPassword))
+        {
+            _logger.LogWarning("Email or new password is null or empty");
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "Email and new password are required.",
+                Data = null
+            });
+        }
+        var result = await _userService.ForgetPasswordAsync(dto);
+        if (!result)
+        {
+            _logger.LogWarning("Failed to reset password for email {Email}", dto.Email);
+            return NotFound(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "User not found with the provided email.",
+                Data = null
+            });
+        }
+        _logger.LogInformation("Password reset successfully for email {Email}", dto.Email);
+        return Ok(new ApiResponse<string>
+        {
+            Success = true,
+            Message = "Password reset successfully.",
             Data = null
         });
     }
@@ -276,5 +310,24 @@ public class UserController : ControllerBase
                 Data = null
             });
         }
+
+
+    }
+
+    [HttpGet("GetAll")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult<User>> GetAll()
+    {
+        var users = await _userService.GetAllUsers();
+        if (users == null)
+        {
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "No users found",
+                Data = null
+            });
+        }
+        return Ok(users);
     }
 }

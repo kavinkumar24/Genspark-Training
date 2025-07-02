@@ -4,6 +4,11 @@ using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Exceptions;
 using OnlineAuctionAPI.Models.DTO;
+using System.Globalization;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using OnlineAuctionAPI.Helpers;
 
 namespace OnlineAuctionAPI.Repositories;
 
@@ -95,7 +100,9 @@ public class AuctionRepository : Repository<Guid, AuctionItem>, IAuctionItemRepo
 
     public IQueryable<AuctionItem> GetAllQueryable()
     {
-        return _auctionContext.AuctionItems.AsQueryable();
+        return _auctionContext.AuctionItems
+        .Include(ai => ai.FileAttachments)
+        .AsQueryable();
     }
 
     public async Task<WinnerIdResponseDto> UpdateWinningId(WinningIdUpdateDto dto)
@@ -138,7 +145,21 @@ public class AuctionRepository : Repository<Guid, AuctionItem>, IAuctionItemRepo
             throw new InvalidException("Only the earliest bid with the highest amount can be declared as the winner.");
 
         auctionItem.WinnerId = bid.Id;
+        auctionItem.Status = AuctionStatus.Completed;
         _auctionContext.AuctionItems.Update(auctionItem);
+        await _auctionContext.SaveChangesAsync();
+
+        byte[] pdfBytes = PdfHelper.GenerateAgreementPdf(auctionItem, bid);
+
+        var agreement = new EAgreement
+        {
+            Id = Guid.NewGuid(),
+            AuctionItemId = auctionItem.Id,
+            BiddingId = bid.Id,
+            File = pdfBytes,
+            CreatedAt = DateTime.UtcNow
+        };
+        _auctionContext.EAgreements.Add(agreement);
         await _auctionContext.SaveChangesAsync();
 
         var winner = await _auctionContext.Users.FirstOrDefaultAsync(u => u.Id == bid.BidderId);
@@ -151,6 +172,7 @@ public class AuctionRepository : Repository<Guid, AuctionItem>, IAuctionItemRepo
             WinningPrice = bid.Amount
         };
     }
+
 
 
     public async Task<IEnumerable<AuctionItem>> GetAllEndedAndNotCompletedAsync(DateTime now)

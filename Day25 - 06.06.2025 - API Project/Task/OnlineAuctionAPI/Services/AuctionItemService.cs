@@ -68,7 +68,7 @@ public class AuctionItemService : IAuctionItemService
         var auctionItem = _mapper.Map<AuctionItem>(auctionDto);
         auctionItem.CreatedAt = DateTime.UtcNow;
         auctionItem.UpdatedAt = DateTime.UtcNow;
-        
+
         if (auctionItem.Status == AuctionStatus.Live && auctionItem.StartTime > DateTime.UtcNow)
         {
             throw new InvalidException("Auction cannot be set to Live if the start time is in the future.");
@@ -153,6 +153,25 @@ public class AuctionItemService : IAuctionItemService
         });
     }
 
+
+    public async Task<IEnumerable<AuctionItemResponseDto>> GetAllAuctionItemBySellerAsync(Guid sellerId)
+    {
+        var auctionItems = await _auctionRespository.GetAllAuctionsWithFile();
+
+        var sellerAuctions = auctionItems?.Where(a => a.SellerId == sellerId).ToList();
+
+        if (sellerAuctions == null || !sellerAuctions.Any())
+        {
+            throw new NotFoundException("No auctions found for this seller.");
+        }
+
+        return _mapper.Map<IEnumerable<AuctionItemResponseDto>>(sellerAuctions, opt =>
+        {
+            opt.Items["HttpContext"] = _httpContextAccessor.HttpContext!;
+        });
+    }
+
+
     public async Task<AuctionItemResponseDto?> GetAuctionItemByIdAsync(Guid id)
     {
         var auctionItem = await _auctionRespository.GetAuctionsWithFile(id);
@@ -217,12 +236,13 @@ public class AuctionItemService : IAuctionItemService
 
         if (auctionUpdateDto.FileAttachments != null && auctionUpdateDto.FileAttachments.Any())
         {
+            auctionItem?.FileAttachments?.Clear();
             foreach (var fileattachment in auctionUpdateDto.FileAttachments)
             {
                 using var memoryStream = new MemoryStream();
                 await fileattachment.CopyToAsync(memoryStream);
 
-                auctionItem.FileAttachments.Add(new FileData
+                auctionItem?.FileAttachments?.Add(new FileData
                 {
                     Name = fileattachment.FileName,
                     ContentType = fileattachment.ContentType,
@@ -231,7 +251,7 @@ public class AuctionItemService : IAuctionItemService
             }
         }
 
-        auctionItem.UpdatedAt = DateTime.UtcNow;
+        auctionItem!.UpdatedAt = DateTime.UtcNow;
 
         await _auctionRespository.Update(id, auctionItem);
 
@@ -258,31 +278,54 @@ public class AuctionItemService : IAuctionItemService
             query = query.Where(a => a.EndTime <= endDate);
         }
 
+        if (!string.IsNullOrWhiteSpace(pagination.Status))
+        {
+            if (Enum.TryParse<AuctionStatus>(pagination.Status, true, out var statusEnum))
+            {
+                query = query.Where(a => a.Status == statusEnum);
+            }
+        }
+        if (!string.IsNullOrWhiteSpace(pagination.SellerId))
+        {
+            query = query.Where(a => a.SellerId == Guid.Parse(pagination.SellerId));
+        }
+
         if (!string.IsNullOrWhiteSpace(pagination.SortBy))
         {
             bool ascending = pagination.SortDirection?.ToLower() != "desc";
             switch (pagination.SortBy.ToLower())
             {
                 case "name":
-                    query = ascending ? query.OrderBy(a => a.Name) : query.OrderByDescending(a => a.Name);
+                    query = ascending
+                        ? query.OrderBy(a => a.Name).ThenBy(a => a.Id)
+                        : query.OrderByDescending(a => a.Name).ThenByDescending(a => a.Id);
                     break;
                 case "starttime":
-                    query = ascending ? query.OrderBy(a => a.StartTime) : query.OrderByDescending(a => a.StartTime);
+                    query = ascending
+                        ? query.OrderBy(a => a.StartTime).ThenBy(a => a.Id)
+                        : query.OrderByDescending(a => a.StartTime).ThenByDescending(a => a.Id);
                     break;
                 case "endtime":
-                    query = ascending ? query.OrderBy(a => a.EndTime) : query.OrderByDescending(a => a.EndTime);
+                    query = ascending
+                        ? query.OrderBy(a => a.EndTime).ThenBy(a => a.Id)
+                        : query.OrderByDescending(a => a.EndTime).ThenByDescending(a => a.Id);
                     break;
                 case "createdat":
-                    query = ascending ? query.OrderBy(a => a.CreatedAt) : query.OrderByDescending(a => a.CreatedAt);
+                    query = ascending
+                        ? query.OrderBy(a => a.CreatedAt).ThenBy(a => a.Id)
+                        : query.OrderByDescending(a => a.CreatedAt).ThenByDescending(a => a.Id);
                     break;
                 default:
-                    query = ascending ? query.OrderBy(a => a.Name) : query.OrderByDescending(a => a.Name);
+                    query = ascending
+                        ? query.OrderBy(a => a.Name).ThenBy(a => a.Id)
+                        : query.OrderByDescending(a => a.Name).ThenByDescending(a => a.Id);
                     break;
             }
         }
         else
         {
-            query = query.OrderBy(a => a.Name);
+            query = query.OrderBy(a => a.Name).ThenBy(a => a.Id);
+
         }
 
         int totalRecords = await query.CountAsync();
@@ -294,8 +337,11 @@ public class AuctionItemService : IAuctionItemService
             .ToListAsync();
 
         var resultDto = _mapper.Map<IEnumerable<AuctionItemResponseDto>>(
-            pagedItems,
-            opt => opt.Items["HttpContext"] = _httpContextAccessor.HttpContext!
+           pagedItems,
+            opt =>
+            {
+                opt.Items["HttpContext"] = _httpContextAccessor.HttpContext!;
+            }
         );
 
         return new PaginatedResponseDto<AuctionItemResponseDto>
@@ -310,21 +356,94 @@ public class AuctionItemService : IAuctionItemService
             }
         };
     }
-    public async Task<WinnerIdResponseDto> UpdateWinningId(WinningIdUpdateDto winningIdUpdateDto)
+    public async Task<WinnerIdResponseDto> UpdateWinningId(WinningIdUpdateDto dto)
     {
-        if (winningIdUpdateDto == null)
-            throw new ArgumentException("Invalid winning ID update data");
-
-        var bid = await _bidItemRepository.GetByIdAsync(winningIdUpdateDto.WinningId);
+        var bid = await _auctionContext.BidItems
+            .FirstOrDefaultAsync(b => b.Id == dto.WinningId);
 
         if (bid == null)
             throw new NotFoundException("Bid not found for the provided WinningId.");
 
-        var user = await _userRepository.Get(bid.BidderId);
-        if (user == null || user.Role != UserRole.Bidder)
-            throw new InvalidException("Invalid bidder for the winning bid.");
+        if (bid.AuctionItemId != dto.AuctionItemId)
+            throw new InvalidException("Bid does not belong to the specified auction item.");
 
-        return await _auctionRespository.UpdateWinningId(winningIdUpdateDto);
+        var auctionItem = await _auctionContext.AuctionItems
+            .FirstOrDefaultAsync(a => a.Id == dto.AuctionItemId);
+
+        if (auctionItem == null)
+            throw new NotFoundException($"Auction item with ID {dto.AuctionItemId} not found");
+
+        var maxAmount = await _auctionContext.BidItems
+            .Where(b => b.AuctionItemId == dto.AuctionItemId && b.BidTime <= auctionItem.EndTime)
+            .MaxAsync(b => (decimal?)b.Amount);
+
+        if (maxAmount == null)
+            throw new InvalidException("No valid bids found for this auction item.");
+
+        var highestBids = await _auctionContext.BidItems
+            .Where(b => b.AuctionItemId == dto.AuctionItemId && b.BidTime <= auctionItem.EndTime && b.Amount == maxAmount)
+            .OrderBy(b => b.BidTime)
+            .ToListAsync();
+
+        var isWinningBid = highestBids.Any(b => b.Id == bid.Id);
+
+        if (!isWinningBid)
+            throw new InvalidException("Only a bid with the highest amount can be declared as the winner.");
+
+        var winningBid = highestBids.First();
+
+        if (bid.Id != winningBid.Id)
+            throw new InvalidException("Only the earliest bid with the highest amount can be declared as the winner.");
+
+        var winnerWallet = await _auctionContext.VirtualWallets
+            .FirstOrDefaultAsync(w => w.UserId == bid.BidderId);
+
+        if (winnerWallet == null)
+            throw new NotFoundException("Winner's virtual wallet not found.");
+
+        if (winnerWallet.Balance < bid.Amount)
+            throw new InvalidException("Insufficient balance in winner's virtual wallet.");
+
+        winnerWallet.Balance -= bid.Amount;
+        winnerWallet.UpdatedAt = DateTime.UtcNow;
+        _auctionContext.VirtualWallets.Update(winnerWallet);
+
+        var history = new VirtualWalletHistory
+        {
+            VirtualWalletId = winnerWallet.Id,
+            Amount = -bid.Amount,
+            Description = $"Deducted for winning auction {auctionItem.Id}",
+            TransactionDate = DateTime.UtcNow
+        };
+        _auctionContext.VirtualWalletHistories.Add(history);
+
+        auctionItem.WinnerId = bid.Id;
+        auctionItem.Status = AuctionStatus.Completed;
+        _auctionContext.AuctionItems.Update(auctionItem);
+
+        byte[] pdfBytes = PdfHelper.GenerateAgreementPdf(auctionItem, bid);
+
+        var agreement = new EAgreement
+        {
+            Id = Guid.NewGuid(),
+            AuctionItemId = auctionItem.Id,
+            BiddingId = bid.Id,
+            File = pdfBytes,
+            CreatedAt = DateTime.UtcNow
+        };
+        _auctionContext.EAgreements.Add(agreement);
+
+        await _auctionContext.SaveChangesAsync();
+
+        var winner = await _auctionContext.Users.FirstOrDefaultAsync(u => u.Id == bid.BidderId);
+
+        return new WinnerIdResponseDto
+        {
+            AuctionItemId = dto.AuctionItemId,
+            WinnerId = winner?.Id ?? Guid.Empty,
+            WinnerName = winner?.Username ?? "Unknown",
+            WinningPrice = bid.Amount
+        };
     }
 
     public async Task<AuctionItemResponseDto> UpdateAuctionStatusAsync(Guid auctionItemId, AuctionStatus newStatus)
@@ -395,6 +514,6 @@ public class AuctionItemService : IAuctionItemService
         };
     }
 
-    
+
 
 }

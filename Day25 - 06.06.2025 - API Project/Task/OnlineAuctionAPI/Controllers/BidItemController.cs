@@ -44,7 +44,7 @@ public class BidItemController : ControllerBase
     }
 
     [HttpGet("{auctionId}")]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Seller,Bidder, Admin")]
     public async Task<ActionResult> GetBidsByAuctionId(Guid auctionId)
     {
         var result = await _bidItemService.GetBidsByAuctionIdAsync(auctionId);
@@ -56,6 +56,55 @@ public class BidItemController : ControllerBase
             Data = result
         });
     }
+
+    [HttpGet("ByBidder")]
+    [Authorize(Roles = "Bidder")]
+    public async Task<ActionResult<IEnumerable<BidItemResponseDto>>> GetBidsByBidderId()
+    {
+        try
+        {
+            var userIdClaim = User.FindFirst("UserId");
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+            {
+                _logger.LogWarning("Invalid or missing userId in token");
+                return BadRequest(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "Please provide a valid userId.",
+                    Data = null
+                });
+            }
+
+            var bidderItems = await _bidItemService.GetBidsByUserIdAsync(userId);
+            if (bidderItems == null)
+            {
+                _logger.LogWarning("No bidding data found");
+                return NotFound(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "No bidding Items found",
+                    Data = null
+                });
+            }
+            return Ok(new ApiResponse<IEnumerable<BidItemResponseDto>>
+            {
+                Success = true,
+                Message = "Auctions for seller id",
+                Data = bidderItems
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving bids for user");
+            return StatusCode(500, new ApiResponse<string>
+            {
+                Success = false,
+                Message = "An unexpected error occurred.",
+                Data = null
+            });
+        }
+    }
+
 
     [HttpGet("HighestBid/{auctionItemId}")]
     [Authorize(Roles = "Seller,Bidder")]
@@ -83,5 +132,52 @@ public class BidItemController : ControllerBase
             Message = "Bid deleted successfully",
             Data = result
         });
+    }
+
+    [HttpGet("ByBiddingId/{biddingId}")]
+    [Authorize(Roles = "Seller,Bidder, Admin")]
+    public async Task<ActionResult<IEnumerable<BidItemResponseDto>>> GetBidsByBiddingId(Guid biddingId)
+    {
+        try
+        {
+            if (biddingId == Guid.Empty)
+            {
+                _logger.LogWarning("Bidding ID cannot be empty");
+                return BadRequest(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "Bidding ID cannot be empty",
+                    Data = null
+                });
+            }
+            var bids = await _bidItemService.GetBidsByBiddingIdAsync(biddingId);
+            if (bids == null)
+            {
+                _logger.LogWarning("No bids found for bidding ID {BiddingId}", biddingId);
+                return NotFound(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = $"No bids found for bidding ID {biddingId}",
+                    Data = null
+                });
+            }
+            _logger.LogInformation("Bids retrieved successfully for bidding ID {BiddingId}", biddingId);
+            return Ok(new ApiResponse<BidItemResponseDto>
+            {
+                Success = true,
+                Message = "Bids retrieved successfully",
+                Data = bids
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving bids for bidding ID {BiddingId}", biddingId);
+            return StatusCode(500, new ApiResponse<string>
+            {
+                Success = false,
+                Message = "An unexpected error occurred.",
+                Data = null
+            });
+        }
     }
 }

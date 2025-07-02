@@ -66,7 +66,7 @@ public class AuctionItemController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Seller,Bidder, Admin")]
     public async Task<ActionResult<IEnumerable<AuctionItemResponseDto>>> GetAllAuctions()
     {
         var results = await _auctionItemService.GetAllAuctionItemAsync();
@@ -77,6 +77,44 @@ public class AuctionItemController : ControllerBase
             Message = "All auction items retrieved successfully",
             Data = results
         });
+    }
+
+    [HttpGet("BySeller")]
+    [Authorize(Roles = "Seller")]
+    public async Task<ActionResult<IEnumerable<AuctionItemResponseDto>>> GetAuctionBySeller()
+    {
+        var userIdClaim = User.FindFirst("UserId");
+
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            _logger.LogWarning("Invalid or missing userId in token");
+            return BadRequest(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "Please provide a valid userId.",
+                Data = null
+            });
+        }
+
+        var sellerAuctions = await _auctionItemService.GetAllAuctionItemBySellerAsync(userId);
+        if (sellerAuctions == null)
+        {
+            _logger.LogWarning("No seller id found in auctions");
+            return NotFound(new ApiResponse<string>
+            {
+                Success = false,
+                Message = "No seller found within auction items",
+                Data = null
+            });
+        }
+        return Ok(new ApiResponse<IEnumerable<AuctionItemResponseDto>>
+        {
+            Success = true,
+            Message = "Auctions for seller id",
+            Data = sellerAuctions
+        });
+
+
     }
 
     [HttpGet("download/{auctionItemId}/{fileName}")]
@@ -95,10 +133,10 @@ public class AuctionItemController : ControllerBase
     }
     [Consumes("multipart/form-data")]
     [HttpPut("UpdateAuctionItem")]
-    [Authorize(Roles = "Seller")]
+    [Authorize(Roles = "Seller,Admin")]
     public async Task<ActionResult> UpdateAuctionItem(Guid id, [FromForm] AuctionItemAddDto auctionDto)
     {
-         var result = await _auctionItemService.UpdateAuctionItemAsync(id, auctionDto);
+        var result = await _auctionItemService.UpdateAuctionItemAsync(id, auctionDto);
         _logger.LogInformation("Auction item with ID {AuctionId} updated successfully", id);
         return Ok(new ApiResponse<AuctionItemResponseDto>
         {
@@ -109,7 +147,7 @@ public class AuctionItemController : ControllerBase
     }
 
     [HttpGet("PagedData")]
-    [Authorize(Roles = "Seller,Bidder")]
+    [Authorize(Roles = "Seller,Bidder, Admin")]
     public async Task<ActionResult<PaginatedResponseDto<AuctionItemResponseDto>>> GetPagedAuctionItem([FromQuery] PaginationDto paginationDto)
     {
         var result = await _auctionItemService.GetPagedAuctionItemsAsync(paginationDto);

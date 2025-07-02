@@ -19,7 +19,7 @@ public class BidItemService : IBidItemService
     private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-    public BidItemService(IBidItemRepository bidItemRepository, IAuctionItemRepository auctionItemRepository,IUserRepository userRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+    public BidItemService(IBidItemRepository bidItemRepository, IAuctionItemRepository auctionItemRepository, IUserRepository userRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
     {
         _bidItemRepository = bidItemRepository;
         _auctionItemRepository = auctionItemRepository;
@@ -59,7 +59,7 @@ public class BidItemService : IBidItemService
         {
             throw new InvalidDataException("Bid amount must be greater than zero.");
         }
-       
+
         var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "UserId");
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var loggedInUserId))
         {
@@ -123,20 +123,20 @@ public class BidItemService : IBidItemService
         return _mapper.Map<IEnumerable<BidItemResponseDto>>(bids);
     }
 
-    public Task<IEnumerable<BidItemResponseDto>> GetBidsByUseridAsync(Guid userId)
+    public async Task<IEnumerable<BidItemResponseDto>> GetBidsByUserIdAsync(Guid userId)
     {
         if (userId == Guid.Empty)
         {
             throw new NullValueException("User ID cannot be empty");
         }
 
-        var bids = _bidItemRepository.GetBidsByUserIdAsync(userId);
+        var bids = await _bidItemRepository.GetBidsByUserIdAsync(userId);
         if (bids == null)
         {
             throw new NotFoundException($"No bids available for user {userId}");
         }
 
-        return Task.FromResult(_mapper.Map<IEnumerable<BidItemResponseDto>>(bids));
+        return _mapper.Map<IEnumerable<BidItemResponseDto>>(bids);
     }
 
     public async Task<BidItemResponseDto?> GetHighestBidAsync(Guid auctionItemId)
@@ -158,5 +158,21 @@ public class BidItemService : IBidItemService
             throw new NotFoundException($"Bid with ID {bidId} not found");
         }
         return true;
+    }
+    
+    public async Task<BidItemResponseDto> GetBidsByBiddingIdAsync(Guid biddingId)
+    {
+        if (biddingId == Guid.Empty)
+        {
+            throw new NullValueException("Bidding ID cannot be empty");
+        }
+
+        var bids = await _bidItemRepository.GetByIdAsync(biddingId);
+        if (bids == null)
+        {
+            throw new NotFoundException($"No bids available for bidding {biddingId}");
+        }
+
+        return _mapper.Map<BidItemResponseDto>(bids);
     }
 }

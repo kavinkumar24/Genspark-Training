@@ -43,5 +43,10 @@ namespace OnlineAuctionAPI.Services
         {
             return await _eAgreementRepository.GetByIdAsync(id);
         }
+
+        public async Task<IEnumerable<EAgreement>> GetByBiddingIdAsync(Guid biddingId)
+        {
+            return await _eAgreementRepository.GetByBiddingIdAsync(biddingId);
+        }
     }
 }

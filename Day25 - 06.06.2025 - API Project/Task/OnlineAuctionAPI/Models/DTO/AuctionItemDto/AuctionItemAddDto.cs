@@ -10,7 +10,8 @@ public class AuctionItemAddDto
     public decimal ReservePrice { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
-    public String Status { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
     public Guid SellerId { get; set; }
     public List<IFormFile>? FileAttachments { get; set; }
 }

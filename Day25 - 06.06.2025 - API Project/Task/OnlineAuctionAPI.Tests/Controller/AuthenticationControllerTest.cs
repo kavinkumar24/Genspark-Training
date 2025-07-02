@@ -39,13 +39,11 @@ namespace OnlineAuctionAPI.Tests.Controller
             {
                 Email = "test@example.com",
                 Password = "password123",
-                Role = "Bidder"
             };
             var loginResponse = new UserLoginResponseDto
             {
                 UserName = "testuser",
                 Email = "test@example.com",
-                Role = "Bidder",
                 Token = "access_token",
                 RefreshToken = "refresh_token"
             };
@@ -81,7 +79,6 @@ namespace OnlineAuctionAPI.Tests.Controller
             {
                 UserName = "testuser",
                 Email = "test@example.com",
-                Role = "Bidder",
                 Token = "access_token",
                 RefreshToken = "refresh_token"
             };

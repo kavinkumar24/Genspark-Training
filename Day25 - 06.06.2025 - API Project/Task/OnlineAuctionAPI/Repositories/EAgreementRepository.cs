@@ -33,11 +33,11 @@ namespace OnlineAuctionAPI.Repositories
         {
             try
             {
-                if( _auctionContext.EAgreements == null)
+                if (_auctionContext.EAgreements == null)
                 {
                     throw new InvalidOperationException("EAgreements DbSet is null.");
                 }
-                
+
                 return await _auctionContext.EAgreements
                     .Include(e => e.Bidding)
                     .Include(e => e.AuctionItem)
@@ -47,7 +47,22 @@ namespace OnlineAuctionAPI.Repositories
             {
                 throw new Exception("An error occurred while retrieving agreements.", ex);
             }
-            
+
         }
+
+        public async Task<IEnumerable<EAgreement>> GetByBiddingIdAsync(Guid biddingId)
+        {
+            try
+            {
+                return await _auctionContext.EAgreements
+                    .Where(e => e.BiddingId == biddingId)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving agreements by bidding ID.", ex);
+            }
+        }
+        
     }
 }

@@ -29,6 +29,10 @@ namespace OnlineAuctionAPI.Models
         [Required]
         [EnumDataType(typeof(AuctionStatus), ErrorMessage = "Invalid auction status.")]
         public AuctionStatus Status { get; set; }
+
+        // [Required]
+        // public string? Category { get; set; }
+
         [Required]
         public Guid SellerId { get; set; }
         public User Seller { get; set; } = null!;
@@ -39,6 +43,8 @@ namespace OnlineAuctionAPI.Models
         public ICollection<FileData>? FileAttachments { get; set; } = new List<FileData>();
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-        
+        // public int StatusId { get; set; }
+        // public Status StatusNavigation { get; set; } = null!;
+
     }
 }

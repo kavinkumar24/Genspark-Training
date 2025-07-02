@@ -12,12 +12,13 @@ public class AuctionContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<AuctionItem> AuctionItems { get; set; }
     public DbSet<BidItem> BidItems { get; set; }
-    public DbSet<FileData> Files { get;  set; }
+    public DbSet<FileData> Files { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<VirtualWallet> VirtualWallets { get; set; }
     public DbSet<VirtualWalletHistory> VirtualWalletHistories { get; set; }
     public DbSet<EAgreement> EAgreements { get; set; }
+    public DbSet<DeletedUsers> DeletedUsers { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Status>()
@@ -83,6 +84,10 @@ public class AuctionContext : DbContext
         .HasIndex(f => f.AuctionItemId)
         .IsUnique(false);
 
+        // modelBuilder.Entity<AuctionItem>()
+        //     .Property(ai => ai.Category)
+        //     .IsRequired()
+        //     .HasMaxLength(100);
 
         modelBuilder.Entity<AuctionItem>()
         .HasMany(a => a.FileAttachments)
@@ -95,6 +100,16 @@ public class AuctionContext : DbContext
         .WithMany(a => a.FileAttachments)
         .HasForeignKey(f => f.AuctionItemId)
         .OnDelete(DeleteBehavior.Cascade);
+
+        
+        modelBuilder.Entity<EAgreement>()
+        .HasOne(e => e.Bidding)
+        .WithMany()
+        .HasForeignKey(e => e.BiddingId)
+        .OnDelete(DeleteBehavior.Cascade);
+
     }
+
+
 
 }

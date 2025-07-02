@@ -5,6 +5,7 @@ using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
 using OnlineAuctionAPI.Exceptions;
 using Microsoft.AspNetCore.Http.HttpResults;
+using OnlineAuctionAPI.Contexts;
 
 namespace OnlineAuctionAPI.Services;
 
@@ -13,11 +14,14 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IPasswordService _passwordService;
     private readonly IMapper _mapper;
-    public UserService(IUserRepository userRepository, IMapper mapper, IPasswordService passwordService)
+    private readonly AuctionContext _auctionContext;
+
+    public UserService(IUserRepository userRepository, IMapper mapper, IPasswordService passwordService, AuctionContext auctionContext)
     {
         _userRepository = userRepository;
         _passwordService = passwordService;
         _mapper = mapper;
+        _auctionContext = auctionContext;
     }
 
     public async Task<User> CreateUserAsync(UserRegisterRequestDto userDto)
@@ -33,9 +37,9 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<User> DeleteUserAsync(Guid id)
+    public async Task<User> DeleteUserAsync(UserDeleteRequest userDeleteDto)
     {
-        var user = await _userRepository.Get(id);
+        var user = await _userRepository.Get(userDeleteDto.UserId);
         if (user.StatusId == 2)
         {
             throw new AlreadyDeletedException("User is already deleted");
@@ -43,6 +47,13 @@ public class UserService : IUserService
 
         user.StatusId = 2;
         await _userRepository.Update(user.Id, user);
+        await _auctionContext.DeletedUsers.AddAsync(new DeletedUsers
+        {
+            UserId = userDeleteDto.UserId,
+            Reason = userDeleteDto.Reason,
+            DeletedAt = DateTime.UtcNow
+        });
+        await _auctionContext.SaveChangesAsync();
         return user;
     }
 
@@ -58,6 +69,16 @@ public class UserService : IUserService
             throw new NotFoundException($"The given email - {email} is not found, please verify that.");
         }
         return user;
+    }
+
+    public async Task<IEnumerable<User>> GetAllUsers()
+    {
+        var users = await _userRepository.GetAll();
+        if (users == null || !users.Any())
+        {
+            throw new NotFoundException("No users found");
+        }
+        return users;
     }
 
     public async Task<User?> GetUserByIdAsync(Guid id)
@@ -94,17 +115,33 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<bool> ChangePasswordAsync(Guid userId, string currentPassword, string newPassword)
+    public async Task<bool> ChangePasswordAsync(ChangePasswordRequestDto changePasswordRequestDto)
     {
-        var user = await _userRepository.Get(userId);
+        var user = await _userRepository.Get(changePasswordRequestDto.UserId);
         if (user == null)
             throw new NotFoundException("User not found");
 
-        if (!_passwordService.VerifyPassword(user.Password, currentPassword))
+        if (!_passwordService.VerifyPassword(user.Password, changePasswordRequestDto.CurrentPassword))
             throw new InvalidException("Current password is incorrect");
 
-        user.Password = _passwordService.HashPassword(newPassword);
-        await _userRepository.Update(userId, user);
+        user.Password = _passwordService.HashPassword(changePasswordRequestDto.NewPassword);
+        await _userRepository.Update(changePasswordRequestDto.UserId, user);
+        return true;
+    }
+
+    public async Task<bool> ForgetPasswordAsync(ForgetPasswordRequestDto forgetPasswordRequestDto)
+    {
+        if (string.IsNullOrEmpty(forgetPasswordRequestDto.Email))
+        {
+            throw new NullValueException("Email can't be null or empty, please ensure it");
+        }
+        var user = await _userRepository.GetByEmailAsync(forgetPasswordRequestDto.Email);
+        if (user == null)
+        {
+            throw new NotFoundException($"The user with email {forgetPasswordRequestDto.Email} is not found, please verify that.");
+        }
+        user.Password = _passwordService.HashPassword(forgetPasswordRequestDto.NewPassword);
+        await _userRepository.Update(user.Id, user);
         return true;
     }
 

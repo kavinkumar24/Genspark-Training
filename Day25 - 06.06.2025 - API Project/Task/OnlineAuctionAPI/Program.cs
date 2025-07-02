@@ -88,6 +88,7 @@ builder.Services.AddDbContext<AuctionContext>(opts =>
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(BidProfile));
 
 #region Controllers
 builder.Services.AddControllers()
@@ -187,7 +188,7 @@ builder.Services.AddTransient<IEAgreementService, EAgreementService>();
 #region CORS
 builder.Services.AddCors(options=>{
     options.AddDefaultPolicy(policy=>{
-        policy.WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501")
+        policy.WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501", "http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -207,7 +208,7 @@ builder.Services.AddRateLimiter(options =>
         {
             return new TokenBucketRateLimiterOptions
             {
-                TokenLimit = 10,
+                TokenLimit = 100,
                 TokensPerPeriod = 1000,
                 ReplenishmentPeriod = TimeSpan.FromHours(1),
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
@@ -219,6 +220,12 @@ builder.Services.AddRateLimiter(options =>
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 });
 #endregion
+
+// Program.cs
+builder.Host.ConfigureHostOptions(opt =>
+{
+    opt.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore;
+});
 
 builder.Services.AddHttpContextAccessor();
 
@@ -235,12 +242,12 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 // app.UseHttpsRedirection();
 app.UseRateLimiter();
 app.MapControllers();
-app.UseCors();
 app.MapHub<AuctionHub>("/auctionHub");
 
 app.UseMiddleware<ExceptionMiddleware>();

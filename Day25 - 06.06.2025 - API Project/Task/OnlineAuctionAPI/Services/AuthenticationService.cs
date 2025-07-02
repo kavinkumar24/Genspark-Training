@@ -32,16 +32,12 @@ public class AuthenticationService : IAuthService
         {
             throw new InvalidException("Invalid Password");
         }
-        if (!string.Equals(dbUser.Role.ToString(), userLoginDto.Role, StringComparison.OrdinalIgnoreCase))
-        {
-            throw new InvalidException("Invalid Role");
-        }
+      
         var tokens = await _tokenService.GenerateTokensAsync(dbUser);
         return new UserLoginResponseDto
         {
             UserName = dbUser.Username,
             Email = dbUser.Email,
-            Role = dbUser.Role.ToString(),
             Token = tokens.AccessToken,
             RefreshToken = tokens.RefreshToken
         };
