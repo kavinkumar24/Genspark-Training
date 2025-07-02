@@ -16,6 +16,8 @@ import { AuctionService } from '../../../core/services/auction.service';
 import { AuctionFilter } from '../../../feature/seller/auction-filter/auction-filter';
 import { Pagination } from '../pagination/pagination';
 import { BiddingService } from '../../../core/services/bidding.service';
+import { UserService } from '../../../core/services/user.service';
+import { User } from '../../../core/models/User';
 
 @Component({
   selector: 'app-view-auction',
@@ -42,7 +44,8 @@ export class ViewAuction {
     private bidService: BiddingService,
     private router: Router,
     private snackBar: SnackbarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
   page = 1;
   pageSize = 10;
@@ -52,6 +55,7 @@ export class ViewAuction {
   auctionToCancel: string | null = '';
   isLoading = false;
   showFilter = false;
+  showBidsData = false;
   filtersApplied = false;
   currentFilters: any = {};
   showEditModel = false;
@@ -61,6 +65,8 @@ export class ViewAuction {
   sellerId = '';
   bidsForAuction: any[] = [];
   selectedBidId: string = '';
+  bidsData: any;
+  userData: User | null = null;
 
   fetchAuctions(filters?: any) {
     if (filters) {
@@ -230,6 +236,10 @@ export class ViewAuction {
       this.selectedAuctionId = auctionId;
       this.showBidModel = true;
       this.fetchBidsForAuction(auctionId);
+    } else if (type === 'bidsData') {
+      this.selectedBidId = auctionId;
+      this.showBidsData = true;
+      this.getBidsItem(auctionId);
     }
   }
   closeModel(type: string) {
@@ -247,6 +257,10 @@ export class ViewAuction {
     } else if (type === 'bids') {
       this.showBidModel = false;
       this.selectedAuctionId = '';
+    } else if (type === 'bidsData') {
+      this.showBidsData = false;
+      this.selectedBidId = '';
+      this.bidsData = null;
     }
   }
 
@@ -289,7 +303,47 @@ export class ViewAuction {
     });
   }
 
-  showWinerBids(winningId: string) {
-    this.selectedBidId = winningId;
+  // showWinnerBids(winningId: string) {
+  //   this.showBidsModel = true;
+  //   console.log('Selected Winning ID:', winningId);
+  //   this.selectedBidId = winningId;
+  //   this.getBidsItem(winningId);
+  // }
+
+  // closeBidsModel() {
+  //   this.showBidsModel = false;
+  //   this.selectedBidId = '';
+  //   this.bidsForAuction = [];
+  // }
+
+  getBidsItem(bidId: string) {
+    this.bidService.getBidsByBidderId(bidId).subscribe({
+      next: (res) => {
+        this.bidsData = res.data;
+        if(this.bidsData.userId){
+          this.getUserData(this.bidsData.userId);
+        }
+
+      },
+      error: (err) => {
+        console.error('Error fetching bids:', err);
+      },
+    });
+  }
+
+  userDetails: any =''
+
+
+getUserData(userId: string) {
+    this.userService.getByUserId(userId).subscribe({
+      next: (res) => {
+        this.userDetails= res.data;
+        console.log('User Data:', this.userDetails);
+      },
+      error: (err) => {
+        console.error('Error fetching user data:', err);
+        return null;
+      },
+    });
   }
 }

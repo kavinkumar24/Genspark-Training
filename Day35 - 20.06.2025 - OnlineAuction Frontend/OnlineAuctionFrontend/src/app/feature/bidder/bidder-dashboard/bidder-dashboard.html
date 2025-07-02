@@ -10,6 +10,26 @@
     [imgSize]="60"
   >
   </app-summary-card>
+
+  <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+    <h2 class="font-normal text-gray-400">Main Balance in Wallet</h2>
+    <div class="flex justify-between mt-4">
+      <p class="text-2xl font-bold">
+        {{virtualWalletBalance | currency:'INR'}}
+      </p>
+      <lucide-angular [img]="walletIcon" size="40"></lucide-angular>
+    </div>
+
+    <div
+      class="w-full bg-gray-200 dark:bg-gray-900 rounded-full h-4 overflow-hidden mt-4"
+    >
+      <div
+        class="h-4 rounded-full transition-all duration-300"
+        ngClass="bg-primary-color"
+        [style.width.%]="balanceUsed"
+      ></div>
+    </div>
+  </div>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
@@ -66,7 +86,7 @@
       <tr>
         <td>{{ bid.id }}</td>
         <td
-          class="text-[#4eadcd] hover:underline hover:cursor-pointer"
+          class="text-primary-color hover:underline hover:cursor-pointer"
           (click)="showAucrionModel(bid.auctionItemId)"
         >
           {{ bid.auctionItemId }}

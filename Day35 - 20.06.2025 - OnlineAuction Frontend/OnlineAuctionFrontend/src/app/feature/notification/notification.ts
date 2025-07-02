@@ -1,6 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+  viewChild,
+} from '@angular/core';
 import { NotificationService } from '../../core/services/notify.service';
-import { BellIcon, LucideAngularModule } from 'lucide-angular';
+import {
+  BellIcon,
+  Delete,
+  DeleteIcon,
+  LucideAngularModule,
+  XCircleIcon,
+} from 'lucide-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,6 +23,8 @@ import { CommonModule } from '@angular/common';
 })
 export class NotificationComponent implements OnInit {
   readonly bellIcon = BellIcon;
+  readonly closeIcon = XCircleIcon;
+  readonly dismissIcon = DeleteIcon;
   notifications: any[] = [];
   unseenCount = 0;
   panelOpen = false;
@@ -77,5 +92,15 @@ export class NotificationComponent implements OnInit {
   markAllAsSeen() {
     this.notifications.forEach((n) => (n.seen = true));
     this.unseenCount = 0;
+  }
+  dismissNotification(notification: any) {
+    this.notifications = this.notifications.filter((n) => n !== notification);
+  }
+
+  @HostListener('window:keydown.escape')
+  closePanel() {
+    if (this.panelOpen) {
+      this.panelOpen = false;
+    }
   }
 }

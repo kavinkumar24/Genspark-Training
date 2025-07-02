@@ -14,6 +14,8 @@ import { SummaryCard } from '../../../shared/components/summary-card/summary-car
 import { BidsWinningStatus } from '../../../shared/components/bids-winning-status/bids-winning-status';
 import { ModelView } from '../../../shared/components/model-view/model-view';
 import { AuctionDetailsCard } from '../../../shared/components/auction-details-card/auction-details-card';
+import { WalletService } from '../../../core/services/wallet.service';
+import { LucideAngularModule, WalletIcon } from 'lucide-angular';
 
 export type ChartOptions = {
   series?: ApexAxisChartSeries;
@@ -37,20 +39,25 @@ export type ChartOptions = {
     BidsWinningStatus,
     ModelView,
     AuctionDetailsCard,
+    LucideAngularModule,
   ],
   templateUrl: './bidder-dashboard.html',
 })
 export class BidderDashboard implements OnInit {
   @ViewChild('statusChart') statusChart!: ChartComponent;
   @ViewChild('monthlyChart') monthlyChart!: ChartComponent;
+  type: ('line' | 'bar' | 'area')[] = ['line', 'bar', 'area'];
 
   public statusChartOptions!: Partial<ChartOptions>;
   public monthlyChartOptions!: Partial<ChartOptions>;
 
+  readonly walletIcon = WalletIcon;
+
   status: string[] = ['Upcoming', 'Live'];
   constructor(
     private auctionService: AuctionService,
-    private biddingService: BiddingService
+    private biddingService: BiddingService,
+    private walletService: WalletService
   ) {}
   auctionItems: any[] = [];
   biddingItems: any[] = [];
@@ -60,10 +67,12 @@ export class BidderDashboard implements OnInit {
   chartHeight = 250;
   showModal = false;
   selectedAuction: any = null;
+  virtualWalletBalance: number = 0;
 
   ngOnInit(): void {
     this.fetchAllAuctions();
     this.fetchBiddingItems();
+    this.fetchVirtualWalletBalance();
   }
 
   fetchAllAuctions() {
@@ -83,7 +92,7 @@ export class BidderDashboard implements OnInit {
         this.monthlyChartOptions = buildMonthlyChart(
           this.biddingItems,
           this.filterationValue,
-          undefined,
+          this.type[2],
           this.chartHeight
         );
         observeThemeChanges(
@@ -113,7 +122,7 @@ export class BidderDashboard implements OnInit {
             this.monthlyChartOptions = buildMonthlyChart(
               this.biddingItems,
               this.filterationValue,
-              undefined,
+              this.type[2],
               this.chartHeight
             );
           }
@@ -155,7 +164,7 @@ export class BidderDashboard implements OnInit {
             this.monthlyChartOptions = buildMonthlyChart(
               this.biddingItems,
               this.filterationValue,
-              undefined,
+              this.type[2],
               this.chartHeight
             );
           }
@@ -183,6 +192,17 @@ export class BidderDashboard implements OnInit {
     });
   }
 
+  fetchVirtualWalletBalance() {
+    this.walletService.getWallet().subscribe({
+      next: (res) => {
+        this.virtualWalletBalance = res?.data?.balance ?? 0;
+      },
+      error: (err) => {
+        console.log(err);
+        this.virtualWalletBalance = 0;
+      },
+    });
+  }
   getAuctionStatus(auction: any): string {
     if (auction.status === 'Upcoming') return 'Upcoming';
     if (auction.status === 'Live') return 'Live';
@@ -197,5 +217,10 @@ export class BidderDashboard implements OnInit {
   closeAuctionModel() {
     this.showModal = false;
     this.selectedAuction = null;
+  }
+
+  maxCapacity = 5_000_000;
+  get balanceUsed(): number {
+    return Math.min((this.virtualWalletBalance / this.maxCapacity) * 100, 100);
   }
 }

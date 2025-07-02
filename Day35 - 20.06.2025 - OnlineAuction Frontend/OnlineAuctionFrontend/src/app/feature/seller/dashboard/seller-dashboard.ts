@@ -83,6 +83,10 @@ export class SellerDashboard implements OnInit, AfterViewInit {
   private hasViewInitialized = false;
 
   ngOnInit(): void {
+    this.fetchAuctions();
+  }
+
+  fetchAuctions() {
     this.auctionService.getAuctionBySeller().subscribe({
       next: (res) => {
         this.auctionItems = res?.data?.$values ?? [];

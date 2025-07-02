@@ -11,59 +11,126 @@
   </button>
 
   @if (panelOpen) {
-  <div
-    class="absolute -right-50 md:right-0 mt-2 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-lg z-50 border border-gray-200 dark:border-gray-700"
-  >
+  <div class="fixed inset-0 bg-black/50 z-40"></div>
+  <div class="fixed right-0 min-h-screen p-4 md:w-1/5 overflow-auto w-72 z-50">
     <div
-      class="p-4 border-b border-gray-200 dark:border-gray-700 font-semibold"
+      class="absolute right-0 md:right-0 mt-0 w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg z-50 border border-gray-200 dark:border-gray-700 flex flex-col max-h-[90vh] overflow-auto"
     >
-      Notifications
-    </div>
-    <div
-      *ngIf="notifications.length === 0"
-      class="p-4 text-gray-500 dark:text-gray-400"
-    >
-      No notifications
-    </div>
-    @for (n of notifications; track n) {
-    <div
-      class="p-4 border-b border-gray-100 dark:border-gray-700 last:border-b-0"
-    >
-      @if (n.type === 'bid') {
-      <div class="font-medium">New Bid Placed!</div>
-      <div>Auction: <span class="font-mono">{{ n.auctionItemId }}</span></div>
-      <div>
-        Amount:
-        <span class="font-semibold">{{ n.amount | currency:'INR' }}</span>
+      <div
+        class="p-4 border-b border-gray-200 dark:border-gray-700 font-semibold flex justify-between sticky top-0 bg-primary-color dark:bg-gray-800 z-10 text-white"
+      >
+        Notifications
+        <button (click)="closePanel()">
+          <lucide-angular
+            [img]="closeIcon"
+            class="my-icon text-white"
+          ></lucide-angular>
+        </button>
       </div>
-      <div class="text-xs text-gray-400">{{ n.bidTime | date:'short' }}</div>
-      } @if (n.type === 'status') {
-      <div class="font-medium">Auction Status Updated!</div>
-      <div>Auction: <span class="font-mono">{{ n.name }}</span></div>
-      <div>Status: <span class="font-semibold">{{ n.status }}</span></div>
-      <div class="text-xs text-gray-400">{{ n.updatedAt | date:'short' }}</div>
-      } @if(n.type==='newAuction'){
-      <div class="font-medium">New Auction Created!</div>
-      <div>Auction: <span class="font-mono">{{ n.name }}</span></div>
-      <div>
-        Start Time:
-        <span class="font-semibold">{{ n.startTime | date:'short'}}</span>
-      </div>
-      <div>
-        End Time:
-        <span class="font-semibold">{{ n.endTime| date:'short' }}</span>
-      </div>
-      <div class="text-xs text-gray-400">{{ n.startingPrice }}</div>
-      } @if(n.type === 'winningBidUpdate'){
-      <div class="font-medium">Winning Bid Update</div>
-      <div>Auction: <span class="font-mono">{{ n.name }}</span></div>
-      <div>Winning Id: <span class="font-semibold">{{ n.winnerId}}</span></div>
-      <div>User Id: <span class="font-semibold">{{ n.sellerId}}</span></div>
-      <div>Amount</div>
-      <div class="text-xs text-gray-400">{{ n.amount }}</div>
+      @if (notifications.length===0) {
+      <div class="p-4 text-gray-500 dark:text-gray-400">No notifications</div>
       }
+      <div class="mb-2">
+        @for (n of notifications; track n) {
+
+        <div
+          class="p-4 border-b border-gray-100 dark:border-gray-700 last:border-b-0 rounded-md mb-2 bg-gray-100 dark:bg-gray-700" 
+        >
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              @if (n.type === 'bid') {
+              <div
+                class="font-medium text-blue-700 dark:text-blue-300 flex items-center gap-2"
+              >
+                <span
+                  class="inline-block w-2 h-2 bg-blue-500 rounded-full"
+                ></span>
+                New Bid Placed!
+              </div>
+              <div>
+                Auction: <span class="font-mono">{{ n.auctionItemId }}</span>
+              </div>
+              <div>
+                Amount:
+                <span class="font-semibold"
+                  >{{ n.amount | currency:'INR' }}</span
+                >
+              </div>
+              <div class="text-xs text-gray-400">
+                {{ n.bidTime | date:'short' }}
+              </div>
+              } @if (n.type === 'status') {
+              <div
+                class="font-medium text-red-700 dark:text-red-300 flex items-center gap-2"
+              >
+                <span
+                  class="inline-block w-2 h-2 bg-red-500 rounded-full"
+                ></span>
+                Auction Status Updated!
+              </div>
+              <div>Auction: <span class="font-mono">{{ n.name }}</span></div>
+              <div>
+                Status: <span class="font-semibold">{{ n.status }}</span>
+              </div>
+              <div class="text-xs text-gray-400">
+                {{ n.updatedAt | date:'short' }}
+              </div>
+              } @if(n.type==='newAuction'){
+              <div
+                class="font-medium text-green-700 dark:text-green-300 flex items-center gap-2"
+              >
+                <span
+                  class="inline-block w-2 h-2 bg-green-500 rounded-full"
+                ></span>
+                New Auction Created!
+              </div>
+              <div>Auction: <span class="font-mono">{{ n.name }}</span></div>
+              <div>
+                Start Time:
+                <span class="font-semibold"
+                  >{{ n.startTime | date:'short'}}</span
+                >
+              </div>
+              <div>
+                End Time:
+                <span class="font-semibold">{{ n.endTime| date:'short' }}</span>
+              </div>
+              <div class="text-xs text-gray-400">
+                Starting Price: {{ n.startingPrice }}
+              </div>
+              } @if(n.type === 'winningBidUpdate'){
+              <div
+                class="font-medium text-purple-700 dark:text-purple-300 flex items-center gap-2"
+              >
+                <span
+                  class="inline-block w-2 h-2 bg-purple-500 rounded-full"
+                ></span>
+                Winning Bid Update
+              </div>
+              <div>Auction: <span class="font-mono">{{ n.name }}</span></div>
+              <div>
+                Winning Id: <span class="font-semibold">{{ n.winnerId}}</span>
+              </div>
+              <div>
+                User Id: <span class="font-semibold">{{ n.sellerId}}</span>
+              </div>
+              <div>
+                Amount: <span class="font-semibold">{{ n.amount }}</span>
+              </div>
+              }
+            </div>
+            <button
+              class="text-gray-400 hover:text-red-500 focus:outline-none ml-2"
+              (click)="dismissNotification(n)"
+              aria-label="Dismiss"
+            >
+              <lucide-angular [img]="dismissIcon" class="hover:text-red-400"></lucide-angular>
+            </button>
+          </div>
+        </div>
+        }
+      </div>
     </div>
-    }
   </div>
   }
 </div>

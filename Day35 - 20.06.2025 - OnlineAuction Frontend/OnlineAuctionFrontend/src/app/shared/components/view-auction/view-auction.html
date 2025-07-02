@@ -18,7 +18,7 @@
           <th>Reserve Price</th>
           <th>Start Time</th>
           <th>End Time</th>
-          <th>Winner Id</th>
+          <th>Winning Bid</th>
           <th>File Attachments</th>
           <th>Cancel Auction</th>
           <th>Edit Auction</th>
@@ -34,7 +34,7 @@
             @if (role === 'Admin') {
             <p
               (click)="showModel('bids',auction.id)"
-              class="text-[#4eadcd] underline hover:text-[#85bdd0] cursor-pointer"
+              class="text-primary-color underline hover:text-[#85bdd0] cursor-pointer"
             >
               {{ auction.name }}
             </p>
@@ -58,8 +58,13 @@
           <td>{{ auction.reservePrice }}</td>
           <td>{{ auction.startTime | date:'short' }}</td>
           <td>{{ auction.endTime | date:'short' }}</td>
-          <td class="underline" (click)="showWinerBids(auction.winnerId)">
-            {{ auction.winnerId?? '-' }}
+          <td>
+            <p
+              (click)="showModel('bidsData', auction.winnerId)"
+              class="text-primary-color hover:underline cursor-pointer"
+            >
+              {{ auction.winnerId?? '-' }}
+            </p>
           </td>
           <td>
             @if (auction.files?.$values?.length>0) {
@@ -277,4 +282,33 @@
       }
     </tbody>
   </table>
+</app-model-view>
+
+<app-model-view [show]="showBidsData" (close)="closeModel('bidsData')">
+  <div class="px-1 py-3">
+    <div>
+      <label class="model-label">Auction Id: </label>
+      <span class="light-text">{{ bidsData?.auctionItemId }}</span>
+    </div>
+    <br />
+    <div>
+      <label class="model-label">User Id: </label>
+      <span class="light-text">{{ bidsData?.userId }}</span>
+    </div>
+    <div>
+      <label class="model-label">User Details</label>
+     <span class="light-text">{{ userDetails.email }}</span>
+    </div>
+    <br />
+    <div>
+      <label class="model-label">Amount: </label>
+      <span class="light-text">{{ bidsData?.amount }}</span>
+    </div>
+
+    <br />
+    <div>
+      <label class="model-label">Bid Time: </label>
+      <span class="light-text">{{ bidsData?.bidTime | date:'short' }}</span>
+    </div>
+  </div>
 </app-model-view>

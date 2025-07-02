@@ -99,7 +99,7 @@ export function buildMonthlyChart(
     },
     theme: { mode: isDark ? 'dark' : 'light' },
     colors: [type === 'area' ? '#EF4444' : '#10B981'],
-    series: [{ name: 'Bids creation', data }],
+    series: [{ name: 'Creation', data }],
 
     plotOptions:
       type === 'bar'

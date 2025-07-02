@@ -31,7 +31,7 @@ export class VirtualWallet implements OnInit {
         this.balance = res.data?.balance ?? 0;
         this.isLoading = false;
       },
-      error: (err) => {
+      error: () => {
         this.message = 'Failed to load wallt';
         this.isLoading = false;
       },
@@ -39,6 +39,11 @@ export class VirtualWallet implements OnInit {
   }
   addFundsToWallet() {
     if (this.addingAmount <= 0) return;
+    var amount = this.addingAmount + (this.balance ?? 0);
+    if (amount > 5_000_000) {
+      alert('You can not add more than 5,000,000 to your wallet at once');
+      return;
+    }
 
     this.isLoading = true;
     this.walletService.addFunds(this.addingAmount).subscribe({

@@ -12,6 +12,7 @@ import { BiddingService } from '../../../core/services/bidding.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { UserService } from '../../../core/services/user.service';
 
 describe('ViewAuction', () => {
   let component: ViewAuction;
@@ -21,6 +22,7 @@ describe('ViewAuction', () => {
   let bidServiceSpy: jasmine.SpyObj<BiddingService>;
   let snackBarSpy: jasmine.SpyObj<SnackbarService>;
   let routerSpy: jasmine.SpyObj<Router>;
+  let userServiceSpy: jasmine.SpyObj<UserService>;
   let activatedRouteStub: any;
 
   beforeEach(waitForAsync(() => {
@@ -39,6 +41,7 @@ describe('ViewAuction', () => {
       'showSuccess',
       'showError',
     ]);
+    userServiceSpy = jasmine.createSpyObj('UserService', ['getUserById']);
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     activatedRouteStub = {
       queryParams: of({ page: 1 }),
@@ -53,6 +56,8 @@ describe('ViewAuction', () => {
         { provide: SnackbarService, useValue: snackBarSpy },
         { provide: Router, useValue: routerSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: UserService, useValue: userServiceSpy },
+
       ],
     }).compileComponents();
   }));
