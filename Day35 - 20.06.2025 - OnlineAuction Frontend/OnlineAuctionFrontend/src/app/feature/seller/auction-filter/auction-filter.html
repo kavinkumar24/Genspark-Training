@@ -1,0 +1,45 @@
+<div class="p-4 bg-white dark:bg-gray-800 rounded-xl max-w-md mx-auto">
+  <h2>Filter Auctions</h2>
+
+  <form [formGroup]="filterForm" (ngSubmit)="onApply()">
+    <label class="form-label">Start Date</label>
+    <input
+      class="form-input"
+      type="datetime-local"
+      formControlName="startTime"
+    />
+
+    <label class="form-label">End Date</label>
+    <input class="form-input" type="datetime-local" formControlName="endTime" />
+
+    <label class="form-label">Sort By</label>
+    <select class="form-input" formControlName="sortBy">
+      <option value="name">Name</option>
+      <option value="startTime">Start Time</option>
+      <option value="endTime">End Time</option>
+      <option value="createdAt">Created At</option>
+    </select>
+
+    <label class="form-label">Sort Direction</label>
+    <select class="form-input" formControlName="sortDirection">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+
+    <label class="form-label">Status</label>
+    <select class="form-input" formControlName="status">
+      <option value="Completed">Completed</option>
+      <option value="Cancelled">Cancelled</option>
+      <option value="Live">Live</option>
+      <option value="Upcoming">Upcoming</option>
+      <option value="Closed">Closed</option>
+    </select>
+
+    <div class="flex justify-between mt-4">
+      <button type="submit" class="btn-primary">Apply</button>
+      <button type="button" class="btn-secondary" (click)="onReset()">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

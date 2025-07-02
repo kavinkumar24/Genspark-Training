@@ -1,0 +1,76 @@
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { catchError, Observable, throwError } from "rxjs";
+import { environment } from "../../../env/environment";
+import { AddUser } from "../models/AddUser";
+import { ChangePasswordModel } from "../models/ChangePassword";
+import { User } from "../models/User";
+import { ErrorHandlerService } from "./errorhandler.service";
+import { LoginRequest } from "../models/LoginRequest";
+import { ForgetPasswordRequest } from "../models/ForgetPassword";
+
+@Injectable()
+
+export class UserService{
+
+    constructor(private http: HttpClient, private errorHandler:ErrorHandlerService){}
+
+    private baseUrl = `${environment.apiUrl}/User`
+    getByEmail(email: string): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}/GetByEmail/?email=${email}`)
+        .pipe(
+            catchError(this.errorHandler.handleError)
+        );
+    }
+
+    registerNewuser(payload: AddUser){
+        return this.http.post<any>(`${this.baseUrl}`, payload)
+        .pipe(
+            catchError(this.errorHandler.handleError)
+        );
+    }
+
+    getAllUsers(): Observable<any> {
+        return this.http.get<any>('http://localhost:5230/api/v1/User/GetAll')
+        .pipe(
+            catchError(this.errorHandler.handleError)
+        );
+    }
+
+
+    changeUserPassword(payload: ChangePasswordModel): Observable<any> {
+        return this.http.patch(
+            `${this.baseUrl}/change-password`,
+            payload,
+            { headers: { 'Content-Type': 'application/json' }, responseType: 'text' as 'json' }
+        ).pipe(
+            catchError(this.errorHandler.handleError)
+        );
+
+    }
+
+    updateUser(payload: any, userId:string):Observable<any>{
+        return this.http.put(`${this.baseUrl}/UpdateUser?id=${userId}`, payload)
+        .pipe(
+            catchError(this.errorHandler.handleError)
+        );
+    }
+
+    deleteUser(payload: any): Observable<any> {
+        return this.http.delete(`${this.baseUrl}`, {
+            headers: { 'Content-Type': 'application/json' },
+            body: payload
+        })
+        .pipe(
+            catchError(this.errorHandler.handleError)
+        );
+    }
+
+    forgetPassword(payload: ForgetPasswordRequest): Observable<any> {
+        return this.http.patch(`${this.baseUrl}/forget-password`, payload)
+        .pipe(
+            catchError(this.errorHandler.handleError)
+        );
+    }
+
+}

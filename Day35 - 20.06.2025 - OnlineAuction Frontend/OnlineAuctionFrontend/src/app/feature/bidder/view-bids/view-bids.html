@@ -1,0 +1,53 @@
+<div class="mt-10">
+  <h1>My Bidding</h1>
+
+  <div class="table-container mt-10">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Auction Id</th>
+          <th>Bid Amount</th>
+          <th>Bid Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (bid of pagedBidItems; track $index) {
+        <tr>
+          <td>
+            <a
+              href="#"
+              class="text-[#4eadcd] hover:underline"
+              (click)="openAuctionModal(bid.auctionItemId); $event.preventDefault()"
+            >
+              {{ bid.auctionItemId }}
+            </a>
+          </td>
+          <td>{{ bid.amount }}</td>
+          <td>{{ bid.bidTime | date:'medium'}}</td>
+          <td>
+            <app-bids-winning-status
+              [bid]="bid"
+              [auctionItems]="auctions"
+            ></app-bids-winning-status>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-pagination
+  [page]="page"
+  [totalPages]="totalPages"
+  (pageChange)="goToPage($event)"
+></app-pagination>
+
+<app-model-view [show]="showAuctionModal" (close)="closeAuctionModal()">
+  @if (selectedAuction) {
+  <app-auction-details-card
+    [selectedAuction]="selectedAuction"
+    (close)="closeAuctionModal()"
+  ></app-auction-details-card>
+  }
+</app-model-view>

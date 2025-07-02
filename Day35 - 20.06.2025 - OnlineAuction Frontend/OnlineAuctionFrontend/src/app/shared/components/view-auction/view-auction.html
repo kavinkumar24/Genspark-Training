@@ -1,0 +1,280 @@
+<div class="mt-10">
+  <div class="flex justify-between">
+    <h1>Created Auctions</h1>
+
+    <button (click)="showModel('filter', '')" class="btn-primary">
+      @if(filtersApplied){ Filter Applied } @else { Filter }
+    </button>
+  </div>
+
+  @if (auctions) {
+  <div class="table-container mt-5">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Starting Price</th>
+          <th>Reserve Price</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Winner Id</th>
+          <th>File Attachments</th>
+          <th>Cancel Auction</th>
+          <th>Edit Auction</th>
+          @if(role === 'Admin'){
+          <th>Delete</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (auction of auctions; track $index) {
+        <tr>
+          <td>
+            @if (role === 'Admin') {
+            <p
+              (click)="showModel('bids',auction.id)"
+              class="text-[#4eadcd] underline hover:text-[#85bdd0] cursor-pointer"
+            >
+              {{ auction.name }}
+            </p>
+            } @else { {{ auction.name }} }
+          </td>
+          <td>
+            <span
+              class="status-label"
+              [ngClass]="{
+            'status-upcoming': auction.status === 'Upcoming',
+            'status-live': auction.status === 'Live',
+            'status-completed': auction.status === 'Completed',
+            'status-closed': auction.status === 'Closed',
+            'status-cancelled': auction.status === 'Cancelled'
+          }"
+            >
+              {{ auction.status }}
+            </span>
+          </td>
+          <td>{{ auction.startingPrice }}</td>
+          <td>{{ auction.reservePrice }}</td>
+          <td>{{ auction.startTime | date:'short' }}</td>
+          <td>{{ auction.endTime | date:'short' }}</td>
+          <td class="underline" (click)="showWinerBids(auction.winnerId)">
+            {{ auction.winnerId?? '-' }}
+          </td>
+          <td>
+            @if (auction.files?.$values?.length>0) {
+            <button
+              class="ml-2 hover:text-red-400 hover:cursor-pointer"
+              (click)="onViewAttachements(auction.id)"
+            >
+              <lucide-angular
+                [img]="fileAttachment"
+                class="my-icon ml-2 hover:text-red-400"
+              ></lucide-angular>
+            </button>
+            } @else {
+            <lucide-angular
+              [img]="nofileAttachement"
+              class="my-icon ml-2 text-gray-200 dark:text-gray-700"
+            ></lucide-angular>
+            }
+          </td>
+
+          <td>
+            <button
+              (click)="showModel('cancel',auction.id)"
+              class="btn-primary bg-red-400 hover:bg-red-500"
+              [disabled]="!(auction.status === 'Live' || auction.status === 'Upcoming')"
+            >
+              Cancel
+            </button>
+          </td>
+
+          <td>
+            <button
+              (click)="openEditModel(auction)"
+              class="btn-primary ml-2"
+              [disabled]="!(auction.status === 'Live' || auction.status === 'Upcoming' || role === 'Admin')"
+            >
+              Edit
+            </button>
+          </td>
+
+          @if(role==='Admin'){
+          <td>
+            <button
+              class="btn-primary bg-red-500 hover:bg-red-600"
+              (click)="showModel('delete',auction.id)"
+            >
+              Delete
+            </button>
+          </td>
+          }
+        </tr>
+        } @if(auctions.length === 0){
+        <tr>
+          <td class="text-center py-4" colspan="11">No data available</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+</div>
+
+<app-model-view [show]="showCancelModel" (close)="closeModel('cancel')">
+  <p class="text-gray-600 dark:text-gray-300">
+    Are you sure to delete the auction?
+  </p>
+  <br />
+  <button
+    (click)="onAuctionCancel(auctionToCancel)"
+    class="btn-primary bg-red-500"
+  >
+    Confirm to cancel
+  </button>
+</app-model-view>
+
+<app-pagination
+  [page]="page"
+  [totalPages]="totalPages"
+  (pageChange)="goToPage($event)"
+></app-pagination>
+
+<app-spinner [loading]="isLoading"></app-spinner>
+
+<app-model-view [show]="showFilter" (close)="closeModel('filter')">
+  <app-auction-filter
+    (applyFilters)="onFilterApplied($event)"
+  ></app-auction-filter>
+</app-model-view>
+
+<app-model-view
+  [show]="showEditModel"
+  (close)="closeModel('edit')"
+  class="w-full"
+>
+  @if (auctionToEdit) {
+  <div class="w-ful overflow-auto p-4">
+    <form (ngSubmit)="onEditSave(auctionToEdit)">
+      <div class="mb-2">
+        <label class="form-label">Name:</label>
+        <input
+          [(ngModel)]="auctionToEdit.name"
+          name="name"
+          class="form-input"
+          required
+        />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Description:</label>
+        <textarea
+          [(ngModel)]="auctionToEdit.description"
+          name="description"
+          class="form-input"
+        ></textarea>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Start Time:</label>
+        <input
+          type="datetime-local"
+          [(ngModel)]="auctionToEdit.startTime"
+          name="startTime"
+          class="form-input"
+          required
+        />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">End Time:</label>
+        <input
+          type="datetime-local"
+          [(ngModel)]="auctionToEdit.endTime"
+          name="endTime"
+          class="form-input"
+          required
+        />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Starting Price:</label>
+        <input
+          type="number"
+          [(ngModel)]="auctionToEdit.startingPrice"
+          name="startingPrice"
+          class="form-input"
+          required
+        />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Reserve Price:</label>
+        <input
+          type="number"
+          [(ngModel)]="auctionToEdit.reservePrice"
+          name="reservePrice"
+          class="form-input"
+          required
+        />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">File:</label>
+        <input type="file" class="form-input" (change)="onFileChange($event)" />
+      </div>
+      <button type="submit" class="btn-primary">Save</button>
+    </form>
+  </div>
+  }
+</app-model-view>
+
+<app-model-view [show]="showDelete" (close)="closeModel('delete')">
+  <div class="flex justify-center items-center flex-col">
+    <lucide-angular
+      [img]="warning"
+      class="text-red-500"
+      size="50"
+    ></lucide-angular>
+    <h2>Are you sure want to delete?</h2>
+    <button
+      (click)="onAuctionDelete()"
+      class="btn-primary bg-red-500 hover:bg-red-600 mt-7"
+    >
+      Confirm
+    </button>
+  </div>
+
+  <br />
+</app-model-view>
+
+<app-model-view [show]="showBidModel" (close)="closeModel('bids')">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Bidding Id</th>
+        <th>Bid Time</th>
+        <th>Amount</th>
+        <th>User id</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (bids of bidsForAuction; track $index) {
+      <tr>
+        <td>{{ bids.id }}</td>
+        <td>{{ bids.bidTime | date: "short"}}</td>
+        <td>{{ bids.amount }}</td>
+        <td>{{ bids.userId }}</td>
+        <td>
+          <button
+            class="btn-primary bg-red-500 hover:bg-red-600"
+            (click)="onDeleteBids(bids.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      } @if(bidsForAuction.length===0){
+      <tr>
+        <td colspan="4" class="text-center">No bids available</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</app-model-view>

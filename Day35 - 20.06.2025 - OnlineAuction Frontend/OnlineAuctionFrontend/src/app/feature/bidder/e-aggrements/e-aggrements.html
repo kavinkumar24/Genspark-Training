@@ -1,0 +1,40 @@
+<div class="mt-4">
+  <h1>Your E-Agreements</h1>
+</div>
+<div class="table-container mt-4">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Auction Item Id</th>
+        <th>Bidding Id</th>
+        <th>Bid Time</th>
+        <th>E-Agreement</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (e of paginatedEAgreementData; track $index) {
+      <tr>
+        <td>{{e.auctionItemId}}</td>
+
+        <td>{{e.biddingId}}</td>
+
+        <td>{{e.createdAt | date:'medium'}}</td>
+
+        <td>
+          <button
+            class="flex justify-center items-center"
+            (click)="getEAgreement(e.id)"
+          >
+            <lucide-angular [img]="fileView" class="my-icon"></lucide-angular>
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<app-pagination
+  [page]="page"
+  [totalPages]="totalPages"
+  (pageChange)="goToPage($event)"
+></app-pagination>

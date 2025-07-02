@@ -1,0 +1,144 @@
+<div class="p-6 dark:bg-gray-900 min-h-screen">
+  <h1
+    class="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100 flex items-center gap-2"
+  >
+    <lucide-angular [img]="gavel" class="w-7 h-7"></lucide-angular>
+    Live Auctions
+  </h1>
+
+  <input
+    type="text"
+    [(ngModel)]="searchString"
+    (input)="onSearchProducts()"
+    placeholder="Search by name"
+    class="form-input mb-10"
+  />
+
+  @if (liveAuctions.length === 0) {
+  <div class="flex flex-col items-center justify-center py-12">
+    <lucide-angular
+      [img]="ban"
+      class="w-10 h-10 text-gray-400 dark:text-gray-600 mb-2"
+    ></lucide-angular>
+    <p class="text-lg text-gray-500 dark:text-gray-400">
+      No live auctions available
+    </p>
+  </div>
+  } @if(liveAuctions.length>0){
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    @for (auction of liveAuctions; track $index) {
+    <div
+      class="border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-lg bg-white dark:bg-gray-800 transition"
+    >
+      <div class="flex items-center gap-3 mb-2">
+        <lucide-angular [img]="package" class="w-6 h-6"></lucide-angular>
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
+          {{ auction.name }}
+        </h3>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-2">
+        <span
+          class="inline-flex items-center px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded text-xs font-medium"
+        >
+          <lucide-angular
+            [img]="hash"
+            class="w-4 h-4 mr-1 text-indigo-700"
+          ></lucide-angular>
+          {{ auction.id }}
+        </span>
+        <span
+          class="inline-flex items-center px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded text-xs font-medium"
+        >
+          <lucide-angular
+            [img]="clock"
+            class="w-4 h-4 mr-1 text-green-700"
+          ></lucide-angular>
+
+          Ends: {{ auction.endTime | date:'short' }}
+        </span>
+      </div>
+      <p class="text-gray-600 dark:text-gray-300 mb-3">
+        {{ auction.description }}
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span
+          class="inline-flex items-center px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 rounded text-xs font-medium"
+        >
+          <lucide-angular
+            [img]="clock"
+            class="w-4 h-4 mr-1 text-yellow-800"
+          ></lucide-angular>
+
+          Start: {{ auction.startingPrice | currency:'INR' }}
+        </span>
+        <span
+          class="inline-flex items-center px-2 py-1 bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-300 rounded text-xs font-medium"
+        >
+          <lucide-angular
+            [img]="tag"
+            class="w-4 h-4 mr-1 text-pink-700"
+          ></lucide-angular>
+
+          Reserve: {{ auction.reservePrice | currency:'INR' }}
+        </span>
+      </div>
+      <button
+        class="btn-primary w-full flex items-center justify-center"
+        (click)="openBidModel(auction.id)"
+      >
+        <lucide-angular
+          [img]="shield"
+          class="w-4 h-4 mr-1 text-white"
+        ></lucide-angular>
+
+        Place Bid
+      </button>
+    </div>
+    }
+  </div>
+  }
+
+  <app-model-view [show]="showModel" (close)="closeModel()">
+    <div class="dark:bg-gray-800 rounded-lg p-6 w-96 relative m-0">
+      <h3
+        class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100 flex items-center gap-2"
+      >
+        <lucide-angular [img]="handcoins" class="w-5 h-5"></lucide-angular>
+
+        Place a bid
+      </h3>
+      <p class="mb-3 text-gray-700 dark:text-gray-300 flex items-center gap-2">
+        <lucide-angular
+          [img]="trophy"
+          class="w-4 h-4 text-yellow-500"
+        ></lucide-angular>
+        Highest Bid: @if(highestBid){
+        <span class="font-bold">{{highestBid | currency: 'INR'}}</span>
+        } @else {
+        <span class="italic text-gray-400">No bids yet</span>
+        }
+      </p>
+      <label class="block mb-2 text-sm text-gray-600 dark:text-gray-300"
+        >Your Bid</label
+      >
+      <input
+        type="number"
+        [(ngModel)]="bidAmount"
+        class="form-input w-full mb-4 px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        placeholder="Enter bid amount"
+      />
+
+      <div class="flex justify-end gap-2">
+        <button
+          class="btn-primary bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+          (click)="closeModel()"
+        >
+          Cancel
+        </button>
+        <button class="btn-primary" (click)="submitBid()">Place Bid</button>
+      </div>
+    </div>
+  </app-model-view>
+
+  <app-spinner [loading]="isLoading"></app-spinner>
+</div>

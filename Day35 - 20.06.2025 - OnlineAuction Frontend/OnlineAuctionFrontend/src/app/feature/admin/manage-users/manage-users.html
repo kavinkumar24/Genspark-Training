@@ -1,0 +1,91 @@
+
+
+<div class="flex justify-between mt-5">
+<h1>Available Users</h1>
+<a class="btn-primary" routerLink="/register">Create New User</a>
+</div>
+<div class="table-container mt-5">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (user of paginatedData; track $index) {
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>
+        {{ user.email }}
+      </td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.createdAt | date: 'short' }}</td>
+        <td>{{ user.updatedAt| date:'short' }}</td>
+        <td>
+            <button class="btn-primary" (click)="onOpenModel(user, 'edit')">
+                <lucide-angular [img]="edit" class="text-white text-sm" size="20"></lucide-angular>
+            </button>
+        </td>
+    
+
+       <td>
+      <button class="btn-primary bg-red-400 hover:bg-red-500" (click)="onOpenModel(user, 'warn')">
+        <lucide-angular [img]="delete" class="text-white" size="20"></lucide-angular>
+      </button>
+    </td>
+      </tr> 
+    }
+    
+    @if(!usersData){
+        <tr>
+        <td class="text-center py-4" colspan="7">No data available</td>
+        </tr>
+    }
+    </tbody>
+  </table>
+</div>
+
+<app-pagination [page]="page" [totalPages]="totalPages" (pageChange)="goToPage($event)"></app-pagination>
+
+<app-model-view [show]="showEditModal" (close)="onCloseModel('edit')">
+<label class="form-label">UserName</label>
+<input type="text" class="form-input" [(ngModel)]="editValues.userName" />
+
+<label class="form-label">Email</label>
+<input type="email" class="form-input" [(ngModel)]="editValues.email" />
+
+<label class="form-label">Role</label>
+<select class="form-input" [(ngModel)]="editValues.role">
+    <option value="Seller">Seller</option>
+    <option value="Bidder">Bidder</option>
+    <option value="Admin">Admin</option>
+</select>
+
+<button class="btn-primary mt-4 w-full" (click)="onSaveChanges()">
+    Save Changes
+</button>
+</app-model-view>
+
+<app-model-view [show]="showWarningModel" (close)="onCloseModel('warn')">
+  <div class="flex flex-col items-center justify-center">
+  <lucide-angular [img]="warn" class="text-red-500 my-icon" size="64"></lucide-angular>
+  <div class ="flex justify-between flex-col gap-4 items-center mt-4">
+  <h2 class="font-bold">Are you sure, to delete this user</h2>
+  <p class="text-md font-light">Please enusure the reason for deleting</p>
+
+  <textarea class="form-input" placeholder="ensure the reason for deletion" [(ngModel)]="reason"></textarea>
+
+  <button class="btn-primary bg-red-500 hover:bg-red-600" (click)="onDeletUser()" [disabled]="!reason">
+    Confirm
+  </button>
+  </div>
+  </div>
+</app-model-view>
+
+<app-spinner [loading]="isLoading"></app-spinner>

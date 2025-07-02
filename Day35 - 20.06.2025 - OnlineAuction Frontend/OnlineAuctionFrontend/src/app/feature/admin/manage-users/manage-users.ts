@@ -1,0 +1,145 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../../core/models/User';
+import { UserService } from '../../../core/services/user.service';
+import { CommonModule } from '@angular/common';
+import {
+  DeleteIcon,
+  EditIcon,
+  LucideAngularModule,
+  Trash,
+  TriangleAlert,
+} from 'lucide-angular';
+import { ModelView } from '../../../shared/components/model-view/model-view';
+import { SnackbarService } from '../../../core/services/snackbar.service';
+import { FormsModule } from '@angular/forms';
+import { paginate } from '../../../shared/utils/pagination-utils';
+import { RouterLink } from '@angular/router';
+import { Spinner } from '../../../shared/components/spinner/spinner';
+import { Pagination } from '../../../shared/components/pagination/pagination';
+
+@Component({
+  selector: 'app-manage-users',
+  imports: [
+    CommonModule,
+    LucideAngularModule,
+    ModelView,
+    FormsModule,
+    RouterLink,
+    Spinner,
+    Pagination,
+  ],
+  templateUrl: './manage-users.html',
+})
+export class ManageUsers implements OnInit {
+  readonly edit = EditIcon;
+  readonly delete = Trash;
+  readonly warn = TriangleAlert;
+  usersData!: User[];
+  paginatedData!: User[];
+  showWarningModel = false;
+  showEditModal = false;
+  userId = '';
+  editValues = {
+    userName: '',
+    email: '',
+    role: '',
+  };
+  reason = '';
+  isLoading = false;
+
+  constructor(
+    private userService: UserService,
+    private snackBar: SnackbarService
+  ) {}
+
+  page = 1;
+  pageSize = 10;
+  totalPages = 0;
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  updatePaginationData() {
+    const result = paginate(this.usersData, this.page, this.pageSize);
+    this.paginatedData = result.data;
+    this.totalPages = result.totalPages;
+  }
+
+  loadUsers() {
+    this.userService.getAllUsers().subscribe({
+      next: (res) => {
+        this.usersData = res?.$values || [];
+        this.updatePaginationData();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.updatePaginationData();
+  }
+
+  onOpenModel(user: any, type: string) {
+    if (type === 'edit') {
+      this.showEditModal = true;
+      this.editValues.userName = user.username;
+      this.editValues.email = user.email;
+      this.editValues.role = user.role;
+      this.userId = user.id;
+    } else if (type === 'warn') {
+      this.userId = user.id;
+      this.showWarningModel = true;
+    }
+  }
+
+  onCloseModel(type: string) {
+    if (type === 'edit') {
+      this.showEditModal = false;
+    } else if (type === 'warn') {
+      this.showWarningModel = false;
+    }
+  }
+
+  onSaveChanges() {
+    this.isLoading = true;
+    this.userService.updateUser(this.editValues, this.userId).subscribe({
+      next: () => {
+        setTimeout(() => {
+          this.snackBar.showSuccess('User updated successfully');
+          this.onCloseModel('edit');
+          this.isLoading = false;
+          this.loadUsers();
+        }, 2000);
+      },
+      error: (err) => {
+        this.snackBar.showError('Failed to update the user');
+        this.isLoading = false;
+      },
+    });
+  }
+
+  onDeletUser() {
+    const payload: any = {
+      userId: this.userId,
+      reason: this.reason,
+    };
+    this.isLoading = true;
+    this.userService.deleteUser(payload).subscribe({
+      next: (res) => {
+        setTimeout(() => {
+          this.snackBar.showSuccess(res.message);
+          this.onCloseModel('warn');
+          this.isLoading = false;
+        }, 1000);
+      },
+      error: (err) => {
+        this.snackBar.showError(`${err.message}`);
+        this.isLoading = false;
+      },
+    });
+  }
+}
