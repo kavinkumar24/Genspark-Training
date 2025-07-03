@@ -61,7 +61,7 @@ describe('VirtualWallet', () => {
       throwError(() => new Error('fail'))
     );
     component.getUserWallet();
-    expect(component.message).toBe('Failed to load wallt');
+    expect(component.message).toBe('Failed to load wallet');
     expect(component.isLoading).toBeFalse();
   });
 

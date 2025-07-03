@@ -14,10 +14,11 @@ import { Spinner } from '../../../shared/components/spinner/spinner';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { loadTheme } from '../../../shared/utils/theme-utils';
 import { LoginRequest } from '../../../core/models/LoginRequest';
+import { TogglePassword } from "../../../shared/components/toggle-password/toggle-password";
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, LucideAngularModule, Spinner, RouterLink],
+  imports: [ReactiveFormsModule, LucideAngularModule, Spinner, RouterLink, TogglePassword],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

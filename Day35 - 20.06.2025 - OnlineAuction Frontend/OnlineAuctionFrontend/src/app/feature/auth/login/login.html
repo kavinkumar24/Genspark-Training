@@ -36,12 +36,19 @@
         </div>
         <br />
         <label class="form-label"> Password </label>
-        <input
-          class="form-input"
-          formControlName="password"
-          type="password"
-          placeholder="please enter valid password"
-        />
+        <div class="relative">
+          <input
+            #passwordInput
+            class="form-input"
+            formControlName="password"
+            type="password"
+            placeholder="please enter valid password"
+          />
+          <app-toggle-password
+            [targetElement]="passwordInput"
+            class="absolute -translate-x-10 mt-3"
+          ></app-toggle-password>
+        </div>
         <div class="error-msg">
           @if(password?.touched && password?.invalid){
           <p>Password is required</p>
@@ -65,12 +72,15 @@
             class="my-icon ml-2 text-white"
           ></lucide-angular>
         </button>
-        <!-- 
-       <div class="text-center mt-3">
-        <a class="text-[#4eadcd] hover:text-[#3489a8] hover:underline hover:cursor-pointer" routerLink="/register">
-          Don't have an account? Click here
-        </a>
-      </div> -->
+
+        <div class="text-center mt-3">
+          <a
+            class="text-[#4eadcd] hover:text-[#3489a8] hover:underline hover:cursor-pointer"
+            routerLink="/register"
+          >
+            Don't have an account? Click here
+          </a>
+        </div>
         <app-spinner [loading]="isLoading"></app-spinner>
       </form>
     </div>

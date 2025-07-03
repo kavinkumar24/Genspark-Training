@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../env/environment';
 import { AddUser } from '../models/AddUser';
 import { ChangePasswordModel } from '../models/ChangePassword';
@@ -8,6 +8,7 @@ import { User } from '../models/User';
 import { ErrorHandlerService } from './errorhandler.service';
 import { LoginRequest } from '../models/LoginRequest';
 import { ForgetPasswordRequest } from '../models/ForgetPassword';
+import { SearchUser } from '../models/SearchUser';
 
 @Injectable()
 export class UserService {
@@ -70,4 +71,26 @@ export class UserService {
       .get<any>(`${this.baseUrl}/${userId}`)
       .pipe(catchError(this.errorHandler.handleError));
   }
+
+getSearchUsers(searchQuery: any): Observable<any> {
+  let params: any = {};
+  if (searchQuery.SearchTerm) {
+    params.SearchTerm = searchQuery.SearchTerm;
+  }
+  if (searchQuery.SortBy) {
+    params.SortBy = searchQuery.SortBy;
+  }
+  return this.http
+    .get<any>(`${this.baseUrl}/search`, { params })
+    .pipe(
+      catchError((error) => {
+        if (error.status === 404) {
+          return of({ success: true, message: 'No users found', data: [] });
+        }
+        return this.errorHandler.handleError(error);
+      })
+    );
 }
+}
+
+

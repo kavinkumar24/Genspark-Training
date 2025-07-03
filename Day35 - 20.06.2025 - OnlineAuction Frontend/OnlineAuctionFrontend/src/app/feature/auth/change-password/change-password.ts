@@ -15,16 +15,18 @@ import { ChangePasswordModel } from '../../../core/models/ChangePassword';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { loadTheme } from '../../../shared/utils/theme-utils';
 import { Router } from '@angular/router';
+import { TogglePassword } from "../../../shared/components/toggle-password/toggle-password";
 
 @Component({
   selector: 'app-change-password',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TogglePassword],
   templateUrl: './change-password.html',
 })
 export class ChangePassword implements OnInit {
   changePasssword!: FormGroup;
   userId: string | null = null;
   role: string | null = null;
+passwordInput: any;
 
   constructor(
     private router: Router,

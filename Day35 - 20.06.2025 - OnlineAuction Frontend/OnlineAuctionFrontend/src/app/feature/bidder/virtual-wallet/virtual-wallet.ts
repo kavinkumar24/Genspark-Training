@@ -4,6 +4,7 @@ import { Spinner } from '../../../shared/components/spinner/spinner';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ModelView } from '../../../shared/components/model-view/model-view';
+import { SnackbarService } from '../../../core/services/snackbar.service';
 
 @Component({
   selector: 'app-virtual-wallet',
@@ -17,8 +18,12 @@ export class VirtualWallet implements OnInit {
   message = '';
   isLoading = false;
   showHistoryModal = false;
+  newWalletBalance: number = 0;
 
-  constructor(private walletService: WalletService) {}
+  constructor(
+    private walletService: WalletService,
+    private snackbar: SnackbarService
+  ) {}
 
   ngOnInit(): void {
     this.getUserWallet();
@@ -32,7 +37,7 @@ export class VirtualWallet implements OnInit {
         this.isLoading = false;
       },
       error: () => {
-        this.message = 'Failed to load wallt';
+        this.message = 'Failed to load wallet';
         this.isLoading = false;
       },
     });
@@ -69,5 +74,24 @@ export class VirtualWallet implements OnInit {
         console.log(this.virtualWalletHistory);
       },
     });
+  }
+
+  AddWallet() {
+    if (this.newWalletBalance >= 0) {
+      this.isLoading = true;
+      this.walletService.AddVirtualWallet(this.newWalletBalance).subscribe({
+        next: () => {
+          setTimeout(() => {
+            this.isLoading = false;
+            this.snackbar.showSuccess('Virtual wallet created!!');
+            this.getUserWallet();
+          }, 2000);
+        },
+        error: () => {
+          this.isLoading = false;
+          this.snackbar.showError(`Failed to create`);
+        },
+      });
+    }
   }
 }

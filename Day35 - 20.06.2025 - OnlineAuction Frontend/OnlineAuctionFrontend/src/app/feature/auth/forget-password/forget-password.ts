@@ -14,10 +14,11 @@ import {
 import { LoginRequest } from '../../../core/models/LoginRequest';
 import { ForgetPasswordRequest } from '../../../core/models/ForgetPassword';
 import { Router } from '@angular/router';
+import { TogglePassword } from "../../../shared/components/toggle-password/toggle-password";
 
 @Component({
   selector: 'app-forget-password',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TogglePassword],
   templateUrl: './forget-password.html',
 })
 export class ForgetPassword {

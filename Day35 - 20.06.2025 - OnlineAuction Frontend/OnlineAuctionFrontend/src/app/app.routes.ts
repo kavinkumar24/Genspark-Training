@@ -26,10 +26,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: Register,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['Admin'],
-    },
+    // canActivate: [AuthGuard],
+    // data: {
+    //   roles: ['Admin'],
+    // },
   },
   {
     path: 'change-password',

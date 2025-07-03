@@ -44,11 +44,17 @@
 
         <label class="form-label">Password</label>
         <input
+          #passwordInput
           type="password"
           formControlName="password"
           placeholder="Please enter the password"
           class="form-input"
         />
+        <app-toggle-password
+          [targetElement]="passwordInput"
+          class="absolute -translate-x-10 mt-3"
+        ></app-toggle-password>
+
         @if (userForm.get('password')?.touched &&
         userForm.get('password')?.invalid) {
         <div class="error-msg">
@@ -64,11 +70,16 @@
 
         <label class="form-label">Confirm Password</label>
         <input
+          #confirmPasswordInput
           type="password"
           formControlName="confirmPassword"
           placeholder="Please confirm the password"
           class="form-input"
         />
+        <app-toggle-password
+          [targetElement]="confirmPasswordInput"
+          class="absolute -translate-x-10 mt-3"
+        ></app-toggle-password>
         @if (userForm.get('confirmPassword')?.touched &&
         userForm.get('confirmPassword')?.invalid) {
         <div class="error-msg">
@@ -106,11 +117,14 @@
           Add User
         </button>
 
-        <!-- <div class="text-center mt-3">
-        <a class="text-[#4eadcd] hover:text-[#3489a8] hover:underline hover:cursor-pointer" routerLink="/login">
-          Already have an account?
-        </a>
-      </div> -->
+        <div class="text-center mt-3">
+          <a
+            class="text-[#4eadcd] hover:text-[#3489a8] hover:underline hover:cursor-pointer"
+            routerLink="/login"
+          >
+            Already have an account?
+          </a>
+        </div>
       </form>
     </div>
   </div>

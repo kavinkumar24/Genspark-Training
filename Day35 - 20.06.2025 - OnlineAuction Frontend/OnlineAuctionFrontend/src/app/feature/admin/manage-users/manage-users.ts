@@ -16,6 +16,7 @@ import { paginate } from '../../../shared/utils/pagination-utils';
 import { RouterLink } from '@angular/router';
 import { Spinner } from '../../../shared/components/spinner/spinner';
 import { Pagination } from '../../../shared/components/pagination/pagination';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-manage-users',
@@ -46,6 +47,10 @@ export class ManageUsers implements OnInit {
   };
   reason = '';
   isLoading = false;
+  searchTerm: string = '';
+  searchSubject: Subject<{ searchTerm: string; sortBy: string }> =
+    new Subject();
+  selectedSortByTerm: string = '';
 
   constructor(
     private userService: UserService,
@@ -58,6 +63,34 @@ export class ManageUsers implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+    this.searchSubject
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(
+          (prev, curr) =>
+            prev.searchTerm === curr.searchTerm && prev.sortBy === curr.sortBy
+        )
+      )
+      .subscribe(({ searchTerm, sortBy }) => {
+        if (searchTerm.trim() !== '' || sortBy) {
+          this.userService
+            .getSearchUsers({
+              SearchTerm: searchTerm,
+              SortBy: sortBy,
+            })
+            .subscribe({
+              next: (res) => {
+                this.usersData = res?.data?.$values || [];
+                this.updatePaginationData();
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            });
+        } else {
+          this.loadUsers();
+        }
+      });
   }
 
   updatePaginationData() {
@@ -66,10 +99,18 @@ export class ManageUsers implements OnInit {
     this.totalPages = result.totalPages;
   }
 
+  onSearch() {
+    this.searchSubject.next({
+      searchTerm: this.searchTerm,
+      sortBy: this.selectedSortByTerm,
+    });
+  }
+
   loadUsers() {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.usersData = res?.$values || [];
+
         this.updatePaginationData();
       },
       error: (err) => {

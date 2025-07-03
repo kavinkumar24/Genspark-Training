@@ -12,6 +12,17 @@ import { UserService } from '../../../core/services/user.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { of, throwError } from 'rxjs';
 import { AddUser } from '../../../core/models/AddUser';
+import { ActivatedRoute, provideRouter } from '@angular/router';
+import { Login } from '../login/login';
+
+const mockActivatedRoute = {
+  snapshot: {
+    params: { id: '1' },
+    paramMap: {
+      get: (key: string) => (key === 'id' ? '1' : null),
+    },
+  },
+};
 
 @Component({
   standalone: true,
@@ -43,6 +54,11 @@ describe('Register (HostComponent model)', () => {
         FormBuilder,
         { provide: UserService, useValue: userServiceSpy },
         { provide: SnackbarService, useValue: snackbarSpy },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        provideRouter([
+          { path: 'login', component: Login },
+        ]),
+
       ],
     }).compileComponents();
   }));

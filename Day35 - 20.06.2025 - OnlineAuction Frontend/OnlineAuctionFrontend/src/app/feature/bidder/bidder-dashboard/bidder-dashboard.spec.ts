@@ -5,6 +5,7 @@ import { BiddingService } from '../../../core/services/bidding.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { of, throwError } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
+import { WalletService } from '../../../core/services/wallet.service';
 
 describe('BidderDashboard', () => {
   let component: BidderDashboard;
@@ -14,6 +15,7 @@ describe('BidderDashboard', () => {
   let biddingServiceSpy: jasmine.SpyObj<BiddingService>;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let userServiceSpy: jasmine.SpyObj<UserService>;
+  let walletServiceSpy: jasmine.SpyObj<WalletService>;
 
   const mockAuctions = {
     data: {
@@ -43,6 +45,8 @@ describe('BidderDashboard', () => {
     authServiceSpy = jasmine.createSpyObj('AuthService', ['getEmailFromToken']);
     userServiceSpy = jasmine.createSpyObj('UserService', ['getCurrentUser']);
 
+    walletServiceSpy = jasmine.createSpyObj('WalletService',['getWallet']);
+
     TestBed.configureTestingModule({
       imports: [BidderDashboard],
       providers: [
@@ -50,6 +54,7 @@ describe('BidderDashboard', () => {
         { provide: BiddingService, useValue: biddingServiceSpy },
         { provide: AuthService, useValue: authServiceSpy },
         { provide: UserService, useValue: userServiceSpy },
+        { provide: WalletService, useValue: walletServiceSpy }
       ],
     }).compileComponents();
   }));
@@ -57,6 +62,7 @@ describe('BidderDashboard', () => {
   beforeEach(() => {
     auctionServiceSpy.getAllAuctions.and.returnValue(of(mockAuctions));
     biddingServiceSpy.getBidItemByBidder.and.returnValue(of(mockBiddingItems));
+    walletServiceSpy.getWallet.and.returnValue(of({ balance: 100 }));
     fixture = TestBed.createComponent(BidderDashboard);
     component = fixture.componentInstance;
   });
