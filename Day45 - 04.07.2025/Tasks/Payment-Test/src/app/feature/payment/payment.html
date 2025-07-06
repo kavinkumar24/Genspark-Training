@@ -1,0 +1,82 @@
+<div>
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" type="text" required />
+
+      @if (paymentForm.get('name')?.touched && paymentForm.get('name')?.invalid)
+      {
+      <div class="error">
+        @if (paymentForm.get('name')?.errors?.['required']) {
+        <span>Name is required.</span>
+        } @if (paymentForm.get('name')?.errors?.['minlength']) {
+        <span>Name must be at least 3 characters.</span>
+        }
+
+      </div>
+      }
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" required />
+
+      @if (paymentForm.get('email')?.touched &&
+      paymentForm.get('email')?.invalid) {
+      <div class="error">
+        @if (paymentForm.get('email')?.errors?.['required']) {
+        <span>Email is required.</span>
+        } @if (paymentForm.get('email')?.errors?.['email']) {
+        <span>Enter a valid email.</span>
+        }
+
+      </div>
+      }
+    </div>
+    <div>
+      <label for="contactNumber">Phone:</label>
+      <input
+        id="contactNumber"
+        formControlName="contactNumber"
+        type="tel"
+        required
+      />
+
+      @if (paymentForm.get('contactNumber')?.touched &&
+      paymentForm.get('contactNumber')?.invalid) {
+      <div class="error">
+        @if (paymentForm.get('contactNumber')?.errors?.['required']) {
+        <span>Phone number is required.</span>
+        } @if (paymentForm.get('contactNumber')?.errors?.['pattern']) {
+        <span>Enter a valid 10-digit phone number.</span>
+        }
+
+      </div>
+      }
+    </div>
+    <div>
+      <label for="amount">Amount (INR):</label>
+      <input id="amount" formControlName="amount" type="number" required />
+
+      @if (paymentForm.get('amount')?.touched &&
+      paymentForm.get('amount')?.invalid) {
+      <div class="error">
+        @if (paymentForm.get('amount')?.errors?.['required']) {
+        <span>Amount is required.</span>
+        } @if (paymentForm.get('amount')?.errors?.['min']) {
+        <span>Amount must be at least 1.</span>
+        }
+
+      </div>
+      }
+    </div>
+
+    <button type="submit">Pay</button>
+  </form>
+
+  @if (paymentStatus) {
+  <div class="status">{{ paymentStatus }}</div>
+  } @if(loading) {
+  <div class="loading">Processing payment...</div>
+  }
+  
+</div>
