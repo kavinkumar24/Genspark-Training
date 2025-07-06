@@ -1,7 +1,7 @@
 # Create a react app
 - npx create-react-app my-app
 
-> create a cokder file and .dockerignore file
+> create a docker file and .dockerignore file
 
 - docker build -t react-app .
 
