@@ -1,3 +1,4 @@
+git add --all
 FROM node:22-alpine AS build
 
 WORKDIR /usr/src/app
