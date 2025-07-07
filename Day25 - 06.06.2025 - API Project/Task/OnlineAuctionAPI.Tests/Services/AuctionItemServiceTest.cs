@@ -40,6 +40,8 @@ namespace OnlineAuctionAPI.Tests.Services
         [SetUp]
         public void Setup()
         {
+            QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
             _mockUserService = new Mock<IUserService>();
 
             var options = new DbContextOptionsBuilder<AuctionContext>()

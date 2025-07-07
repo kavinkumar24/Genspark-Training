@@ -20,6 +20,8 @@ namespace OnlineAuctionAPI.Tests
         [SetUp]
         public void Setup()
         {
+            QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community; // <-- Add this line
+
             var options = new DbContextOptionsBuilder<AuctionContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
@@ -212,7 +214,10 @@ namespace OnlineAuctionAPI.Tests
                 WinningId = Guid.NewGuid(),
             };
 
-            Assert.ThrowsAsync<NotFoundException>(() => _repo.UpdateWinningId(dto));
+            var ex = Assert.ThrowsAsync<RepositoryOperationException>(() =>
+                _repo.UpdateWinningId(dto)
+            );
+            Assert.IsInstanceOf<NotFoundException>(ex.InnerException);
         }
 
         [Test]
@@ -235,7 +240,10 @@ namespace OnlineAuctionAPI.Tests
 
             var dto = new WinningIdUpdateDto { AuctionItemId = auctionId, WinningId = wrongWinner };
 
-            Assert.ThrowsAsync<NotFoundException>(() => _repo.UpdateWinningId(dto));
+            var ex = Assert.ThrowsAsync<RepositoryOperationException>(() =>
+                _repo.UpdateWinningId(dto)
+            );
+            Assert.IsInstanceOf<NotFoundException>(ex.InnerException);
         }
     }
 }
