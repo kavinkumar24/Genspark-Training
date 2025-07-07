@@ -14,6 +14,8 @@ import { BiddingService } from './core/services/bidding.service';
 import { WalletService } from './core/services/wallet.service';
 import { EAgreementService } from './core/services/e-agreement.service';
 import { ErrorHandlerService } from './core/services/errorhandler.service';
+import { AuctionDeleteService } from './core/services/auctionDelete.service';
+import { UserAccountService } from './core/services/userAccount.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,6 +32,8 @@ export const appConfig: ApplicationConfig = {
     BiddingService,
     WalletService,
     EAgreementService,
-    ErrorHandlerService
+    ErrorHandlerService,
+    AuctionDeleteService,
+    UserAccountService
   ]
 };

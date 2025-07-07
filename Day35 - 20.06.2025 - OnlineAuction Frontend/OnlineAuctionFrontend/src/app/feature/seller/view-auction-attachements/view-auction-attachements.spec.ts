@@ -79,14 +79,6 @@ describe('ViewAuctionAttachements', () => {
     expect(auctionServiceSpy.getfile).toHaveBeenCalledWith('123', 'file1.pdf');
   });
 
-  it('should open image in new tab', () => {
-    spyOn(window, 'open');
-    component.viewInTab('http://test.com/image.png');
-    expect(window.open).toHaveBeenCalledWith(
-      'http://test.com/image.png',
-      '_blank'
-    );
-  });
 
   it('should view file in new tab', () => {
     const blob = new Blob(['test'], { type: 'application/pdf' });

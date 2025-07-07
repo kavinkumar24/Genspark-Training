@@ -6,14 +6,65 @@
     Live Auctions
   </h1>
 
-  <input
-    type="text"
-    [(ngModel)]="searchString"
-    (input)="onSearchProducts()"
-    placeholder="Search by name"
-    class="form-input mb-10"
-  />
+  <div class="flex flex-col md:flex-row gap-4 mb-8 items-end">
+    <div class="flex flex-col w-full md:w-1/3">
+      <label
+        class="mb-1 text-sm font-medium text-gray-700 dark:text-gray-200"
+        for="searchInput"
+      >
+        Search by name
+      </label>
+      <input
+        id="searchInput"
+        type="text"
+        [(ngModel)]="searchString"
+        (input)="onSearchProducts()"
+        placeholder="Search by name"
+        class="form-input px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      />
+    </div>
 
+    <div class="flex flex-col w-full md:w-1/3">
+      <label
+        class="mb-1 text-sm font-medium text-gray-700 dark:text-gray-200"
+        for="endDate"
+      >
+        Ending Date (on or before)
+      </label>
+      <input
+        type="date"
+        id="endDate"
+        [(ngModel)]="selectedEndDate"
+        (change)="fetchLiveAuctions()"
+        class="form-input px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      />
+    </div>
+
+    <div class="flex flex-col w-full md:w-1/3">
+      <label
+        class="mb-1 text-sm font-medium text-gray-700 dark:text-gray-200"
+        for="startPriceSlider"
+      >
+        Min Start Price: <span class="font-semibold">{{ minStartPrice }}</span>
+      </label>
+      <div
+        class="flex items-center gap-2 bg-white dark:bg-gray-700 p-2 rounded-md mb-1"
+      >
+        <input
+          type="range"
+          id="startPriceSlider"
+          [min]="startPriceRange.min"
+          [max]="startPriceRange.max"
+          [(ngModel)]="minStartPrice"
+          (input)="onSliderChange()"
+          class="w-full accent-[#0091c1]"
+        />
+        <span class="ml-2 text-gray-700 dark:text-gray-200"
+          >{{ minStartPrice }}</span
+        >
+      </div>
+    </div>
+  </div>
   @if (liveAuctions.length === 0) {
   <div class="flex flex-col items-center justify-center py-12">
     <lucide-angular
@@ -36,51 +87,79 @@
           {{ auction.name }}
         </h3>
       </div>
-      <div class="flex flex-wrap gap-2 mb-2">
-        <span
-          class="inline-flex items-center px-2 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded text-xs font-medium"
-        >
-          <lucide-angular
-            [img]="hash"
-            class="w-4 h-4 mr-1 text-indigo-700"
-          ></lucide-angular>
-          {{ auction.id }}
-        </span>
-        <span
-          class="inline-flex items-center px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded text-xs font-medium"
-        >
-          <lucide-angular
-            [img]="clock"
-            class="w-4 h-4 mr-1 text-green-700"
-          ></lucide-angular>
-
-          Ends: {{ auction.endTime | date:'short' }}
-        </span>
-      </div>
       <p class="text-gray-600 dark:text-gray-300 mb-3">
         {{ auction.description }}
       </p>
       <div class="flex flex-wrap gap-2 mb-4">
         <span
-          class="inline-flex items-center px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 rounded text-xs font-medium"
+          class="inline-flex items-center px-2 py-1 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 rounded text-xs font-medium"
+        >
+          <lucide-angular
+            [img]="hash"
+            class="w-4 h-4 mr-1 text-slate-700 dark:text-slate-300"
+          ></lucide-angular>
+          {{ auction.id }}
+        </span>
+        <span
+          class="bg-lime-100 dark:bg-lime-900 text-lime-700 dark:text-lime-300 label-container"
         >
           <lucide-angular
             [img]="clock"
-            class="w-4 h-4 mr-1 text-yellow-800"
+            class="w-4 h-4 mr-1 text-lime-700 dark:text-lime-300"
           ></lucide-angular>
 
-          Start: {{ auction.startingPrice | currency:'INR' }}
+          Started At: {{ auction.startTime | date:'short' }}
         </span>
         <span
-          class="inline-flex items-center px-2 py-1 bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-300 rounded text-xs font-medium"
+          class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 label-container"
+        >
+          <lucide-angular
+            [img]="clock"
+            class="w-4 h-4 mr-1 text-green-700 dark:text-green-300"
+          ></lucide-angular>
+
+          Ends: {{ auction.endTime | date:'short' }}
+        </span>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span
+          class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 label-container"
+        >
+          <lucide-angular
+            [img]="startprice"
+            class="w-4 h-4 mr-1 text-yellow-800 dark:text-yellow-300"
+          ></lucide-angular>
+
+          Start Price: {{ auction.startingPrice | currency:'INR' }}
+        </span>
+        <span
+          class="bg-pink-100 dark:bg-pink-900 text-pink-700 dark:text-pink-300 label-container"
         >
           <lucide-angular
             [img]="tag"
-            class="w-4 h-4 mr-1 text-pink-700"
+            class="w-4 h-4 mr-1 text-pink-700 dark:text-pink-300"
           ></lucide-angular>
 
-          Reserve: {{ auction.reservePrice | currency:'INR' }}
+          Reserve Price: {{ auction.reservePrice | currency:'INR' }}
         </span>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mb-4">
+        @let auctionFiles = auction.files.$values; @for (auctionFile of
+        auctionFiles; track $index) {
+        <span
+          (click)="viewFile(auction.id, auctionFile.name)"
+          class="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 label-container cursor-pointer hover:scale-95"
+        >
+          <lucide-angular
+            [img]="attachment"
+            class="w-4 h-r mr-1 text-blue-700 dark:text-blue-300"
+          >
+          </lucide-angular>
+          {{auctionFile.name}}
+        </span>
+        }
       </div>
       <button
         class="btn-primary w-full flex items-center justify-center"

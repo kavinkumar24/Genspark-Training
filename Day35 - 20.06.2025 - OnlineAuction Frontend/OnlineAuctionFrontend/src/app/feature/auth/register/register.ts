@@ -12,10 +12,18 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 import { Spinner } from '../../../shared/components/spinner/spinner';
 import { Router, RouterLink } from '@angular/router';
 import { TogglePassword } from '../../../shared/components/toggle-password/toggle-password';
+import { UserAccountService } from '../../../core/services/userAccount.service';
+import { ModelView } from '../../../shared/components/model-view/model-view';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, Spinner, RouterLink, TogglePassword],
+  imports: [
+    ReactiveFormsModule,
+    Spinner,
+    RouterLink,
+    TogglePassword,
+    ModelView,
+  ],
   templateUrl: './register.html',
 })
 export class Register implements OnInit {
@@ -24,10 +32,11 @@ export class Register implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private snackBar: SnackbarService,
-    private router: Router
+    private router: Router,
+    private userAccountService: UserAccountService
   ) {}
   isLoading = false;
-  roles: string[] = ['admin', 'seller', 'root', 'bidder'];
+  showAdminInfoModel = false;
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group(
@@ -48,18 +57,35 @@ export class Register implements OnInit {
     if (this.userForm.valid) {
       const { confirmPassword, ...payload } = this.userForm.value;
       this.isLoading = true;
-      this.userService.registerNewuser(payload).subscribe({
-        next: () => {
-          setTimeout(() => {
-            this.snackBar.showSuccess('New User Created');
+
+      this.userAccountService.getDeleteReasonByEmail(payload.email).subscribe({
+        next: (res) => {
+          if (res?.data) {
             this.isLoading = false;
-            this.userForm.reset();
-            this.router.navigate(['/login']);
-          }, 2000);
+            this.snackBar.showError(
+              'This user was previously deleted. Please contact admin to revoke the deletion.'
+            );
+            this.showAdminInfoModel = true;
+          } else {
+            this.userService.registerNewuser(payload).subscribe({
+              next: () => {
+                setTimeout(() => {
+                  this.snackBar.showSuccess('New User Created');
+                  this.isLoading = false;
+                  this.userForm.reset();
+                  this.router.navigate(['/login']);
+                }, 2000);
+              },
+              error: (err) => {
+                this.isLoading = false;
+                this.snackBar.showError(`Failed to create - ${err.message}`);
+              },
+            });
+          }
         },
         error: (err) => {
           this.isLoading = false;
-          this.snackBar.showError(`Failed to created - ${err.message}`);
+          this.snackBar.showError('Error checking user status.');
         },
       });
     } else {

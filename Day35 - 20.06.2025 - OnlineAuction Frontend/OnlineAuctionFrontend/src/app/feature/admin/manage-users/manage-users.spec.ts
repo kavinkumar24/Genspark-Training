@@ -11,6 +11,7 @@ import { UserService } from '../../../core/services/user.service';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { UserAccountService } from '../../../core/services/userAccount.service';
 
 const mockActivatedRoute = {
   snapshot: {
@@ -35,6 +36,7 @@ describe('ManageUsers', () => {
   let fixture: ComponentFixture<ManageUsers>;
   let userServiceSpy: jasmine.SpyObj<UserService>;
   let snackbarSpy: jasmine.SpyObj<SnackbarService>;
+  let userAccountServiceSpy: jasmine.SpyObj<UserAccountService>;
 
   beforeEach(waitForAsync(() => {
     userServiceSpy = jasmine.createSpyObj('UserService', [
@@ -53,6 +55,11 @@ describe('ManageUsers', () => {
     userServiceSpy.deleteUser.and.returnValue(
       of({ message: 'Deleted successfully' })
     );
+    userAccountServiceSpy = jasmine.createSpyObj('UserAccountService', [
+      'getAllDeletedUsers',
+    ]);
+
+    userAccountServiceSpy.getAllDeletedUsers.and.returnValue(of([]));
 
     TestBed.configureTestingModule({
       imports: [HostComponent],
@@ -60,6 +67,7 @@ describe('ManageUsers', () => {
         { provide: UserService, useValue: userServiceSpy },
         { provide: SnackbarService, useValue: snackbarSpy },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        { provide: UserAccountService, useValue: userAccountServiceSpy },
       ],
     }).compileComponents();
   }));
@@ -133,7 +141,7 @@ describe('ManageUsers', () => {
     userServiceSpy.deleteUser.and.returnValue(
       of({ message: 'Deleted successfully' })
     );
-    component.onDeletUser();
+    component.onDeleteUser(component.reason);
     tick(1100);
     expect(snackbarSpy.showSuccess).toHaveBeenCalledWith(
       'Deleted successfully'
@@ -145,7 +153,7 @@ describe('ManageUsers', () => {
     userServiceSpy.deleteUser.and.returnValue(
       throwError(() => new Error('fail'))
     );
-    component.onDeletUser();
+    component.onDeleteUser(component.reason);
     expect(snackbarSpy.showError).toHaveBeenCalledWith('fail');
     expect(component.isLoading).toBeFalse();
   });

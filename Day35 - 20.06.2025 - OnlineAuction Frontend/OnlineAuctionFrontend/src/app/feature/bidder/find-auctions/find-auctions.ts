@@ -11,6 +11,7 @@ import { Spinner } from '../../../shared/components/spinner/spinner';
 import {
   BanIcon,
   ClockIcon,
+  DiamondPercent,
   Gavel,
   GavelIcon,
   HandCoins,
@@ -18,6 +19,7 @@ import {
   LucideAngularModule,
   Package,
   PackageIcon,
+  Paperclip,
   ShieldIcon,
   TagIcon,
   TrophyIcon,
@@ -40,50 +42,41 @@ export class FindAuctions implements OnInit {
   readonly shield = ShieldIcon;
   readonly handcoins = HandCoins;
   readonly trophy = TrophyIcon;
+  readonly attachment = Paperclip;
+  readonly startprice = DiamondPercent;
 
   liveAuctions: any[] = [];
   isLoading = false;
   showModel = false;
-
+  searchString: string = '';
+  SearchSubject = new Subject<string>();
   selectedAuctionId: string | null = null;
   highestBid: number | null = null;
   bidAmount: number = 0;
-
-  searchString: string = '';
-  searchSubject = new Subject<string>();
+  startPriceRange = { min: 0, max: 10000 };
+  minStartPrice: number = 0;
+  selectedEndDate: string | null = null;
+  
   constructor(
     private auctionService: AuctionService,
     private biddingService: BiddingService,
     private authService: AuthService,
     private snackBar: SnackbarService
   ) {}
-  // private notificationService: NotificationService ){}
 
   ngOnInit(): void {
     this.fetchLiveAuctions();
-    // this.notificationService.auctionStatus$.subscribe(status => {
-    //   this.updateAuction(status);
-    // });
-    this.searchSubject
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((searchTerm) => {
-        this.searchString = searchTerm;
-        this.fetchLiveAuctions();
-      });
+    this.SearchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe((searchTerm) => {
+      this.searchString = searchTerm;
+      this.fetchLiveAuctions();
+    });
   }
 
-  // updateAuction(status: any) {
-  //   const idx = this.liveAuctions.findIndex(a => a.id === status.id);
-  //   if (idx !== -1) {
-  //     this.liveAuctions[idx] = {
-  //       ...this.liveAuctions[idx],
-  //       ...status
-  //     };
-  //   }
-  // }
-
   onSearchProducts() {
-    this.searchSubject.next(this.searchString);
+    this.SearchSubject.next(this.searchString);
   }
 
   fetchLiveAuctions() {
@@ -92,10 +85,27 @@ export class FindAuctions implements OnInit {
       next: (res) => {
         let auctions = res?.data?.$values || [];
         if (this.searchString && this.searchString.trim() !== '') {
-          auctions = auctions.filter((a: any) =>
-            a.name?.toLowerCase().includes(this.searchString.toLowerCase())
+          auctions = auctions.filter(
+            (a: any) =>
+              a.name?.toLowerCase().includes(this.searchString.toLowerCase()) ||
+              a.description
+                ?.toLowerCase()
+                .includes(this.searchString.toLowerCase())
           );
         }
+        auctions = auctions.filter(
+          (a: any) => (a.startingPrice ?? 0) >= this.minStartPrice
+        );
+
+        if (this.selectedEndDate) {
+          const selectedDate = new Date(this.selectedEndDate);
+          selectedDate.setHours(23, 59, 59, 999);
+          auctions = auctions.filter((a: any) => {
+            const auctionEnd = new Date(a.endTime);
+            return auctionEnd <= selectedDate;
+          });
+        }
+
         this.liveAuctions = auctions;
         this.isLoading = false;
       },
@@ -106,6 +116,9 @@ export class FindAuctions implements OnInit {
     });
   }
 
+  onSliderChange() {
+    this.fetchLiveAuctions();
+  }
   openBidModel(auctionid: string) {
     this.selectedAuctionId = auctionid;
     this.bidAmount = 0;
@@ -125,6 +138,13 @@ export class FindAuctions implements OnInit {
 
   closeModel() {
     this.showModel = false;
+  }
+
+  viewFile(auctionId: string, fileName: string) {
+    this.auctionService.getfile(auctionId, fileName).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    });
   }
 
   submitBid() {

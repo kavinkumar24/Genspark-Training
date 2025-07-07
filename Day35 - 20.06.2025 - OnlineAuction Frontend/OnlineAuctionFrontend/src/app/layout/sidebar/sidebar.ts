@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { ModelView } from '../../shared/components/model-view/model-view';
 import { SnackbarService } from '../../core/services/snackbar.service';
 import { Spinner } from '../../shared/components/spinner/spinner';
+import { ConfirmModal } from "../../shared/components/confirm-modal/confirm-modal";
 
 @Component({
   selector: 'app-sidebar',
@@ -33,7 +34,8 @@ import { Spinner } from '../../shared/components/spinner/spinner';
     ModelView,
     Spinner,
     RouterLinkActive,
-  ],
+    ConfirmModal
+],
   templateUrl: './sidebar.html',
 })
 export class SidebarComponent implements OnInit {

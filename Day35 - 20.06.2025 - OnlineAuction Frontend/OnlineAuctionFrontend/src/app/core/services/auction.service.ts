@@ -8,13 +8,16 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { UpdateWinningIdRequest } from '../models/WinningBidUpdate';
 import { environment } from '../../../env/environment';
 import { ErrorHandlerService } from './errorhandler.service';
+import { PaginatedAuction } from '../models/PaginatedAuction';
 
 @Injectable()
 export class AuctionService {
   private baseUrl = `${environment.apiUrl}/AuctionItem`;
 
-  constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {}
-
+  constructor(
+    private http: HttpClient,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
   getAuctionBySeller(): Observable<any> {
     return this.http
@@ -34,29 +37,21 @@ export class AuctionService {
       .pipe(catchError(this.errorHandler.handleError));
   }
 
-  getAuctions(params: {
-    page: number;
-    pageSize: number;
-    startTime?: string;
-    endTime?: string;
-    sortBy?: string;
-    sortDirection?: string;
-    status?: string;
-    sellerId?: string;
-  }): Observable<any> {
+  getAuctions(paginatedParams: PaginatedAuction): Observable<any> {
     let queryParams = new HttpParams()
-      .set('Page', params.page)
-      .set('PageSize', params.pageSize)
-      .set('SortBy', params.sortBy || 'name')
-      .set('SortDirection', params.sortDirection || 'asc');
+      .set('Page', paginatedParams.page)
+      .set('PageSize', paginatedParams.pageSize)
+      .set('SortBy', paginatedParams.sortBy || 'name')
+      .set('SortDirection', paginatedParams.sortDirection || 'asc');
 
-    if (params.status) queryParams = queryParams.set('Status', params.status);
-    if (params.startTime)
-      queryParams = queryParams.set('StartTime', params.startTime);
-    if (params.endTime)
-      queryParams = queryParams.set('EndTime', params.endTime);
-    if (params.sellerId)
-      queryParams = queryParams.set('SellerId', params.sellerId);
+    if (paginatedParams.status)
+      queryParams = queryParams.set('Status', paginatedParams.status);
+    if (paginatedParams.startTime)
+      queryParams = queryParams.set('StartTime', paginatedParams.startTime);
+    if (paginatedParams.endTime)
+      queryParams = queryParams.set('EndTime', paginatedParams.endTime);
+    if (paginatedParams.sellerId)
+      queryParams = queryParams.set('SellerId', paginatedParams.sellerId);
 
     return this.http
       .get(`${this.baseUrl}/PagedData`, {
@@ -105,8 +100,9 @@ export class AuctionService {
       .pipe(catchError(this.errorHandler.handleError));
   }
 
-  deleteAuction(auctionId:string):Observable<any>{
-    return this.http.delete(`${this.baseUrl}/${auctionId}`)
-    .pipe(catchError(this.errorHandler.handleError));
+  deleteAuction(auctionId: string): Observable<any> {
+    return this.http
+      .delete(`${this.baseUrl}/${auctionId}`)
+      .pipe(catchError(this.errorHandler.handleError));
   }
 }

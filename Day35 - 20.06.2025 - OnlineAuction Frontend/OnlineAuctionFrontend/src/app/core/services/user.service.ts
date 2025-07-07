@@ -53,7 +53,7 @@ export class UserService {
 
   deleteUser(payload: any): Observable<any> {
     return this.http
-      .delete(`${this.baseUrl}`, {
+      .delete(`${environment.apiUrl}/UserAccountStatus`, {
         headers: { 'Content-Type': 'application/json' },
         body: payload,
       })
@@ -91,6 +91,6 @@ getSearchUsers(searchQuery: any): Observable<any> {
       })
     );
 }
-}
 
+}
 

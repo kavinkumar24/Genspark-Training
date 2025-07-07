@@ -17,8 +17,8 @@ export class AuctionFilter implements OnInit {
     this.filterForm = this.formBuilder.group({
       startTime: [''],
       endTime: [''],
-      sortBy: ['endTime'],
-      sortDirection: ['asc'],
+      sortBy: ['deleterequest'],
+      sortDirection: ['desc'],
       status: '',
     });
   }

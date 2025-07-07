@@ -17,6 +17,8 @@ import { RouterLink } from '@angular/router';
 import { Spinner } from '../../../shared/components/spinner/spinner';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { ConfirmModal } from '../../../shared/components/confirm-modal/confirm-modal';
+import { UserAccountStatus } from "../user-account-status/user-account-status";
 
 @Component({
   selector: 'app-manage-users',
@@ -28,17 +30,20 @@ import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
     RouterLink,
     Spinner,
     Pagination,
-  ],
+    ConfirmModal,
+    UserAccountStatus
+],
   templateUrl: './manage-users.html',
 })
 export class ManageUsers implements OnInit {
   readonly edit = EditIcon;
   readonly delete = Trash;
   readonly warn = TriangleAlert;
-  usersData!: User[];
-  paginatedData!: User[];
+  usersData: User[] = [];
+  paginatedData: User[] = [];
   showWarningModel = false;
   showEditModal = false;
+  showDeletedUsersModel = false;
   userId = '';
   editValues = {
     userName: '',
@@ -51,6 +56,8 @@ export class ManageUsers implements OnInit {
   searchSubject: Subject<{ searchTerm: string; sortBy: string }> =
     new Subject();
   selectedSortByTerm: string = '';
+  
+  refreshDeletedUsers = 0;
 
   constructor(
     private userService: UserService,
@@ -162,11 +169,10 @@ export class ManageUsers implements OnInit {
       },
     });
   }
-
-  onDeletUser() {
+  onDeleteUser(reason: string) {
     const payload: any = {
       userId: this.userId,
-      reason: this.reason,
+      reason: reason,
     };
     this.isLoading = true;
     this.userService.deleteUser(payload).subscribe({
@@ -175,6 +181,8 @@ export class ManageUsers implements OnInit {
           this.snackBar.showSuccess(res.message);
           this.onCloseModel('warn');
           this.isLoading = false;
+          this.loadUsers();
+          this.refreshDeletedUsers++;
         }, 1000);
       },
       error: (err) => {

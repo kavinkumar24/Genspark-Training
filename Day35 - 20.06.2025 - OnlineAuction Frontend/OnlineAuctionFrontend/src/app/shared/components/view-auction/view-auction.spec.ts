@@ -13,6 +13,7 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
+import { AuctionDeleteService } from '../../../core/services/auctionDelete.service';
 
 describe('ViewAuction', () => {
   let component: ViewAuction;
@@ -24,6 +25,7 @@ describe('ViewAuction', () => {
   let routerSpy: jasmine.SpyObj<Router>;
   let userServiceSpy: jasmine.SpyObj<UserService>;
   let activatedRouteStub: any;
+  let auctionDeleteServiceSpy: jasmine.SpyObj<AuctionDeleteService>;
 
   beforeEach(waitForAsync(() => {
     auctionServiceSpy = jasmine.createSpyObj('AuctionService', [
@@ -36,6 +38,9 @@ describe('ViewAuction', () => {
     bidServiceSpy = jasmine.createSpyObj('BiddingService', [
       'getBidsByAuctionId',
       'deleteBids',
+    ]);
+    auctionDeleteServiceSpy = jasmine.createSpyObj('AuctionDeleteService', [
+      'requestAuctionDelete',
     ]);
     snackBarSpy = jasmine.createSpyObj('SnackbarService', [
       'showSuccess',
@@ -57,6 +62,7 @@ describe('ViewAuction', () => {
         { provide: Router, useValue: routerSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: UserService, useValue: userServiceSpy },
+        { provide: AuctionDeleteService, useValue: auctionDeleteServiceSpy },
 
       ],
     }).compileComponents();

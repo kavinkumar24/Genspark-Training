@@ -4,9 +4,12 @@ import { AuthService } from '../../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  CalendarOff,
+  CalendarOffIcon,
   EyeOffIcon,
   FileIcon,
   LucideAngularModule,
+  TrashIcon,
   TriangleAlert,
 } from 'lucide-angular';
 import { ModelView } from '../model-view/model-view';
@@ -18,6 +21,9 @@ import { Pagination } from '../pagination/pagination';
 import { BiddingService } from '../../../core/services/bidding.service';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/User';
+import { ConfirmModal } from '../confirm-modal/confirm-modal';
+import { AuctionDeleteService } from '../../../core/services/auctionDelete.service';
+import { AuctionDeleteRequest } from '../../../core/models/AuctionDeleteRequest';
 
 @Component({
   selector: 'app-view-auction',
@@ -29,6 +35,7 @@ import { User } from '../../../core/models/User';
     Spinner,
     AuctionFilter,
     Pagination,
+    ConfirmModal,
   ],
   templateUrl: './view-auction.html',
 })
@@ -36,7 +43,10 @@ export class ViewAuction {
   readonly fileAttachment = FileIcon;
   readonly nofileAttachement = EyeOffIcon;
   readonly warning = TriangleAlert;
+  readonly cancel = CalendarOffIcon;
+  readonly trash = TrashIcon;
   showDelete: boolean = false;
+  deleteRequest: any;
   selectedAuctionId: string = '';
   constructor(
     private auctionService: AuctionService,
@@ -45,7 +55,8 @@ export class ViewAuction {
     private router: Router,
     private snackBar: SnackbarService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private auctionDeleteService: AuctionDeleteService
   ) {}
   page = 1;
   pageSize = 10;
@@ -60,6 +71,7 @@ export class ViewAuction {
   currentFilters: any = {};
   showEditModel = false;
   showBidModel = false;
+  showRequestReason = false;
   auctionToEdit: any = null;
   role = '';
   sellerId = '';
@@ -103,6 +115,14 @@ export class ViewAuction {
         const pagination = res.data?.pagination;
         this.auctions = res.data?.data?.$values || [];
         console.log(this.auctions);
+        if (this.role === 'Admin') {
+          this.auctions = this.auctions.sort((a, b) => {
+            if (a.deleteRequest && !b.deleteRequest) return -1;
+            if (!a.deleteRequest && b.deleteRequest) return 1;
+            return 0;
+          });
+          console.log('Sorted Auctions:', this.auctions);
+        }
         this.totalPages = Math.ceil(pagination.totalRecords / this.pageSize);
       },
       error: (err) => {
@@ -114,6 +134,48 @@ export class ViewAuction {
   goToPage(newPage: number) {
     this.page = newPage;
     this.fetchAuctions();
+  }
+
+  showRejectInput = false;
+  rejectRemarks = '';
+
+  onApproveDeleteRequest(request: any) {
+    this.auctionDeleteService
+      .approveAuctionDeleteRequest(request.auctionItemId)
+      .subscribe({
+        next: (res) => {
+          this.snackBar.showSuccess('Delete request approved successfully');
+          this.showRequestReason = false;
+          this.showRejectInput = false;
+          this.rejectRemarks = '';
+          this.fetchAuctions();
+        },
+        error: (err) => {
+          this.snackBar.showError('Failed to approve delete request');
+          console.error(err);
+        },
+      });
+  }
+
+  onRejectDeleteRequest(request: any, remarks: string) {
+    this.auctionDeleteService
+      .rejectAuctionDeleteRequest({
+        auctionItemId: request.auctionItemId,
+        remarks: remarks,
+      })
+      .subscribe({
+        next: (res) => {
+          this.snackBar.showSuccess('Delete request rejected successfully');
+          this.showRequestReason = false;
+          this.showRejectInput = false;
+          this.rejectRemarks = '';
+          this.fetchAuctions();
+        },
+        error: (err) => {
+          this.snackBar.showError('Failed to reject delete request');
+          console.error(err);
+        },
+      });
   }
 
   ngOnInit() {
@@ -223,7 +285,7 @@ export class ViewAuction {
     this.filtersApplied = true;
     this.fetchAuctions(filters);
   }
-  showModel(type: string, auctionId: string) {
+  showModel(type: string, auctionId: any) {
     if (type === 'filter') {
       this.showFilter = true;
     } else if (type === 'delete') {
@@ -240,6 +302,11 @@ export class ViewAuction {
       this.selectedBidId = auctionId;
       this.showBidsData = true;
       this.getBidsItem(auctionId);
+    } else if (type === 'request-reason') {
+      this.deleteRequest = auctionId;
+      this.showRequestReason = true;
+      this.showRejectInput = false;
+      this.rejectRemarks = '';
     }
   }
   closeModel(type: string) {
@@ -303,27 +370,13 @@ export class ViewAuction {
     });
   }
 
-  // showWinnerBids(winningId: string) {
-  //   this.showBidsModel = true;
-  //   console.log('Selected Winning ID:', winningId);
-  //   this.selectedBidId = winningId;
-  //   this.getBidsItem(winningId);
-  // }
-
-  // closeBidsModel() {
-  //   this.showBidsModel = false;
-  //   this.selectedBidId = '';
-  //   this.bidsForAuction = [];
-  // }
-
   getBidsItem(bidId: string) {
     this.bidService.getBidsByBidderId(bidId).subscribe({
       next: (res) => {
         this.bidsData = res.data;
-        if(this.bidsData.userId){
+        if (this.bidsData.userId) {
           this.getUserData(this.bidsData.userId);
         }
-
       },
       error: (err) => {
         console.error('Error fetching bids:', err);
@@ -331,18 +384,38 @@ export class ViewAuction {
     });
   }
 
-  userDetails: any =''
+  userDetails: any = '';
 
-
-getUserData(userId: string) {
+  getUserData(userId: string) {
     this.userService.getByUserId(userId).subscribe({
       next: (res) => {
-        this.userDetails= res.data;
+        this.userDetails = res.data;
         console.log('User Data:', this.userDetails);
       },
       error: (err) => {
         console.error('Error fetching user data:', err);
         return null;
+      },
+    });
+  }
+
+  onDeleteRequest(reason: string) {
+    const payload: AuctionDeleteRequest = {
+      auctionItemId: this.selectedAuctionId,
+      userId: this.sellerId,
+      reason: reason,
+    };
+    this.isLoading = true;
+    this.auctionDeleteService.requestAuctionDelete(payload).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.snackBar.showSuccess('Request sent successfully');
+        this.closeModel('delete');
+        this.fetchRoleAndAuctions();
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.snackBar.showError('Failed to send request');
       },
     });
   }

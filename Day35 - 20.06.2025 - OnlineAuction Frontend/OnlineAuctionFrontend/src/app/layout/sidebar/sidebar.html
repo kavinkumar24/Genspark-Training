@@ -221,23 +221,26 @@
       class="mt-auto w-[90%] mx-auto mb-5 border border-dotted border-gray-400 rounded-full px-4 py-2 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
     >
       <div
-        class="w-20 h-10 flex items-center justify-center rounded-full bg-primary-color text-white text-lg font-semibold cursor-pointer relative transition-transform duration-200 hover:scale-105 hover:border-2 border-double -mx-2 md:mx-0"
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-color text-white text-lg font-semibold cursor-pointer relative transition-transform duration-200 hover:scale-105 hover:border-2 border-double -mx-2 md:mx-0 flex-shrink-0"
         (click)="showModel('profile')"
       >
         {{ username.charAt(0).toUpperCase() }}
       </div>
 
       <div
-        class="flex-col text-center md:text-left hidden md:flex flex-grow overflow-hidden"
+        class="flex-col text-center md:text-left hidden md:flex flex-grow overflow-hidden min-w-0"
       >
+        @if ((username.length || 0) <= 15) {
         <div class="text-gray-800 dark:text-white font-medium truncate">
           {{ username }}
         </div>
+        } @if ((email.length || 0) <= 34) {
         <div
           class="text-gray-500 dark:text-gray-400 text-sm truncate max-w-xs mx-auto md:mx-0"
         >
           {{ email }}
         </div>
+        }
       </div>
 
       <div class="flex justify-center md:justify-end">
@@ -251,23 +254,14 @@
       </div>
     </div>
 
-    <app-model-view [show]="showLogoutModal" (close)="closeModel('logout')">
-      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-        Logout
-      </h2>
-      <p class="text-gray-600 dark:text-gray-300">
-        Are you sure you want to logout?
-      </p>
-      <div class="mt-4 flex justify-end">
-        <button
-          (click)="onLogout()"
-          class="px-4 py-2 bg-red-400 text-white rounded-md hover:bg-red-500 transition cursor-pointer"
-        >
-          Logout
-        </button>
-      </div>
-    </app-model-view>
-
+    <app-confirm-modal
+      [show]="showLogoutModal"
+      [icon]="logout"
+      [message]="'Are you sure you want to logout?'"
+      [showInput]="false"
+      (close)="closeModel('logout')"
+      (confirm)="onLogout()"
+    ></app-confirm-modal>
     <app-model-view
       [show]="showProfileModal"
       (close)="closeModel('profile')"

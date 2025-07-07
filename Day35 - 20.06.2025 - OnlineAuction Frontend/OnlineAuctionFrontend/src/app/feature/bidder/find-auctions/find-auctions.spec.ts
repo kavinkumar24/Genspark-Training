@@ -17,8 +17,19 @@ describe('FindAuctions', () => {
   const mockAuctions = {
     data: {
       $values: [
-        { id: '1', name: 'Auction 1' },
-        { id: '2', name: 'Auction 2' },
+        { id: '1', name: 'Auction 1', files:{
+          $values:[
+            {id:'3', name:'demo.png', downloadUrl:'http://localost:4200/demo', contentType:'image/png'}
+          ]
+        } },
+        { id: '2', name: 'Auction 2',
+          files:{
+          $values:[
+            {id:'4', name:'demo1.png', downloadUrl:'http://localost:4200/demo1', contentType:'image/png'}
+          ]
+        }
+
+         },
       ],
     },
   };

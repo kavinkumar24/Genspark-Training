@@ -52,9 +52,6 @@ export class ViewAuctionAttachements implements OnInit {
     return typeof type === 'string' && type.startsWith('image/');
   }
 
-  viewInTab(url: string) {
-    window.open(url, '_blank');
-  }
 
   viewFile(fileName: string) {
     this.auctionService.getfile(this.auctionId, fileName).subscribe((blob) => {

@@ -14,6 +14,7 @@ import { of, throwError } from 'rxjs';
 import { AddUser } from '../../../core/models/AddUser';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { Login } from '../login/login';
+import { UserAccountService } from '../../../core/services/userAccount.service';
 
 const mockActivatedRoute = {
   snapshot: {
@@ -38,6 +39,7 @@ describe('Register (HostComponent model)', () => {
   let fixture: ComponentFixture<Register>;
   let userServiceSpy: jasmine.SpyObj<UserService>;
   let snackbarSpy: jasmine.SpyObj<SnackbarService>;
+  let userAccountServiceSpy: jasmine.SpyObj<UserAccountService>;
 
   beforeEach(waitForAsync(() => {
     userServiceSpy = jasmine.createSpyObj('UserService', ['registerNewuser']);
@@ -45,8 +47,14 @@ describe('Register (HostComponent model)', () => {
       'showSuccess',
       'showError',
     ]);
+    userAccountServiceSpy = jasmine.createSpyObj('UserAccountService', [
+      'getAllDeletedUsers',
+      'getDeleteReasonByEmail'
+    ]);
 
     userServiceSpy.registerNewuser.and.returnValue(of({}));
+    userAccountServiceSpy.getAllDeletedUsers.and.returnValue(of([]));
+    userAccountServiceSpy.getDeleteReasonByEmail.and.returnValue(of(''));
 
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, HostComponent],
@@ -55,6 +63,7 @@ describe('Register (HostComponent model)', () => {
         { provide: UserService, useValue: userServiceSpy },
         { provide: SnackbarService, useValue: snackbarSpy },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        { provide: UserAccountService, useValue: userAccountServiceSpy },
         provideRouter([
           { path: 'login', component: Login },
         ]),
@@ -124,7 +133,7 @@ describe('Register (HostComponent model)', () => {
     component.onFormSubmit();
     tick();
     expect(snackbarSpy.showError).toHaveBeenCalledWith(
-      'Failed to created - fail'
+      'Failed to create - fail'
     );
     expect(component.isLoading).toBeFalse();
   }));

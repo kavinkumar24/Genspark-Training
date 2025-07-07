@@ -138,4 +138,21 @@
   </div>
 </div>
 
+<app-model-view
+  [show]="showAdminInfoModel"
+  (close)="showAdminInfoModel = false"
+>
+  <div class="text-center">
+    <h2 class="text-lg font-black">You were the previous user</h2>
+    <p>For some reason you were inactive</p>
+    <p class="text-gray-500 mt-3">
+      Please contact at
+      <br />
+      <span class="text-primary-color">
+        supportOnlineAuction&#64;gmail.com
+      </span>
+    </p>
+  </div>
+</app-model-view>
+
 <app-spinner [loading]="isLoading"></app-spinner>
