@@ -8,8 +8,8 @@ public class CustomValidationFilter : IActionFilter
     {
         if (!context.ModelState.IsValid)
         {
-            var errors = context.ModelState
-                .Where(x => x.Value!.Errors.Count > 0)
+            var errors = context
+                .ModelState.Where(x => x.Value!.Errors.Count > 0)
                 .ToDictionary(
                     kvp => kvp.Key,
                     kvp => kvp.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
@@ -19,7 +19,7 @@ public class CustomValidationFilter : IActionFilter
             {
                 Success = false,
                 Message = "Validation failed",
-                Errors = errors
+                Errors = errors,
             };
 
             context.Result = new BadRequestObjectResult(response);

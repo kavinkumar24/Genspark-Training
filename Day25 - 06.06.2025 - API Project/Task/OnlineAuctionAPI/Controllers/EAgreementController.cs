@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using OnlineAuctionAPI.Interfaces;
-using System;
-using System.Threading.Tasks;
-using System.Security.Claims;
-using OnlineAuctionAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OnlineAuctionAPI.Helpers;
+using OnlineAuctionAPI.Interfaces;
+using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Services;
 
 namespace OnlineAuctionAPI.Controllers
@@ -14,10 +12,18 @@ namespace OnlineAuctionAPI.Controllers
     public class EAgreementController : ControllerBase
     {
         private readonly IEAgreementService _eAgreementService;
+        private readonly IEmailService _emailService;
+        private readonly ILogger<EAgreementController> _logger;
 
-        public EAgreementController(IEAgreementService eAgreementService)
+        public EAgreementController(
+            IEAgreementService eAgreementService,
+            IEmailService emailService,
+            ILogger<EAgreementController> logger
+        )
         {
             _eAgreementService = eAgreementService;
+            _emailService = emailService;
+            _logger = logger;
         }
 
         [HttpGet("myAgreements")]
@@ -27,21 +33,18 @@ namespace OnlineAuctionAPI.Controllers
             var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
             {
-                return BadRequest(new ApiResponse<string>
-                {
-                    Success = false,
-                    Message = "Please provide a valid userId.",
-                    Data = null
-                });
+                return BadRequest(
+                    ApiResponseHelper.CreateBadRequest<string>("Please provide a valid userId.")
+                );
             }
 
             var result = await _eAgreementService.GetByUserIdAsync(userId.ToString());
-            return Ok(new ApiResponse<object>
-            {
-                Success = true,
-                Message = "Agreements retrieved successfully.",
-                Data = result
-            });
+            return Ok(
+                ApiResponseHelper.CreateSuccess<object>(
+                    result,
+                    "Agreements retrieved successfully."
+                )
+            );
         }
 
         [HttpGet("{id}/download")]
@@ -67,19 +70,40 @@ namespace OnlineAuctionAPI.Controllers
             var agreements = await _eAgreementService.GetByBiddingIdAsync(biddingId);
             if (agreements == null || !agreements.Any())
             {
-                return NotFound(new ApiResponse<string>
-                {
-                    Success = false,
-                    Message = "No agreements found for the provided bidding ID.",
-                    Data = null
-                });
+                return NotFound(
+                    ApiResponseHelper.CreateNotFound<string>(
+                        "No agreements found for the provided bidding ID."
+                    )
+                );
             }
-            return Ok(new ApiResponse<IEnumerable<EAgreement>>
+            return Ok(
+                ApiResponseHelper.CreateSuccess<IEnumerable<EAgreement>>(
+                    agreements,
+                    "Agreements retrieved successfully."
+                )
+            );
+        }
+
+        [HttpPost("send-email")]
+        public async Task<IActionResult> SendEmail()
+        {
+
+
+            try
             {
-                Success = true,
-                Message = "Agreements retrieved successfully.",
-                Data = agreements
-            });
+
+                await _emailService.SendEmailAsync(
+                    "kavinpalanisamy242003@gmail.com",
+                    "Testing",
+                    "Demo"
+                );
+                return Ok("Email sent successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending email");
+                return BadRequest();
+            }
         }
     }
 }

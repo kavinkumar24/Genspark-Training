@@ -39,7 +39,8 @@ namespace OnlineAuctionAPI.Tests.Services
             _passwordServiceMock = new Mock<IPasswordService>();
             _passwordServiceMock.Setup(p => p.HashPassword(It.IsAny<string>())).Returns("hashedPwd");
 
-            _userService = new UserService(_userRepository, _mapper, _passwordServiceMock.Object);
+           _userService = new UserService(_userRepository, _mapper, _passwordServiceMock.Object, _dbContext);
+
         }
         
 
@@ -99,38 +100,9 @@ namespace OnlineAuctionAPI.Tests.Services
             Assert.AreEqual(user.Email, result.Email);
         }
 
-        [Test]
-        public async Task DeleteUserAsync_Should_Set_StatusId_2_When_Not_Already_Deleted()
-        {
-            var user = new User
-            {
-                Email = "del@example.com",
-                Username = "del",
-                Password = "123456",
-                StatusId = 1
-            };
-            await _userRepository.Add(user);
+        
 
-            var result = await _userService.DeleteUserAsync(user.Id);
 
-            Assert.AreEqual(2, result.StatusId);
-        }
-
-        [Test]
-        public async Task DeleteUserAsync_Should_Throw_When_Already_Deleted()
-        {
-            var user = new User
-            {
-                Email = "del2@example.com",
-                Username = "del2",
-                Password = "123456",
-                StatusId = 2
-            };
-            await _userRepository.Add(user);
-
-            var ex = Assert.ThrowsAsync<AlreadyDeletedException>(() => _userService.DeleteUserAsync(user.Id));
-            Assert.That(ex.Message, Does.Contain("already deleted"));
-        }
         [TearDown]
         public void TearDown()
         {

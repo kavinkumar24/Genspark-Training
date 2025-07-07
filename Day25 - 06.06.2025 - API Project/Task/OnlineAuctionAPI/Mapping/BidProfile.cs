@@ -1,4 +1,3 @@
-
 using AutoMapper;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;

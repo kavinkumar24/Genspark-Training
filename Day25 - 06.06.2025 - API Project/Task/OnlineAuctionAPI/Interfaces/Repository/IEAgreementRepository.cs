@@ -1,7 +1,7 @@
-using OnlineAuctionAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OnlineAuctionAPI.Models;
 
 namespace OnlineAuctionAPI.Interfaces
 {

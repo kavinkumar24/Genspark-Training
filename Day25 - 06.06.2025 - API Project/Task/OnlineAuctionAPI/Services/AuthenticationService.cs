@@ -1,10 +1,8 @@
-
+using System.Security.Claims;
+using OnlineAuctionAPI.Exceptions;
 using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
-using OnlineAuctionAPI.Exceptions;
-using System.Security.Claims;
-
 
 namespace OnlineAuctionAPI.Service;
 
@@ -13,7 +11,12 @@ public class AuthenticationService : IAuthService
     private readonly ITokenService _tokenService;
     private readonly IPasswordService _passwordService;
     private readonly IUserRepository _userRepository;
-    public AuthenticationService(ITokenService tokenService, IPasswordService passwordService, IUserRepository userRepository)
+
+    public AuthenticationService(
+        ITokenService tokenService,
+        IPasswordService passwordService,
+        IUserRepository userRepository
+    )
     {
         _tokenService = tokenService;
         _passwordService = passwordService;
@@ -27,19 +30,22 @@ public class AuthenticationService : IAuthService
         {
             throw new NotFoundException("Email not found, please verify the email");
         }
-        var passwordVerify = _passwordService.VerifyPassword(dbUser.Password, userLoginDto.Password);
+        var passwordVerify = _passwordService.VerifyPassword(
+            dbUser.Password,
+            userLoginDto.Password
+        );
         if (!passwordVerify)
         {
             throw new InvalidException("Invalid Password");
         }
-      
+
         var tokens = await _tokenService.GenerateTokensAsync(dbUser);
         return new UserLoginResponseDto
         {
             UserName = dbUser.Username,
             Email = dbUser.Email,
             Token = tokens.AccessToken,
-            RefreshToken = tokens.RefreshToken
+            RefreshToken = tokens.RefreshToken,
         };
     }
 
@@ -59,7 +65,6 @@ public class AuthenticationService : IAuthService
 
         await _userRepository.Update(user.Id, user);
     }
-
 
     public async Task<User> GetCurrentUserAsync(ClaimsPrincipal user)
     {

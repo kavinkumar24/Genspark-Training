@@ -1,70 +1,74 @@
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using OnlineAuctionAPI.Contexts;
 using OnlineAuctionAPI.Exceptions;
+using OnlineAuctionAPI.Hubs;
 using OnlineAuctionAPI.Interfaces;
+using OnlineAuctionAPI.Interfaces.Repository;
 using OnlineAuctionAPI.Mapping;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Repositories;
 using OnlineAuctionAPI.Service;
 using OnlineAuctionAPI.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using OnlineAuctionAPI.Hubs;
+using QuestPDF.Infrastructure;
 using Serilog;
 using Serilog.Events;
-using System.Threading.RateLimiting;
-using System.Security.Claims;
-using System.Text.Json.Serialization;
-using QuestPDF.Infrastructure;
-
 
 var builder = WebApplication.CreateBuilder(args);
+
 QuestPDF.Settings.License = LicenseType.Community;
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .CreateLogger();
 
-
 // builder.Host.UseSerilog(logger);
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
-
 
 builder.Services.AddEndpointsApiExplorer();
 
 #region Swagger
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "bearer"
-    }); 
-    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+    opt.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
         {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
-                }
-            },
-            new string[]{}
+            In = ParameterLocation.Header,
+            Description = "Please enter token",
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            Scheme = "bearer",
         }
-    });
+    );
+    opt.AddSecurityRequirement(
+        new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer",
+                    },
+                },
+                new string[] { }
+            },
+        }
+    );
 });
 #endregion
 
@@ -83,22 +87,26 @@ builder.Services.AddDbContext<AuctionContext>(opts =>
 //     });
 // });
 
-
-
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
+builder.Services.AddAutoMapper(typeof(AuctionItemProfile));
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(BidProfile));
 
 #region Controllers
-builder.Services.AddControllers()
-                .AddJsonOptions(opts =>
-                {
-                    opts.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-                    opts.JsonSerializerOptions.WriteIndented = true;
-                    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-
-                });
+builder
+    .Services.AddControllers()
+    .AddJsonOptions(opts =>
+    {
+        opts.JsonSerializerOptions.ReferenceHandler = System
+            .Text
+            .Json
+            .Serialization
+            .ReferenceHandler
+            .Preserve;
+        opts.JsonSerializerOptions.WriteIndented = true;
+        opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<CustomValidationFilter>();
@@ -120,48 +128,55 @@ builder.Services.AddVersionedApiExplorer(opt =>
 #endregion
 
 #region AuthenticationFilter
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
+builder
+    .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false,
+            ValidateIssuer = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"])
+            ),
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnChallenge = context =>
+            {
+                context.HandleResponse();
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.ContentType = "application/json";
+                var result = System.Text.Json.JsonSerializer.Serialize(
+                    new
                     {
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
-                    };
-                    options.Events = new JwtBearerEvents
+                        success = false,
+                        message = "Unauthorized",
+                        data = (object)null,
+                        errors = (object)null,
+                    }
+                );
+                return context.Response.WriteAsync(result);
+            },
+            OnForbidden = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                context.Response.ContentType = "application/json";
+                var result = System.Text.Json.JsonSerializer.Serialize(
+                    new
                     {
-                        OnChallenge = context =>
-                        {
-                            context.HandleResponse();
-                            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                            context.Response.ContentType = "application/json";
-                            var result = System.Text.Json.JsonSerializer.Serialize(new
-                            {
-                                success = false,
-                                message = "Unauthorized",
-                                data = (object)null,
-                                errors = (object)null
-                            });
-                            return context.Response.WriteAsync(result);
-                        },
-                        OnForbidden = context =>
-                        {
-                             context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                            context.Response.ContentType = "application/json";
-                            var result = System.Text.Json.JsonSerializer.Serialize(new
-                            {
-                                success = false,
-                                message = "Forbidden",
-                                data = (object)null,
-                                errors = (object)null
-                            });
-                            return context.Response.WriteAsync(result);
-                        }
-                    };
-                });
+                        success = false,
+                        message = "Forbidden",
+                        data = (object)null,
+                        errors = (object)null,
+                    }
+                );
+                return context.Response.WriteAsync(result);
+            },
+        };
+    });
 #endregion
 
 #region Repositories
@@ -171,6 +186,8 @@ builder.Services.AddTransient<IBidItemRepository, BidItemRepository>();
 builder.Services.AddTransient<AuctionRepository>();
 builder.Services.AddTransient<IEAgreementRepository, EAgreementRepository>();
 builder.Services.AddTransient<IVirtualWalletRepository, VirtualWalletRepository>();
+builder.Services.AddTransient<IUserAccountManageRepository, UserAccountManageRepository>();
+builder.Services.AddTransient<IAuctionDeleteRequestRepository, AuctionDeleteRequestRepository>();
 
 #endregion
 
@@ -183,12 +200,19 @@ builder.Services.AddTransient<IAuthService, OnlineAuctionAPI.Service.Authenticat
 builder.Services.AddTransient<IBidItemService, BidItemService>();
 builder.Services.AddHostedService<AuctionCheckService>();
 builder.Services.AddTransient<IEAgreementService, EAgreementService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddTransient<IVirtualWalletService, VirtualWalletService>();
+builder.Services.AddTransient<IUserAccountManageService, UserAccountManageService>();
+builder.Services.AddTransient<IAuctionDeleteRequestService, AuctionDeleteRequestService>();
 #endregion
 
 #region CORS
-builder.Services.AddCors(options=>{
-    options.AddDefaultPolicy(policy=>{
-        policy.WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501", "http://localhost:4200")
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .WithOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501", "http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -204,17 +228,20 @@ builder.Services.AddRateLimiter(options =>
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
     {
         var user = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous";
-        return RateLimitPartition.GetTokenBucketLimiter(user, _ =>
-        {
-            return new TokenBucketRateLimiterOptions
+        return RateLimitPartition.GetTokenBucketLimiter(
+            user,
+            _ =>
             {
-                TokenLimit = 100,
-                TokensPerPeriod = 1000,
-                ReplenishmentPeriod = TimeSpan.FromHours(1),
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 0,
-            };
-        });
+                return new TokenBucketRateLimiterOptions
+                {
+                    TokenLimit = 100,
+                    TokensPerPeriod = 1000,
+                    ReplenishmentPeriod = TimeSpan.FromHours(1),
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                };
+            }
+        );
     });
 
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -229,10 +256,7 @@ builder.Host.ConfigureHostOptions(opt =>
 
 builder.Services.AddHttpContextAccessor();
 
-
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -241,17 +265,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+
 // app.UseHttpsRedirection();
 app.UseRateLimiter();
 app.MapControllers();
 app.MapHub<AuctionHub>("/auctionHub");
 
 app.UseMiddleware<ExceptionMiddleware>();
-
 
 app.Run();
 

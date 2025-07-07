@@ -6,10 +6,12 @@ namespace OnlineAuctionAPI.Exceptions;
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
+
     public ExceptionMiddleware(RequestDelegate next)
     {
         _next = next;
     }
+
     public async Task Invoke(HttpContext context)
     {
         try
@@ -22,11 +24,13 @@ public class ExceptionMiddleware
         }
         catch (NotFoundException ex)
         {
-            var errors = new Dictionary<string, string[]>
-            {
-                { "email", new[] { ex.Message } }
-            };
-            await HandleExceptionAsync(context, StatusCodes.Status404NotFound, "Validation failed", errors);
+            var errors = new Dictionary<string, string[]> { { "email", new[] { ex.Message } } };
+            await HandleExceptionAsync(
+                context,
+                StatusCodes.Status404NotFound,
+                "Validation failed",
+                errors
+            );
         }
         catch (AlreadyDeletedException ex)
         {
@@ -34,13 +38,17 @@ public class ExceptionMiddleware
         }
         catch (KeyNotFoundException ex)
         {
-            await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, ex.Message);
+            await HandleExceptionAsync(
+                context,
+                StatusCodes.Status500InternalServerError,
+                ex.Message
+            );
         }
         catch (NullValueException ex)
         {
             await HandleExceptionAsync(context, StatusCodes.Status400BadRequest, ex.Message);
         }
-        catch(InvalidOperationException ex)
+        catch (InvalidOperationException ex)
         {
             await HandleExceptionAsync(context, StatusCodes.Status400BadRequest, ex.Message);
         }
@@ -48,7 +56,11 @@ public class ExceptionMiddleware
         {
             if (ex.InnerException is NotFoundException notFoundEx)
             {
-                await HandleExceptionAsync(context, StatusCodes.Status404NotFound, notFoundEx.Message);
+                await HandleExceptionAsync(
+                    context,
+                    StatusCodes.Status404NotFound,
+                    notFoundEx.Message
+                );
             }
             else
             {
@@ -57,7 +69,11 @@ public class ExceptionMiddleware
                 {
                     message += $" Inner exception: {ex.InnerException.Message}";
                 }
-                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, message);
+                await HandleExceptionAsync(
+                    context,
+                    StatusCodes.Status500InternalServerError,
+                    message
+                );
             }
         }
         catch (InvalidException ex)
@@ -72,28 +88,36 @@ public class ExceptionMiddleware
         {
             await HandleExceptionAsync(context, StatusCodes.Status401Unauthorized, ex.Message);
         }
-        
-        catch(BadHttpRequestException ex)
+        catch (BadHttpRequestException ex)
         {
             await HandleExceptionAsync(context, StatusCodes.Status400BadRequest, ex.Message);
         }
         catch (Exception ex)
         {
-            await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+            await HandleExceptionAsync(
+                context,
+                StatusCodes.Status500InternalServerError,
+                "An unexpected error occurred."
+            );
         }
     }
 
-    private async Task HandleExceptionAsync(HttpContext context, int statusCode, string message, object errors = null)
+    private async Task HandleExceptionAsync(
+        HttpContext context,
+        int statusCode,
+        string message,
+        object? errors = null
+    )
     {
         context.Response.StatusCode = statusCode;
         context.Response.ContentType = "application/json";
         var response = new
-    {
-        success = false,
-        message = message,
-        data = (object)null,
-        errors = errors 
-    };
+        {
+            success = false,
+            message = message,
+            data = (object)null,
+            errors = errors,
+        };
         await context.Response.WriteAsJsonAsync(response);
     }
 }

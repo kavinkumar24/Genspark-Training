@@ -19,9 +19,5 @@ namespace OnlineAuctionAPI.Models
         [Required]
         public Guid AuctionItemId { get; set; }
         public AuctionItem? AuctionItem { get; set; }
-        
-        // public int StatusId { get; set; }
-        // public Status? DeletionStatus { get; set; }
-
     }
 }

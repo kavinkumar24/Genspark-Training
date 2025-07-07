@@ -40,6 +40,42 @@ namespace OnlineAuctionAPI.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionDeleteRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("ApprovalDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("AuctionItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuctionItemId")
+                        .IsUnique();
+
+                    b.ToTable("AuctionDeleteRequests");
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -129,6 +165,10 @@ namespace OnlineAuctionAPI.Migrations
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("text");
@@ -138,7 +178,11 @@ namespace OnlineAuctionAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("DeletedUsers");
                 });
@@ -352,6 +396,15 @@ namespace OnlineAuctionAPI.Migrations
                     b.ToTable("VirtualWalletHistories");
                 });
 
+            modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionDeleteRequest", b =>
+                {
+                    b.HasOne("OnlineAuctionAPI.Models.AuctionItem", null)
+                        .WithOne("DeleteRequest")
+                        .HasForeignKey("OnlineAuctionAPI.Models.AuctionDeleteRequest", "AuctionItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionItem", b =>
                 {
                     b.HasOne("OnlineAuctionAPI.Models.User", "Seller")
@@ -477,6 +530,8 @@ namespace OnlineAuctionAPI.Migrations
             modelBuilder.Entity("OnlineAuctionAPI.Models.AuctionItem", b =>
                 {
                     b.Navigation("Bids");
+
+                    b.Navigation("DeleteRequest");
 
                     b.Navigation("FileAttachments");
                 });

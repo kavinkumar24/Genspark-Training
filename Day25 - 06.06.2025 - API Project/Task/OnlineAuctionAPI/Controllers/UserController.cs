@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineAuctionAPI.Helpers;
 using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
@@ -12,10 +13,17 @@ namespace OnlineAuctionAPI.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IVirtualWalletService _virtualWalletService;
     private readonly ILogger<UserController> _logger;
-    public UserController(IUserService userService, ILogger<UserController> logger)
+
+    public UserController(
+        IUserService userService,
+        ILogger<UserController> logger,
+        IVirtualWalletService virtualWalletService
+    )
     {
         _userService = userService;
+        _virtualWalletService = virtualWalletService;
         _logger = logger;
     }
 
@@ -28,15 +36,10 @@ public class UserController : ControllerBase
         if (user == null)
         {
             _logger.LogWarning("User with ID {UserId} not found", id);
-            return NotFound("User not found");
+            return NotFound(ApiResponseHelper.CreateNotFound<string>("User not found"));
         }
         _logger.LogInformation("User with ID {UserId} retrieved successfully", id);
-        return Ok(new ApiResponse<User>
-        {
-            Success = true,
-            Message = "User retrieved successfully",
-            Data = user
-        });
+        return Ok(ApiResponseHelper.CreateSuccess(user, "User retrieved successfully"));
     }
 
     [HttpGet("GetByEmail")]
@@ -45,69 +48,50 @@ public class UserController : ControllerBase
     {
         var user = await _userService.GetUserByEmailAsync(email);
         _logger.LogInformation("Attempted to retrieve user with email {Email}", email);
-        return Ok(new ApiResponse<User>
-        {
-            Success = true,
-            Message = "User retrieved successfully",
-            Data = user
-        });
+        return Ok(ApiResponseHelper.CreateSuccess(user, "User retrieved successfully"));
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public async Task<ActionResult<User>> CreateUser([FromBody] UserRegisterRequestDto userDto)
     {
         var newUser = await _userService.CreateUserAsync(userDto);
         _logger.LogInformation("User created successfully with ID {UserId}", newUser.Id);
-        return CreatedAtAction(nameof(GetUserById), new { id = newUser.Id }, new ApiResponse<User>
-        {
-            Success = true,
-            Message = "User created successfully",
-            Data = newUser
-        });
+        return CreatedAtAction(
+            nameof(GetUserById),
+            new { id = newUser.Id },
+            ApiResponseHelper.CreateSuccess(newUser, "User created successfully")
+        );
     }
 
-    [HttpDelete]
-    [Authorize(Roles = "Admin")]
-    public async Task<ActionResult> DeleteUser(UserDeleteRequest userDeleteDto)
-    {
-        var user = await _userService.DeleteUserAsync(userDeleteDto);
-        _logger.LogInformation("User with ID {UserId} deleted successfully", userDeleteDto.UserId);
-        return Ok(new ApiResponse<User>
-        {
-            Success = true,
-            Message = "User deleted successfully",
-            Data = user
-        });
-    }
+    // [HttpDelete]
+    // [Authorize(Roles = "Admin")]
+    // public async Task<ActionResult> DeleteUser(UserDeleteRequest userDeleteDto)
+    // {
+    //     await _userDeletionService.SoftDeleteUserAsync(userDeleteDto);
+    //     _logger.LogInformation("User with ID {UserId} deleted successfully", userDeleteDto.UserId);
+    //     return Ok(ApiResponseHelper.CreateSuccess<string>(null, "User deleted successfully"));
+    // }
 
     [HttpPut("UpdateUser")]
     [Authorize(Roles = "Seller,Bidder, Admin")]
-    public async Task<ActionResult> Updateuser([FromQuery] Guid id, [FromBody] UserUpdateRequestDto updatedto)
+    public async Task<ActionResult> Updateuser(
+        [FromQuery] Guid id,
+        [FromBody] UserUpdateRequestDto updatedto
+    )
     {
         var user = await _userService.UpdateUserInfoAsync(id, updatedto);
         _logger.LogInformation("User with ID {UserId} updated successfully", id);
-        return Ok(new ApiResponse<User>
-        {
-            Success = true,
-            Message = "User updated successfully",
-            Data = user
-        });
+        return Ok(ApiResponseHelper.CreateSuccess(user, "User updated successfully"));
     }
 
     [HttpPatch("change-password")]
     [Authorize(Roles = "Seller,Bidder")]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequestDto dto)
     {
-
         await _userService.ChangePasswordAsync(dto);
         _logger.LogInformation("Password changed successfully for user {UserId}", dto.UserId);
-        return Ok(new ApiResponse<string>
-        {
-            Success = true,
-            Message = "Password changed successfully",
-            Data = null
-        });
+        return Ok(ApiResponseHelper.CreateSuccess<string>(null, "Password changed successfully"));
     }
 
     [HttpPatch("forget-password")]
@@ -117,31 +101,20 @@ public class UserController : ControllerBase
         if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.NewPassword))
         {
             _logger.LogWarning("Email or new password is null or empty");
-            return BadRequest(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "Email and new password are required.",
-                Data = null
-            });
+            return BadRequest(
+                ApiResponseHelper.CreateBadRequest<string>("Email and new password are required.")
+            );
         }
         var result = await _userService.ForgetPasswordAsync(dto);
         if (!result)
         {
             _logger.LogWarning("Failed to reset password for email {Email}", dto.Email);
-            return NotFound(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "User not found with the provided email.",
-                Data = null
-            });
+            return NotFound(
+                ApiResponseHelper.CreateNotFound<string>("User not found with the provided email.")
+            );
         }
         _logger.LogInformation("Password reset successfully for email {Email}", dto.Email);
-        return Ok(new ApiResponse<string>
-        {
-            Success = true,
-            Message = "Password reset successfully.",
-            Data = null
-        });
+        return Ok(ApiResponseHelper.CreateSuccess<string>(null, "Password reset successfully."));
     }
 
     [HttpGet("GetWalletByUserId")]
@@ -152,68 +125,59 @@ public class UserController : ControllerBase
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             _logger.LogWarning("Invalid or missing userId in token");
-            return BadRequest(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "Please provide a valid userId.",
-                Data = null
-            });
+            return BadRequest(
+                ApiResponseHelper.CreateBadRequest<string>("Please provide a valid userId.")
+            );
         }
 
         var user = await _userService.GetUserWithWalletByUserIdAsync(userId);
         if (user == null)
         {
             _logger.LogWarning("No user found with User ID {UserId}", userId);
-            return NotFound(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "No user found with the given User Id",
-                Data = null
-            });
+            return NotFound(
+                ApiResponseHelper.CreateNotFound<string>("No user found with the given User Id")
+            );
         }
         if (user.VirtualWallet == null)
         {
             _logger.LogWarning("No virtual wallet found for user {UserId}", userId);
-            return NotFound(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "No virtual wallet found for the given User Id",
-                Data = null
-            });
+            return NotFound(
+                ApiResponseHelper.CreateNotFound<string>(
+                    "No virtual wallet found for the given User Id"
+                )
+            );
         }
         _logger.LogInformation("User with User ID {UserId} retrieved successfully", userId);
-        return Ok(new ApiResponse<VirtualWalletResponseDto>
+        var data = new VirtualWalletResponseDto
         {
-            Success = true,
-            Message = "User with wallet retrieved successfully",
-            Data = new VirtualWalletResponseDto
-            {
-                Id = user.VirtualWallet.Id,
-                UserId = user.Id,
-                Balance = user.VirtualWallet.Balance,
-            }
-        });
+            Id = user.VirtualWallet.Id,
+            UserId = user.Id,
+            Balance = user.VirtualWallet.Balance,
+        };
+        return Ok(ApiResponseHelper.CreateSuccess(data, "User with wallet retrieved successfully"));
     }
 
     [HttpPost("AddVirtualWalletToUser")]
     [Authorize(Roles = "Bidder")]
-    public async Task<ActionResult<VirtualWalletResponseDto>> AddVirtualWalletToUser([FromBody] VirtualWalletAddDto virtualWallet)
+    public async Task<ActionResult<VirtualWalletResponseDto>> AddVirtualWalletToUser(
+        [FromBody] VirtualWalletAddDto virtualWallet
+    )
     {
         var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
             _logger.LogWarning("Invalid or missing userId in token");
-            return BadRequest(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "Please provide a valid userId.",
-                Data = null
-            });
+            return BadRequest(
+                ApiResponseHelper.CreateBadRequest<string>("Please provide a valid userId.")
+            );
         }
 
-        var user = await _userService.AddVirtualWalletToUserAsync(userId, virtualWallet);
+        var user = await _virtualWalletService.AddVirtualWalletToUserAsync(userId, virtualWallet);
 
-        _logger.LogInformation("Virtual wallet added to user with ID {UserId} successfully", userId);
+        _logger.LogInformation(
+            "Virtual wallet added to user with ID {UserId} successfully",
+            userId
+        );
 
         var wallet = user.VirtualWallet!;
         var walletDto = new VirtualWalletResponseDto
@@ -221,48 +185,37 @@ public class UserController : ControllerBase
             Id = wallet.Id,
             UserId = wallet.UserId,
             Balance = wallet.Balance,
-            UpdatedAt = wallet.UpdatedAt
+            UpdatedAt = wallet.UpdatedAt,
         };
 
-        return Ok(new ApiResponse<VirtualWalletResponseDto>
-        {
-            Success = true,
-            Message = "Virtual wallet added successfully",
-            Data = walletDto
-        });
+        return Ok(ApiResponseHelper.CreateSuccess(walletDto, "Virtual wallet added successfully"));
     }
 
     [HttpPatch("AddFundsToWallet")]
     [Authorize(Roles = "Bidder")]
-    public async Task<ActionResult<VirtualWalletResponseDto>> AddFundsToWallet([FromQuery] decimal amount)
+    public async Task<ActionResult<VirtualWalletResponseDto>> AddFundsToWallet(
+        [FromQuery] decimal amount
+    )
     {
         var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
-            return BadRequest(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "Please provide a valid userId.",
-                Data = null
-            });
+            return BadRequest(
+                ApiResponseHelper.CreateBadRequest<string>("Please provide a valid userId.")
+            );
         }
 
-        var user = await _userService.AddFundsToVirtualWalletAsync(userId, amount);
+        var user = await _virtualWalletService.AddFundsToVirtualWalletAsync(userId, amount);
         var wallet = user.VirtualWallet!;
         var walletDto = new VirtualWalletResponseDto
         {
             Id = wallet.Id,
             UserId = wallet.UserId,
             Balance = wallet.Balance,
-            UpdatedAt = wallet.UpdatedAt
+            UpdatedAt = wallet.UpdatedAt,
         };
 
-        return Ok(new ApiResponse<VirtualWalletResponseDto>
-        {
-            Success = true,
-            Message = "Funds added successfully",
-            Data = walletDto
-        });
+        return Ok(ApiResponseHelper.CreateSuccess(walletDto, "Funds added successfully"));
     }
 
     [HttpGet("GetWalletHistoryByUserId")]
@@ -272,46 +225,24 @@ public class UserController : ControllerBase
         var userIdClaim = User.FindFirst("sub") ?? User.FindFirst("UserId");
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
-            return BadRequest(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "Please provide a valid userId.",
-                Data = null
-            });
+            return BadRequest(
+                ApiResponseHelper.CreateBadRequest<string>("Please provide a valid userId.")
+            );
         }
-        try
+        var history = await _virtualWalletService.GetVirtualWalletHistoryByUserIdAsync(userId);
+        if (history == null || history.Count == 0)
         {
-            var history = await _userService.GetVirtualWalletHistoryByUserIdAsync(userId);
-            if (history == null || history.Count == 0)
-            {
-                _logger.LogWarning("No wallet history found for user {UserId}", userId);
-                return NotFound(new ApiResponse<string>
-                {
-                    Success = false,
-                    Message = "No wallet history found for the given User Id",
-                    Data = null
-                });
-            }
-
-            return Ok(new ApiResponse<List<VirtualWalletHistory>>
-            {
-                Success = true,
-                Message = "Wallet history retrieved successfully",
-                Data = history
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error retrieving wallet history for user {UserId}", userId);
-            return StatusCode(500, new ApiResponse<string>
-            {
-                Success = false,
-                Message = "An error occurred while retrieving wallet history.",
-                Data = null
-            });
+            _logger.LogWarning("No wallet history found for user {UserId}", userId);
+            return NotFound(
+                ApiResponseHelper.CreateNotFound<string>(
+                    "No wallet history found for the given User Id"
+                )
+            );
         }
 
-
+        return Ok(
+            ApiResponseHelper.CreateSuccess(history, "Wallet history retrieved successfully")
+        );
     }
 
     [HttpGet("GetAll")]
@@ -321,13 +252,33 @@ public class UserController : ControllerBase
         var users = await _userService.GetAllUsers();
         if (users == null)
         {
-            return BadRequest(new ApiResponse<string>
-            {
-                Success = false,
-                Message = "No users found",
-                Data = null
-            });
+            return BadRequest(ApiResponseHelper.CreateBadRequest<string>("No users found"));
         }
         return Ok(users);
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<User>>> GetSearchData(
+        [FromQuery] UserSearchDto searchDto
+    )
+    {
+        var users = await _userService.SearchUsersAsync(searchDto);
+        if (users == null || !users.Any())
+        {
+            _logger.LogWarning(
+                "No users found matching the search term {SearchTerm}",
+                searchDto.SearchTerm
+            );
+            return NotFound(
+                ApiResponseHelper.CreateNotFound<string>("No users found matching the search term.")
+            );
+        }
+
+        _logger.LogInformation(
+            "Users found matching the search term {SearchTerm}",
+            searchDto.SearchTerm
+        );
+
+        return Ok(ApiResponseHelper.CreateSuccess(users, "Users retrieved successfully"));
     }
 }

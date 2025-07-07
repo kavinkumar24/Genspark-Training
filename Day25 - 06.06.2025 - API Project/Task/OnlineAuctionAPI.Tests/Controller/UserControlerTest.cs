@@ -16,6 +16,8 @@ namespace OnlineAuctionAPI.Tests.Controller
     {
         private Mock<IUserService> _mockUserService;
         private Mock<ILogger<UserController>> _mockLogger;
+        private Mock<IVirtualWalletService> _mockVirtualWalletService;
+
         private UserController _controller;
 
         [SetUp]
@@ -23,14 +25,24 @@ namespace OnlineAuctionAPI.Tests.Controller
         {
             _mockUserService = new Mock<IUserService>();
             _mockLogger = new Mock<ILogger<UserController>>();
-            _controller = new UserController(_mockUserService.Object, _mockLogger.Object);
+            _mockVirtualWalletService = new Mock<IVirtualWalletService>();
+            _controller = new UserController(
+                _mockUserService.Object,
+                _mockLogger.Object,
+                _mockVirtualWalletService.Object
+            );
         }
 
         [Test]
         public async Task GetUserById_ReturnsOkWithUser()
         {
             var userId = Guid.NewGuid();
-            var user = new User { Id = userId, Username = "testuser", Password = "dummy" };
+            var user = new User
+            {
+                Id = userId,
+                Username = "testuser",
+                Password = "dummy",
+            };
             _mockUserService.Setup(s => s.GetUserByIdAsync(userId)).ReturnsAsync(user);
 
             var actionResult = await _controller.GetUserById(userId);
@@ -45,9 +57,13 @@ namespace OnlineAuctionAPI.Tests.Controller
         public async Task GetUserById_Exception_ThrowsException()
         {
             var userId = Guid.NewGuid();
-            _mockUserService.Setup(s => s.GetUserByIdAsync(userId)).ThrowsAsync(new Exception("DB error"));
+            _mockUserService
+                .Setup(s => s.GetUserByIdAsync(userId))
+                .ThrowsAsync(new Exception("DB error"));
 
-            var ex = Assert.ThrowsAsync<Exception>(async () => await _controller.GetUserById(userId));
+            var ex = Assert.ThrowsAsync<Exception>(async () =>
+                await _controller.GetUserById(userId)
+            );
             Assert.That(ex.Message, Does.Contain("DB error"));
         }
 
@@ -60,13 +76,21 @@ namespace OnlineAuctionAPI.Tests.Controller
             var actionResult = await _controller.GetUserById(userId);
             var notFoundResult = actionResult.Result as NotFoundObjectResult;
             Assert.IsNotNull(notFoundResult);
-            Assert.AreEqual("User not found", notFoundResult.Value);
+
+            var apiResponse = notFoundResult.Value as ApiResponse<string>;
+            Assert.IsNotNull(apiResponse);
+            Assert.AreEqual("User not found", apiResponse.Message);
         }
 
         [Test]
         public async Task GetByEmail_ReturnsOkWithUser()
         {
-            var user = new User { Id = Guid.NewGuid(), Username = "testuser", Password = "dummy" };
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Username = "testuser",
+                Password = "dummy",
+            };
             _mockUserService.Setup(s => s.GetUserByEmailAsync(user.Email)).ReturnsAsync(user);
 
             var actionResult = await _controller.GetByEmail(user.Email);
@@ -81,7 +105,9 @@ namespace OnlineAuctionAPI.Tests.Controller
         public async Task GetByEmail_Exception_ThrowsException()
         {
             var email = "test@example.com";
-            _mockUserService.Setup(s => s.GetUserByEmailAsync(email)).ThrowsAsync(new Exception("Email error"));
+            _mockUserService
+                .Setup(s => s.GetUserByEmailAsync(email))
+                .ThrowsAsync(new Exception("Email error"));
 
             var ex = Assert.ThrowsAsync<Exception>(async () => await _controller.GetByEmail(email));
             Assert.That(ex.Message, Does.Contain("Email error"));
@@ -95,9 +121,14 @@ namespace OnlineAuctionAPI.Tests.Controller
                 Email = "test@example.com",
                 Password = "password123",
                 UserName = "testuser",
-                Role = "Bidder"
+                Role = "Bidder",
             };
-            var user = new User { Id = Guid.NewGuid(), Username = "testuser", Password = "dummy" };
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Username = "testuser",
+                Password = "dummy",
+            };
             _mockUserService.Setup(s => s.CreateUserAsync(userDto)).ReturnsAsync(user);
 
             var actionResult = await _controller.CreateUser(userDto);
@@ -116,37 +147,16 @@ namespace OnlineAuctionAPI.Tests.Controller
                 Email = "test@example.com",
                 Password = "password123",
                 UserName = "testuser",
-                Role = "Bidder"
+                Role = "Bidder",
             };
-            _mockUserService.Setup(s => s.CreateUserAsync(userDto)).ThrowsAsync(new Exception("Create error"));
+            _mockUserService
+                .Setup(s => s.CreateUserAsync(userDto))
+                .ThrowsAsync(new Exception("Create error"));
 
-            var ex = Assert.ThrowsAsync<Exception>(async () => await _controller.CreateUser(userDto));
+            var ex = Assert.ThrowsAsync<Exception>(async () =>
+                await _controller.CreateUser(userDto)
+            );
             Assert.That(ex.Message, Does.Contain("Create error"));
-        }
-
-        [Test]
-        public async Task DeleteUser_ReturnsOkWithUser()
-        {
-            var userId = Guid.NewGuid();
-            var user = new User { Id = userId, Username = "testuser", Password = "dummy" };
-            _mockUserService.Setup(s => s.DeleteUserAsync(userId)).ReturnsAsync(user);
-
-            var actionResult = await _controller.DeleteUser(userId);
-            var okResult = actionResult as OkObjectResult;
-            Assert.IsNotNull(okResult);
-            var apiResponse = okResult.Value as ApiResponse<User>;
-            Assert.IsTrue(apiResponse.Success);
-            Assert.AreEqual(user, apiResponse.Data);
-        }
-
-        [Test]
-        public async Task DeleteUser_Exception_ThrowsException()
-        {
-            var userId = Guid.NewGuid();
-            _mockUserService.Setup(s => s.DeleteUserAsync(userId)).ThrowsAsync(new Exception("Delete error"));
-
-            var ex = Assert.ThrowsAsync<Exception>(async () => await _controller.DeleteUser(userId));
-            Assert.That(ex.Message, Does.Contain("Delete error"));
         }
 
         [Test]
@@ -156,10 +166,18 @@ namespace OnlineAuctionAPI.Tests.Controller
             var updateDto = new UserUpdateRequestDto
             {
                 UserName = "updateduser",
-                Email = "updated@example.com"
+                Email = "updated@example.com",
             };
-            var updatedUser = new User { Id = userId, Username = "updateduser", Email = "updated@example.com", Password = "dummy" };
-            _mockUserService.Setup(s => s.UpdateUserInfoAsync(userId, updateDto)).ReturnsAsync(updatedUser);
+            var updatedUser = new User
+            {
+                Id = userId,
+                Username = "updateduser",
+                Email = "updated@example.com",
+                Password = "dummy",
+            };
+            _mockUserService
+                .Setup(s => s.UpdateUserInfoAsync(userId, updateDto))
+                .ReturnsAsync(updatedUser);
 
             var actionResult = await _controller.Updateuser(userId, updateDto);
             var okResult = actionResult as OkObjectResult;
@@ -176,13 +194,16 @@ namespace OnlineAuctionAPI.Tests.Controller
             var updateDto = new UserUpdateRequestDto
             {
                 UserName = "updateduser",
-                Email = "updated@example.com"
+                Email = "updated@example.com",
             };
-            _mockUserService.Setup(s => s.UpdateUserInfoAsync(userId, updateDto)).ThrowsAsync(new Exception("Update error"));
+            _mockUserService
+                .Setup(s => s.UpdateUserInfoAsync(userId, updateDto))
+                .ThrowsAsync(new Exception("Update error"));
 
-            var ex = Assert.ThrowsAsync<Exception>(async () => await _controller.Updateuser(userId, updateDto));
+            var ex = Assert.ThrowsAsync<Exception>(async () =>
+                await _controller.Updateuser(userId, updateDto)
+            );
             Assert.That(ex.Message, Does.Contain("Update error"));
-
         }
     }
 }

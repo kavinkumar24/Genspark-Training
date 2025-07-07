@@ -1,6 +1,5 @@
 namespace OnlineAuctionAPI.Models.DTO;
 
-
 public class AuctionItemResponseDto
 {
     public Guid Id { get; set; }
@@ -17,4 +16,6 @@ public class AuctionItemResponseDto
     public string? WinnerId { get; set; }
     public List<FileDataDto> Files { get; set; } = new();
     public DateTime CreatedAt { get; set; }
+
+    public AuctionDeleteRequest? DeleteRequest { get; set; }
 }

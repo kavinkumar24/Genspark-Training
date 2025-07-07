@@ -7,6 +7,5 @@ namespace OnlineAuctionAPI.Models
         Completed,
         Closed,
         Cancelled,
-
     }
 }

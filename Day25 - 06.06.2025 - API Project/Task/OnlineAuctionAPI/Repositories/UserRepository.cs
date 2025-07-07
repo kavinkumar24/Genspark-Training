@@ -1,19 +1,17 @@
-
-using OnlineAuctionAPI.Contexts;
-using OnlineAuctionAPI.Models;
-using OnlineAuctionAPI.Helpers;
 using Microsoft.EntityFrameworkCore;
+using OnlineAuctionAPI.Contexts;
 using OnlineAuctionAPI.Exceptions;
+using OnlineAuctionAPI.Helpers;
+using OnlineAuctionAPI.Models;
+
 namespace OnlineAuctionAPI.Repositories;
 
 using OnlineAuctionAPI.Models.DTO;
 
 public class UserRepository : Repository<Guid, User>, IUserRepository
 {
-    public UserRepository(AuctionContext context) : base(context)
-    {
-
-    }
+    public UserRepository(AuctionContext context)
+        : base(context) { }
 
     public async Task<User?> GetByUsernameAsync(string username)
     {
@@ -21,8 +19,9 @@ public class UserRepository : Repository<Guid, User>, IUserRepository
 
         try
         {
-            var users = await _auctionContext.Users
-            .FirstOrDefaultAsync(u => u.Username == username);
+            var users = await _auctionContext.Users.FirstOrDefaultAsync(u =>
+                u.Username == username
+            );
             return users;
         }
         catch (Exception ex)
@@ -36,8 +35,9 @@ public class UserRepository : Repository<Guid, User>, IUserRepository
         InputValidator.ValidateString(email, nameof(email));
         try
         {
-            var usersByEmail = await _auctionContext.Users
-                                .FirstOrDefaultAsync(e => e.Email == email);
+            var usersByEmail = await _auctionContext.Users.FirstOrDefaultAsync(e =>
+                e.Email == email
+            );
             return usersByEmail;
         }
         catch (Exception ex)
@@ -48,24 +48,39 @@ public class UserRepository : Repository<Guid, User>, IUserRepository
 
     public async Task<User?> GetUserByRefreshTokenAsync(string refreshToken)
     {
-        var user = await _auctionContext.Users
-                    .Include(u => u.RefreshTokens)
-                    .FirstOrDefaultAsync(u => u.RefreshTokens.Any(r => r.Token == refreshToken));
-        return user;
+        try
+        {
+            var user = await _auctionContext
+                .Users.Include(u => u.RefreshTokens)
+                .FirstOrDefaultAsync(u => u.RefreshTokens.Any(r => r.Token == refreshToken));
+            return user;
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Get user by refresh token", ex);
+        }
     }
 
     public async Task<RefreshToken?> GetRefreshTokenAsync(string refreshToken)
     {
-        return await _auctionContext.RefreshTokens
-            .FirstOrDefaultAsync(rt => rt.Token == refreshToken);
+        try
+        {
+            return await _auctionContext.RefreshTokens.FirstOrDefaultAsync(rt =>
+                rt.Token == refreshToken
+            );
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Get refresh token", ex);
+        }
     }
 
     public async Task<User?> GetByIdWithVirtualWalletAsync(Guid id)
     {
         try
         {
-            var user = await _auctionContext.Users
-                .Include(u => u.VirtualWallet)
+            var user = await _auctionContext
+                .Users.Include(u => u.VirtualWallet)
                 .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
@@ -75,107 +90,16 @@ public class UserRepository : Repository<Guid, User>, IUserRepository
         }
     }
 
-
-
-    public async Task AddVirtualWalletAsync(Guid userId, VirtualWalletAddDto dto)
+    public async Task AddRefreshTokenAsync(RefreshToken refreshToken)
     {
-        using var transaction = await _auctionContext.Database.BeginTransactionAsync();
         try
         {
-            var virtualWallet = new VirtualWallet
-            {
-                UserId = userId,
-                Balance = dto.Balance,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
-
-            await _auctionContext.VirtualWallets.AddAsync(virtualWallet);
-
-            var history = new VirtualWalletHistory
-            {
-                Id = Guid.NewGuid(),
-                VirtualWalletId = virtualWallet.Id,
-                Amount = dto.Balance,
-                TransactionDate = DateTime.UtcNow
-            };
-
-            await _auctionContext.VirtualWalletHistories.AddAsync(history);
-
+            _auctionContext.RefreshTokens.Add(refreshToken);
             await _auctionContext.SaveChangesAsync();
-            await transaction.CommitAsync();
         }
         catch (Exception ex)
         {
-            await transaction.RollbackAsync();
-            throw new RepositoryOperationException("Add virtual wallet and history", ex);
+            throw new RepositoryOperationException("Add refresh token", ex);
         }
     }
-
-    public async Task AddFundsToWalletAndHistoryAsync(Guid userId, decimal amount)
-    {
-        using var transaction = await _auctionContext.Database.BeginTransactionAsync();
-        try
-        {
-            var user = await _auctionContext.Users
-                .Include(u => u.VirtualWallet)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null || user.VirtualWallet == null)
-                throw new Exception("User or wallet not found");
-
-            user.VirtualWallet.Balance += amount;
-            user.VirtualWallet.UpdatedAt = DateTime.UtcNow;
-
-            var history = new VirtualWalletHistory
-            {
-                Id = Guid.NewGuid(),
-                VirtualWalletId = user.VirtualWallet.Id,
-                Amount = amount,
-                TransactionDate = DateTime.UtcNow
-            };
-
-            _auctionContext.VirtualWalletHistories.Add(history);
-            await _auctionContext.SaveChangesAsync();
-            await transaction.CommitAsync();
-        }
-        catch (Exception ex)
-        {
-            await transaction.RollbackAsync();
-            throw new RepositoryOperationException("Add funds to wallet and history", ex);
-        }
-    }
-
-    public async Task<List<VirtualWalletHistory>> GetVirtualWalletHistoryByUserIdAsync(Guid userId)
-    {
-        try
-        {
-            var user = await _auctionContext.Users
-                .Include(u => u.VirtualWallet)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null || user.VirtualWallet == null)
-                throw new Exception("User or wallet not found");
-
-            var history = await _auctionContext.VirtualWalletHistories
-                .Where(h => h.VirtualWalletId == user.VirtualWallet.Id)
-                .OrderByDescending(h => h.TransactionDate)
-                .Select(h => new VirtualWalletHistory
-                {
-                    Id = h.Id,
-                    VirtualWalletId = h.VirtualWalletId,
-                    Amount = h.Amount,
-                    Description = h.Description,
-                    TransactionDate = h.TransactionDate
-                })
-                .ToListAsync();
-
-            return history;
-        }
-        catch (Exception ex)
-        {
-            throw new RepositoryOperationException("Get virtual wallet history by userId", ex);
-        }
-    }
-
 }

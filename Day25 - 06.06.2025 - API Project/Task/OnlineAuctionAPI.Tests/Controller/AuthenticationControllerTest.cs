@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using OnlineAuctionAPI.Controllers;
+using OnlineAuctionAPI.Hubs;
 using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
 using OnlineAuctionAPI.Models.DTO;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.SignalR;
-using OnlineAuctionAPI.Hubs;
 
 namespace OnlineAuctionAPI.Tests.Controller
 {
@@ -32,6 +32,7 @@ namespace OnlineAuctionAPI.Tests.Controller
                 _mockLogger.Object
             );
         }
+
         [Test]
         public async Task UserLogin_ReturnsOkWithUserLoginResponse()
         {
@@ -45,7 +46,7 @@ namespace OnlineAuctionAPI.Tests.Controller
                 UserName = "testuser",
                 Email = "test@example.com",
                 Token = "access_token",
-                RefreshToken = "refresh_token"
+                RefreshToken = "refresh_token",
             };
             _mockAuthService.Setup(s => s.LoginAsync(loginRequest)).ReturnsAsync(loginResponse);
 
@@ -80,9 +81,11 @@ namespace OnlineAuctionAPI.Tests.Controller
                 UserName = "testuser",
                 Email = "test@example.com",
                 Token = "access_token",
-                RefreshToken = "refresh_token"
+                RefreshToken = "refresh_token",
             };
-            _mockTokenService.Setup(s => s.RefreshTokenAsync(refreshToken)).ReturnsAsync(loginResponse);
+            _mockTokenService
+                .Setup(s => s.RefreshTokenAsync(refreshToken))
+                .ReturnsAsync(loginResponse);
 
             var actionResult = await _controller.RefreshToken(refreshToken);
             var okResult = actionResult.Result as OkObjectResult;
@@ -96,20 +99,30 @@ namespace OnlineAuctionAPI.Tests.Controller
         public async Task RefreshToken_InvalidToken_ReturnsUnauthorized()
         {
             var refreshToken = "badtoken";
-            _mockTokenService.Setup(s => s.RefreshTokenAsync(refreshToken)).ReturnsAsync((UserLoginResponseDto)null);
+            _mockTokenService
+                .Setup(s => s.RefreshTokenAsync(refreshToken))
+                .ReturnsAsync((UserLoginResponseDto?)null);
 
             var actionResult = await _controller.RefreshToken(refreshToken);
             var unauthorizedResult = actionResult.Result as UnauthorizedObjectResult;
             Assert.IsNotNull(unauthorizedResult);
-            Assert.AreEqual("Invalid refresh token", unauthorizedResult.Value);
+
+            var apiResponse = unauthorizedResult.Value as ApiResponse<string>;
+            Assert.IsNotNull(apiResponse);
+            Assert.That(apiResponse.Message, Is.EqualTo("Invalid refresh token"));
         }
+
         [Test]
         public async Task RefreshToken_Exception_ThrowsException()
         {
             var refreshToken = "anytoken";
-            _mockTokenService.Setup(s => s.RefreshTokenAsync(refreshToken)).ThrowsAsync(new System.Exception("Something went wrong"));
+            _mockTokenService
+                .Setup(s => s.RefreshTokenAsync(refreshToken))
+                .ThrowsAsync(new System.Exception("Something went wrong"));
 
-            var ex = Assert.ThrowsAsync<Exception>(async () => await _controller.RefreshToken(refreshToken));
+            var ex = Assert.ThrowsAsync<Exception>(async () =>
+                await _controller.RefreshToken(refreshToken)
+            );
             Assert.That(ex.Message, Does.Contain("Something went wrong"));
         }
     }

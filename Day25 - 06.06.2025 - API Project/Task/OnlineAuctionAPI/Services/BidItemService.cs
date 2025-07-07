@@ -1,4 +1,3 @@
-
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using OnlineAuctionAPI.Exceptions;
@@ -18,8 +17,13 @@ public class BidItemService : IBidItemService
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-
-    public BidItemService(IBidItemRepository bidItemRepository, IAuctionItemRepository auctionItemRepository, IUserRepository userRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+    public BidItemService(
+        IBidItemRepository bidItemRepository,
+        IAuctionItemRepository auctionItemRepository,
+        IUserRepository userRepository,
+        IMapper mapper,
+        IHttpContextAccessor httpContextAccessor
+    )
     {
         _bidItemRepository = bidItemRepository;
         _auctionItemRepository = auctionItemRepository;
@@ -53,14 +57,18 @@ public class BidItemService : IBidItemService
         }
         if (auctionItem.StartingPrice > bidDto.Amount)
         {
-            throw new InvalidDataException("Please place the bid above the starting price of the auctions.");
+            throw new InvalidDataException(
+                "Please place the bid above the starting price of the auctions."
+            );
         }
         if (bidDto.Amount <= 0)
         {
             throw new InvalidDataException("Bid amount must be greater than zero.");
         }
 
-        var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "UserId");
+        var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c =>
+            c.Type == "UserId"
+        );
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var loggedInUserId))
         {
             throw new InvalidDataException("You are not authorized to place this bid.");
@@ -69,7 +77,9 @@ public class BidItemService : IBidItemService
         bidDto.BidderId = loggedInUserId;
         var user = await _userRepository.GetByIdWithVirtualWalletAsync(loggedInUserId);
         if (user?.VirtualWallet == null)
-            throw new InvalidDataException("You do not have a virtual wallet. Please create one before bidding.");
+            throw new InvalidDataException(
+                "You do not have a virtual wallet. Please create one before bidding."
+            );
         if (user.VirtualWallet.Balance < bidDto.Amount)
             throw new InvalidDataException("Insufficient wallet balance to place this bid.");
 
@@ -78,19 +88,25 @@ public class BidItemService : IBidItemService
         if (highestBid != null)
         {
             if (bidDto.Amount <= highestBid.Amount)
-                throw new InvalidDataException($"Your bid must be higher than the current highest bid ({highestBid.Amount}) - for the auction {bidDto.AuctionItemId}.");
+                throw new InvalidDataException(
+                    $"Your bid must be higher than the current highest bid ({highestBid.Amount}) - for the auction {bidDto.AuctionItemId}."
+                );
         }
         else
         {
             if (bidDto.Amount < auctionItem.StartingPrice)
-                throw new InvalidDataException("Please place the bid above the starting price of the auction.");
+                throw new InvalidDataException(
+                    "Please place the bid above the starting price of the auction."
+                );
         }
         var existingBids = await _bidItemRepository.GetBidsByAuctionAsync(bidDto.AuctionItemId);
         var userPreviousBid = existingBids?.FirstOrDefault(b => b.BidderId == bidDto.BidderId);
 
         if (userPreviousBid != null && bidDto.Amount <= userPreviousBid.Amount)
         {
-            throw new InvalidDataException("Your new bid must be greater than your previous bid for this auction.");
+            throw new InvalidDataException(
+                "Your new bid must be greater than your previous bid for this auction."
+            );
         }
 
         var bidItem = _mapper.Map<BidItem>(bidDto);
@@ -159,7 +175,7 @@ public class BidItemService : IBidItemService
         }
         return true;
     }
-    
+
     public async Task<BidItemResponseDto> GetBidsByBiddingIdAsync(Guid biddingId)
     {
         if (biddingId == Guid.Empty)

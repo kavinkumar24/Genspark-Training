@@ -1,4 +1,3 @@
-
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineAuctionAPI.Models
@@ -18,6 +17,7 @@ namespace OnlineAuctionAPI.Models
 
         [Range(0.01, double.MaxValue, ErrorMessage = "Reserve price must be greater than zero.")]
         public decimal ReservePrice { get; set; }
+
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
@@ -43,8 +43,7 @@ namespace OnlineAuctionAPI.Models
         public ICollection<FileData>? FileAttachments { get; set; } = new List<FileData>();
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-        // public int StatusId { get; set; }
-        // public Status StatusNavigation { get; set; } = null!;
 
+        public AuctionDeleteRequest? DeleteRequest { get; set; } = null;
     }
 }

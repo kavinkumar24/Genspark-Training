@@ -1,12 +1,13 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using OnlineAuctionAPI.Contexts;
-using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Exceptions;
-using Microsoft.AspNetCore.Http.HttpResults;
+using OnlineAuctionAPI.Interfaces;
+
 namespace OnlineAuctionAPI.Repositories;
 
-
-public class Repository<K, T> : IRepository<K, T> where T : class
+public class Repository<K, T> : IRepository<K, T>
+    where T : class
 {
     protected readonly AuctionContext _auctionContext;
 
@@ -14,6 +15,7 @@ public class Repository<K, T> : IRepository<K, T> where T : class
     {
         _auctionContext = auctionContext;
     }
+
     public async Task<T> Add(T item)
     {
         try
@@ -29,7 +31,7 @@ public class Repository<K, T> : IRepository<K, T> where T : class
         catch (Exception ex)
         {
             throw new RepositoryOperationException("Adding the data", ex);
-        }   
+        }
     }
 
     public async Task<T> Get(K key)
@@ -63,7 +65,6 @@ public class Repository<K, T> : IRepository<K, T> where T : class
         catch (Exception ex)
         {
             throw new RepositoryOperationException("Getting all the data from database.", ex);
-            
         }
     }
 
@@ -83,9 +84,9 @@ public class Repository<K, T> : IRepository<K, T> where T : class
         catch (Exception ex)
         {
             throw new RepositoryOperationException("Updating the data.", ex);
-            
         }
     }
+
     public async Task<T> Delete(K key)
     {
         try
@@ -98,8 +99,6 @@ public class Repository<K, T> : IRepository<K, T> where T : class
         catch (Exception ex)
         {
             throw new RepositoryOperationException("Deleting the data", ex);
-            
         }
     }
-    
 }

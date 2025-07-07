@@ -1,14 +1,14 @@
-using NUnit.Framework;
-using Microsoft.EntityFrameworkCore;
-using OnlineAuctionAPI.Contexts;
-using OnlineAuctionAPI.Models;
-using OnlineAuctionAPI.Repositories;
 using System;
-using System.Threading.Tasks;
-using System.Linq;
 using System.Collections.Generic;
-using OnlineAuctionAPI.Models.DTO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
+using OnlineAuctionAPI.Contexts;
 using OnlineAuctionAPI.Exceptions;
+using OnlineAuctionAPI.Models;
+using OnlineAuctionAPI.Models.DTO;
+using OnlineAuctionAPI.Repositories;
 
 namespace OnlineAuctionAPI.Tests
 {
@@ -46,7 +46,7 @@ namespace OnlineAuctionAPI.Tests
                 Name = "Live Auction",
                 Status = AuctionStatus.Live,
                 StartTime = DateTime.UtcNow.AddMinutes(-10),
-                EndTime = DateTime.UtcNow.AddMinutes(10)
+                EndTime = DateTime.UtcNow.AddMinutes(10),
             };
             _context.AuctionItems.Add(auction);
             await _context.SaveChangesAsync();
@@ -62,8 +62,20 @@ namespace OnlineAuctionAPI.Tests
         {
             var auctionId = Guid.NewGuid();
             var auction = new AuctionItem { Id = auctionId, Name = "Bid Auction" };
-            var bidder = new User { Id = Guid.NewGuid(), Username = "Bidder1", Password = "dummy" };
-            var bid = new BidItem { Id = Guid.NewGuid(), AuctionItemId = auctionId, Amount = 100, BidderId = bidder.Id, Bidder = bidder };
+            var bidder = new User
+            {
+                Id = Guid.NewGuid(),
+                Username = "Bidder1",
+                Password = "dummy",
+            };
+            var bid = new BidItem
+            {
+                Id = Guid.NewGuid(),
+                AuctionItemId = auctionId,
+                Amount = 100,
+                BidderId = bidder.Id,
+                Bidder = bidder,
+            };
 
             _context.Users.Add(bidder);
             _context.AuctionItems.Add(auction);
@@ -80,10 +92,23 @@ namespace OnlineAuctionAPI.Tests
         {
             var auction = new AuctionItem
             {
-                
                 Name = "Auction with File",
-                FileAttachments = new List<FileData> { new FileData { Id = 1, Name = "doc.txt",Data = new byte[] { 0x01 }} },               
-                Seller = new User { Id = Guid.NewGuid(), Username = "Seller1", Password = "dummy" }            };
+                FileAttachments = new List<FileData>
+                {
+                    new FileData
+                    {
+                        Id = 1,
+                        Name = "doc.txt",
+                        Data = new byte[] { 0x01 },
+                    },
+                },
+                Seller = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = "Seller1",
+                    Password = "dummy",
+                },
+            };
             _context.AuctionItems.Add(auction);
             await _context.SaveChangesAsync();
 
@@ -100,8 +125,21 @@ namespace OnlineAuctionAPI.Tests
             var auction = new AuctionItem
             {
                 Id = auctionId,
-                FileAttachments = new List<FileData> { new FileData { Id =1, Name = "img.jpg", Data = new byte[] { 0x01 } } },
-                Seller = new User { Id = Guid.NewGuid(), Username = "Seller2", Password = "dummy" },
+                FileAttachments = new List<FileData>
+                {
+                    new FileData
+                    {
+                        Id = 1,
+                        Name = "img.jpg",
+                        Data = new byte[] { 0x01 },
+                    },
+                },
+                Seller = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = "Seller2",
+                    Password = "dummy",
+                },
             };
             _context.AuctionItems.Add(auction);
             await _context.SaveChangesAsync();
@@ -117,7 +155,9 @@ namespace OnlineAuctionAPI.Tests
         {
             for (int i = 0; i < 15; i++)
             {
-                _context.AuctionItems.Add(new AuctionItem { Id = Guid.NewGuid(), Name = $"Auction {i}" });
+                _context.AuctionItems.Add(
+                    new AuctionItem { Id = Guid.NewGuid(), Name = $"Auction {i}" }
+                );
             }
             await _context.SaveChangesAsync();
 
@@ -133,36 +173,33 @@ namespace OnlineAuctionAPI.Tests
             var userId = Guid.NewGuid();
             var now = DateTime.UtcNow;
 
-            var auction = new AuctionItem
-            {
-                Id = auctionId,
-                EndTime = now.AddMinutes(10) 
-            };
+            var auction = new AuctionItem { Id = auctionId, EndTime = now.AddMinutes(10) };
             var bid = new BidItem
             {
                 Id = Guid.NewGuid(),
                 AuctionItemId = auctionId,
                 Amount = 500,
                 BidderId = userId,
-                BidTime = now.AddMinutes(1)
+                BidTime = now.AddMinutes(1),
             };
-            var user = new User { Id = userId, Username = "TopBidder", Password = "dummy" };
+            var user = new User
+            {
+                Id = userId,
+                Username = "TopBidder",
+                Password = "dummy",
+            };
 
             _context.Users.Add(user);
             _context.AuctionItems.Add(auction);
             _context.BidItems.Add(bid);
             await _context.SaveChangesAsync();
 
-            var dto = new WinningIdUpdateDto
-            {
-                AuctionItemId = auctionId,
-                WinningId = bid.Id
-            };
+            var dto = new WinningIdUpdateDto { AuctionItemId = auctionId, WinningId = bid.Id };
 
             var result = await _repo.UpdateWinningId(dto);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(bid.BidderId, result.WinnerId); 
+            Assert.AreEqual(bid.BidderId, result.WinnerId);
             Assert.AreEqual("TopBidder", result.WinnerName);
         }
 
@@ -172,11 +209,12 @@ namespace OnlineAuctionAPI.Tests
             var dto = new WinningIdUpdateDto
             {
                 AuctionItemId = Guid.NewGuid(),
-                WinningId = Guid.NewGuid()
+                WinningId = Guid.NewGuid(),
             };
 
             Assert.ThrowsAsync<NotFoundException>(() => _repo.UpdateWinningId(dto));
         }
+
         [Test]
         public async Task UpdateWinningId_InvalidWinner_ThrowsNotFound()
         {
@@ -185,14 +223,17 @@ namespace OnlineAuctionAPI.Tests
             var wrongWinner = Guid.NewGuid();
 
             _context.AuctionItems.Add(new AuctionItem { Id = auctionId });
-            _context.BidItems.Add(new BidItem { AuctionItemId = auctionId, Amount = 999, BidderId = bidder });
+            _context.BidItems.Add(
+                new BidItem
+                {
+                    AuctionItemId = auctionId,
+                    Amount = 999,
+                    BidderId = bidder,
+                }
+            );
             await _context.SaveChangesAsync();
 
-            var dto = new WinningIdUpdateDto
-            {
-                AuctionItemId = auctionId,
-                WinningId = wrongWinner
-            };
+            var dto = new WinningIdUpdateDto { AuctionItemId = auctionId, WinningId = wrongWinner };
 
             Assert.ThrowsAsync<NotFoundException>(() => _repo.UpdateWinningId(dto));
         }

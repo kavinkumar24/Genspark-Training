@@ -1,14 +1,15 @@
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using OnlineAuctionAPI.Interfaces;
-using OnlineAuctionAPI.Models;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using OnlineAuctionAPI.Hubs;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OnlineAuctionAPI.Helpers;
+using OnlineAuctionAPI.Hubs;
+using OnlineAuctionAPI.Interfaces;
+using OnlineAuctionAPI.Models;
+using OnlineAuctionAPI.Services;
 
 namespace OnlineAuctionAPI.Service
 {
@@ -17,7 +18,10 @@ namespace OnlineAuctionAPI.Service
         private readonly IServiceProvider _serviceProvider;
         private readonly IHubContext<AuctionHub> _hubContext;
 
-        public AuctionCheckService(IServiceProvider serviceProvider, IHubContext<AuctionHub> hubContext)
+        public AuctionCheckService(
+            IServiceProvider serviceProvider,
+            IHubContext<AuctionHub> hubContext
+        )
         {
             _serviceProvider = serviceProvider;
             _hubContext = hubContext;
@@ -29,14 +33,21 @@ namespace OnlineAuctionAPI.Service
             {
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    var auctionItemRepository = scope.ServiceProvider.GetRequiredService<IAuctionItemRepository>();
-                    var bidItemRepository = scope.ServiceProvider.GetRequiredService<IBidItemRepository>();
-                    var eAgreementRepository = scope.ServiceProvider.GetRequiredService<IEAgreementRepository>();
-                    var virtualWalletRepository = scope.ServiceProvider.GetRequiredService<IVirtualWalletRepository>();
+                    var auctionItemRepository =
+                        scope.ServiceProvider.GetRequiredService<IAuctionItemRepository>();
+                    var bidItemRepository =
+                        scope.ServiceProvider.GetRequiredService<IBidItemRepository>();
+                    var eAgreementRepository =
+                        scope.ServiceProvider.GetRequiredService<IEAgreementRepository>();
+                    var virtualWalletRepository =
+                        scope.ServiceProvider.GetRequiredService<IVirtualWalletRepository>();
+                    var _userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+                    var _emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
 
                     var now = DateTime.UtcNow;
 
-                    var toGoLiveAuctions = await auctionItemRepository.GetAllUpcomingAndShouldBeLiveAsync(now);
+                    var toGoLiveAuctions =
+                        await auctionItemRepository.GetAllUpcomingAndShouldBeLiveAsync(now);
 
                     foreach (var auction in toGoLiveAuctions)
                     {
@@ -56,13 +67,15 @@ namespace OnlineAuctionAPI.Service
                                 endTime = auction.EndTime,
                                 sellerId = auction.SellerId,
                                 createdAt = auction.CreatedAt,
-                                updatedAt = auction.UpdatedAt
+                                updatedAt = auction.UpdatedAt,
                             };
                             await _hubContext.Clients.All.SendAsync("AuctionStatusUpdated", result);
                         }
                     }
 
-                    var endedAuctions = await auctionItemRepository.GetAllEndedAndNotCompletedAsync(now);
+                    var endedAuctions = await auctionItemRepository.GetAllEndedAndNotCompletedAsync(
+                        now
+                    );
 
                     foreach (var auction in endedAuctions)
                     {
@@ -75,7 +88,6 @@ namespace OnlineAuctionAPI.Service
 
                         if (highestBid != null && highestBid.Amount >= auction.ReservePrice)
                         {
-
                             auction.WinnerId = highestBid.Id;
                             var result = new
                             {
@@ -84,22 +96,24 @@ namespace OnlineAuctionAPI.Service
                                 winnerId = auction.WinnerId,
                                 sellerId = auction.SellerId,
                                 createdAt = auction.CreatedAt,
-                                amount = highestBid.Amount
+                                amount = highestBid.Amount,
                             };
                             await _hubContext.Clients.All.SendAsync("WinningIdUpdated", result);
 
-                            var winnerWallet = await virtualWalletRepository.GetByUserIdAsync(highestBid.BidderId);
+                            var winnerWallet = await virtualWalletRepository.GetByUserIdAsync(
+                                highestBid.BidderId
+                            );
                             if (winnerWallet != null && winnerWallet.Balance >= highestBid.Amount)
                             {
                                 winnerWallet.Balance -= highestBid.Amount;
                                 winnerWallet.UpdatedAt = DateTime.UtcNow;
-                                await virtualWalletRepository.UpdateAsync(winnerWallet);
+                                await virtualWalletRepository.Update(winnerWallet.Id, winnerWallet);
                                 var history = new VirtualWalletHistory
                                 {
                                     VirtualWalletId = winnerWallet.Id,
                                     Amount = -highestBid.Amount,
                                     Description = $"Deducted for winning auction {auction.Id}",
-                                    TransactionDate = DateTime.UtcNow
+                                    TransactionDate = DateTime.UtcNow,
                                 };
                                 await virtualWalletRepository.AddHistoryAsync(history);
                             }
@@ -109,7 +123,9 @@ namespace OnlineAuctionAPI.Service
                             }
                             else if (winnerWallet.Balance < highestBid.Amount)
                             {
-                                throw new InvalidDataException("Insufficient balance in winner's virtual wallet.");
+                                throw new InvalidDataException(
+                                    "Insufficient balance in winner's virtual wallet."
+                                );
                             }
                             else
                             {
@@ -124,10 +140,26 @@ namespace OnlineAuctionAPI.Service
                                 AuctionItemId = auction.Id,
                                 BiddingId = highestBid.Id,
                                 File = pdfBytes,
-                                CreatedAt = DateTime.UtcNow
+                                CreatedAt = DateTime.UtcNow,
                             };
                             await eAgreementRepository.Add(agreement);
                             auction.Status = AuctionStatus.Completed;
+                            var recipient =
+                                await _userService.GetUserByIdAsync(highestBid.BidderId)
+                                ?? throw new NotFoundException(
+                                    $"Recipient with ID {highestBid.BidderId} not found."
+                                );
+                            var pdfFilePath = PdfHelper.SavePdfToFile(
+                                pdfBytes,
+                                $"agreement_{agreement.Id} - {recipient.Username} .pdf"
+                            );
+
+                            await _emailService.SendEmailAsync(
+                                recipient.Email,
+                                "Auction Won",
+                                $"Congratulations! You have won the auction for {auction.Name}.",
+                                pdfFilePath
+                            );
                         }
                         else
                         {
@@ -149,7 +181,7 @@ namespace OnlineAuctionAPI.Service
                                 endTime = auction.EndTime,
                                 sellerId = auction.SellerId,
                                 createdAt = auction.CreatedAt,
-                                updatedAt = auction.UpdatedAt
+                                updatedAt = auction.UpdatedAt,
                             };
                             await _hubContext.Clients.All.SendAsync("AuctionStatusUpdated", result);
                         }
@@ -159,7 +191,6 @@ namespace OnlineAuctionAPI.Service
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }
         }
-
 
         public override void Dispose()
         {

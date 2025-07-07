@@ -12,7 +12,10 @@ namespace OnlineAuctionAPI.Services
         private readonly IEAgreementRepository _eAgreementRepository;
         private readonly IBidItemRepository _bidItemRepository;
 
-        public EAgreementService(IEAgreementRepository eAgreementRepository, IBidItemRepository bidItemRepository)
+        public EAgreementService(
+            IEAgreementRepository eAgreementRepository,
+            IBidItemRepository bidItemRepository
+        )
         {
             _eAgreementRepository = eAgreementRepository;
             _bidItemRepository = bidItemRepository;
@@ -32,7 +35,7 @@ namespace OnlineAuctionAPI.Services
                     agreement.AuctionItemId,
                     agreement.BiddingId,
                     agreement.CreatedAt,
-                    FileUrl = $"http://localhost:5230/api/v1/EAgreement/{agreement.Id}/download"
+                    FileUrl = $"http://localhost:5230/api/v1/EAgreement/{agreement.Id}/download",
                 })
                 .ToList();
 

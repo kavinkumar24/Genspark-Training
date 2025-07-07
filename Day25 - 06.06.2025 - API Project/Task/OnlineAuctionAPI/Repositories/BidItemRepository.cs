@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using OnlineAuctionAPI.Contexts;
 using OnlineAuctionAPI.Exceptions;
@@ -9,20 +8,18 @@ namespace OnlineAuctionAPI.Repositories;
 
 public class BidItemRepository : Repository<Guid, BidItem>, IBidItemRepository
 {
-    public BidItemRepository(AuctionContext context) : base(context)
-    {
-
-    }
+    public BidItemRepository(AuctionContext context)
+        : base(context) { }
 
     public async Task<IEnumerable<BidItem>> GetBidsByAuctionAsync(Guid auctionItemId)
     {
         try
         {
-            var auction = await _auctionContext.BidItems
-                                .Where(b => b.AuctionItemId == auctionItemId)
-                                .Include(b => b.Bidder)
-                                .OrderByDescending(b => b.Amount)
-                                .ToListAsync();
+            var auction = await _auctionContext
+                .BidItems.Where(b => b.AuctionItemId == auctionItemId)
+                .Include(b => b.Bidder)
+                .OrderByDescending(b => b.Amount)
+                .ToListAsync();
             return auction;
         }
         catch (Exception ex)
@@ -35,11 +32,11 @@ public class BidItemRepository : Repository<Guid, BidItem>, IBidItemRepository
     {
         try
         {
-            var highestBid = await _auctionContext.BidItems
-                                    .Where(b => b.AuctionItemId == auctionItemId)
-                                    .OrderByDescending(b => b.Amount)
-                                    .ThenBy(b => b.BidTime)
-                                    .FirstOrDefaultAsync();
+            var highestBid = await _auctionContext
+                .BidItems.Where(b => b.AuctionItemId == auctionItemId)
+                .OrderByDescending(b => b.Amount)
+                .ThenBy(b => b.BidTime)
+                .FirstOrDefaultAsync();
             return highestBid;
         }
         catch (Exception ex)
@@ -50,12 +47,62 @@ public class BidItemRepository : Repository<Guid, BidItem>, IBidItemRepository
 
     public async Task<IEnumerable<BidItem>> GetBidsByUserIdAsync(Guid userId)
     {
-        return await _auctionContext.BidItems.Where(b => b.BidderId == userId).ToListAsync();
+        try
+        {
+            return await _auctionContext.BidItems.Where(b => b.BidderId == userId).ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Error retrieving bids by user ID.", ex);
+        }
     }
 
     public async Task<BidItem?> GetByIdAsync(Guid bidId)
     {
-        return await _auctionContext.BidItems
-            .FirstOrDefaultAsync(b => b.Id == bidId);
+        try
+        {
+            return await _auctionContext.BidItems.FirstOrDefaultAsync(b => b.Id == bidId);
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Error retrieving bid by ID.", ex);
+        }
+    }
+
+    public async Task<decimal?> GetMaxBidAmountAsync(Guid auctionItemId, DateTime endTime)
+    {
+        try
+        {
+            return await _auctionContext
+                .BidItems.Where(b => b.AuctionItemId == auctionItemId && b.BidTime <= endTime)
+                .MaxAsync(b => (decimal?)b.Amount);
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Error retrieving max bid amount.", ex);
+        }
+    }
+
+    public async Task<List<BidItem>> GetHighestBidsAsync(
+        Guid auctionItemId,
+        DateTime endTime,
+        decimal maxAmount
+    )
+    {
+        try
+        {
+            return await _auctionContext
+                .BidItems.Where(b =>
+                    b.AuctionItemId == auctionItemId
+                    && b.BidTime <= endTime
+                    && b.Amount == maxAmount
+                )
+                .OrderBy(b => b.BidTime)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryOperationException("Error retrieving highest bids.", ex);
+        }
     }
 }

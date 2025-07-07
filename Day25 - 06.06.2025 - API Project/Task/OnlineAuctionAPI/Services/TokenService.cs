@@ -1,39 +1,44 @@
 using OnlineAuctionAPI.Interfaces;
 using OnlineAuctionAPI.Models;
+
 namespace OnlineAuctionAPI.Service;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using OnlineAuctionAPI.Models.DTO;
 using System.Security.Cryptography;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using OnlineAuctionAPI.Contexts;
+using OnlineAuctionAPI.Models.DTO;
 
 public class TokenService : ITokenService
 {
     private readonly SymmetricSecurityKey _securityKey;
-    private readonly AuctionContext _auctionContext;
     private readonly int _accessTokenExpiryMinutes;
     private readonly int _refreshTokenExpiryDays;
     private readonly IUserRepository _userRepository;
-    public TokenService(AuctionContext auctionContext, IConfiguration configuration, IUserRepository userRepository)
+
+    public TokenService(IConfiguration configuration, IUserRepository userRepository)
     {
-        _auctionContext = auctionContext;
-        _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Keys:JwtTokenKey"]));
-        _accessTokenExpiryMinutes = int.Parse(configuration["JwtSettings:AccessTokenExpiryMinutes"]);
-        _refreshTokenExpiryDays = int.Parse(configuration["JwtSettings:RefreshTokenExpiryDays"]);
+        var jwtTokenKey =
+            configuration["Keys:JwtTokenKey"]
+            ?? throw new ArgumentNullException("JwtTokenKey configuration is missing.");
+        _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenKey));
+        _accessTokenExpiryMinutes = configuration.GetValue<int>(
+            "JwtSettings:AccessTokenExpiryMinutes"
+        );
+        _refreshTokenExpiryDays = configuration.GetValue<int>("JwtSettings:RefreshTokenExpiryDays");
         _userRepository = userRepository;
-
-
     }
+
     public async Task<TokenDto> GenerateTokensAsync(User user)
     {
         List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier,user.Email),
-                new Claim(ClaimTypes.Role,user.Role.ToString()),
-                new Claim("UserId", user.Id.ToString()),
-            };
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Email),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
+            new Claim("UserId", user.Id.ToString()),
+        };
 
         var creds = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256Signature);
 
@@ -41,7 +46,7 @@ public class TokenService : ITokenService
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(_accessTokenExpiryMinutes),
-            SigningCredentials = creds
+            SigningCredentials = creds,
         };
         var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -55,30 +60,28 @@ public class TokenService : ITokenService
             CreatedAt = DateTime.UtcNow,
             ExpiresAt = DateTime.UtcNow.AddDays(_refreshTokenExpiryDays),
             IsRevoked = false,
-            UserId = user.Id
+            UserId = user.Id,
         };
-        _auctionContext.RefreshTokens.Add(newRefreshToken);
-        await _auctionContext.SaveChangesAsync();
-        return new TokenDto
-        {
-            AccessToken = accessToken,
-            RefreshToken = refreshToken
-        };
+        await _userRepository.AddRefreshTokenAsync(newRefreshToken);
+        return new TokenDto { AccessToken = accessToken, RefreshToken = refreshToken };
     }
 
     private string GenerateRefreshToken()
     {
-
         var randomBytes = new byte[64];
         using var randomNumGen = RandomNumberGenerator.Create();
         randomNumGen.GetBytes(randomBytes);
         return Convert.ToBase64String(randomBytes);
-
     }
+
     public async Task<UserLoginResponseDto> RefreshTokenAsync(string refreshToken)
     {
         var storedRefreshToken = await _userRepository.GetRefreshTokenAsync(refreshToken);
-        if (storedRefreshToken == null || storedRefreshToken.ExpiresAt < DateTime.UtcNow || storedRefreshToken.IsRevoked)
+        if (
+            storedRefreshToken == null
+            || storedRefreshToken.ExpiresAt < DateTime.UtcNow
+            || storedRefreshToken.IsRevoked
+        )
         {
             throw new UnauthorizedAccessException("Invalid, expired, or revoked refresh token");
         }
@@ -88,11 +91,9 @@ public class TokenService : ITokenService
         {
             throw new UnauthorizedAccessException("User not found for refresh token");
         }
-       
 
         storedRefreshToken.IsRevoked = true;
         storedRefreshToken.RevokedAt = DateTime.UtcNow;
-        await _auctionContext.SaveChangesAsync();
 
         var newTokens = await GenerateTokensAsync(user);
 
@@ -101,9 +102,7 @@ public class TokenService : ITokenService
             UserName = user.Username,
             Email = user.Email,
             Token = newTokens.AccessToken,
-            RefreshToken = newTokens.RefreshToken
+            RefreshToken = newTokens.RefreshToken,
         };
     }
-
 }
-        

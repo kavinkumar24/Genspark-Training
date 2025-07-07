@@ -1,4 +1,3 @@
-
 using OnlineAuctionAPI.Interfaces;
 
 namespace OnlineAuctionAPI.Service;
