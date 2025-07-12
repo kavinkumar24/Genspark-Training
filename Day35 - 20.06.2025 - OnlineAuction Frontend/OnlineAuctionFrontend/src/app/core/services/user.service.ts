@@ -72,17 +72,15 @@ export class UserService {
       .pipe(catchError(this.errorHandler.handleError));
   }
 
-getSearchUsers(searchQuery: any): Observable<any> {
-  let params: any = {};
-  if (searchQuery.SearchTerm) {
-    params.SearchTerm = searchQuery.SearchTerm;
-  }
-  if (searchQuery.SortBy) {
-    params.SortBy = searchQuery.SortBy;
-  }
-  return this.http
-    .get<any>(`${this.baseUrl}/search`, { params })
-    .pipe(
+  getSearchUsers(searchQuery: any): Observable<any> {
+    let params: any = {};
+    if (searchQuery.SearchTerm) {
+      params.SearchTerm = searchQuery.SearchTerm;
+    }
+    if (searchQuery.SortBy) {
+      params.SortBy = searchQuery.SortBy;
+    }
+    return this.http.get<any>(`${this.baseUrl}/search`, { params }).pipe(
       catchError((error) => {
         if (error.status === 404) {
           return of({ success: true, message: 'No users found', data: [] });
@@ -90,7 +88,24 @@ getSearchUsers(searchQuery: any): Observable<any> {
         return this.errorHandler.handleError(error);
       })
     );
-}
+  }
 
-}
+  loginSuperAdmin(payload: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}/super-admin-login`, payload)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            return throwError(() => new Error('Invalid credentials'));
+          }
+          return this.errorHandler.handleError(error);
+        })
+      );
+    }
 
+    registerAdmin(payload: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}/register-admin`, payload)
+      .pipe(catchError(this.errorHandler.handleError));
+    }
+}

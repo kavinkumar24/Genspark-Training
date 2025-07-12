@@ -39,7 +39,7 @@
           <td>
             @if (role === 'Admin') {
             <p
-              (click)="showModel('bids',auction.id)"
+              (click)="showModel('bids',auction)"
               class="text-primary-color underline hover:text-[#85bdd0] cursor-pointer"
             >
               {{ auction.name }}
@@ -66,7 +66,7 @@
           <td>{{ auction.endTime | date:'short' }}</td>
           <td>
             <p
-              (click)="showModel('bidsData', auction.winnerId)"
+              (click)="showModel('bidsData', auction)"
               class="text-primary-color hover:underline cursor-pointer"
             >
               {{ auction.winnerId?? '-' }}
@@ -93,7 +93,7 @@
 
           <td>
             <button
-              (click)="showModel('cancel',auction.id)"
+              (click)="showModel('cancel',auction)"
               class="btn-primary bg-red-400 hover:bg-red-500"
               [disabled]="!(auction.status === 'Live' || auction.status === 'Upcoming')"
             >
@@ -115,7 +115,7 @@
           <td>
             <button
               class="btn-primary p-2 bg-red-500 hover:bg-red-600"
-              (click)="showModel('delete',auction.id)"
+              (click)="showModel('delete',auction)"
             >
               <lucide-angular [img]="trash" class="text-white"></lucide-angular>
             </button>
@@ -157,7 +157,7 @@
           } @if (role === 'Seller') {
           <td>
             <span
-              class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded text-sm italic min-w-[80px] text-center dark:bg-gray-900 dark:text-gray-400"
+              class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded text-sm italic min-w-sm text-center dark:bg-gray-900 dark:text-gray-400"
             >
               {{ auction.deleteRequest?.remarks || '-' }}
             </span>
@@ -430,12 +430,14 @@
         <td>{{ bids.amount }}</td>
         <td>{{ bids.userId }}</td>
         <td>
+
           <button
-            class="btn-primary bg-red-500 hover:bg-red-600"
-            (click)="onDeleteBids(bids.id)"
-          >
-            Delete
-          </button>
+  class="btn-primary bg-red-500 hover:bg-red-600"
+  (click)="onDeleteBids(bids.id)"
+  [disabled]="bids.id === winnerId"
+>
+  Delete
+</button>
         </td>
       </tr>
       } @if(bidsForAuction.length===0){

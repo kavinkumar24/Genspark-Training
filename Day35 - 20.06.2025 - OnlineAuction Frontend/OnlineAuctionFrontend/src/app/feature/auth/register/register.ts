@@ -67,6 +67,11 @@ export class Register implements OnInit {
             );
             this.showAdminInfoModel = true;
           } else {
+            if( payload.role === 'Admin') {
+              this.snackBar.showError('Admin registration is not allowed.');
+              this.isLoading = false;
+              return;
+            }
             this.userService.registerNewuser(payload).subscribe({
               next: () => {
                 setTimeout(() => {
@@ -85,7 +90,7 @@ export class Register implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-          this.snackBar.showError('Error checking user status.');
+          this.snackBar.showError(`Error checking user status. - ${err.message}`);
         },
       });
     } else {

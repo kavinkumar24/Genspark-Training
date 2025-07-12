@@ -79,6 +79,7 @@ export class ViewAuction {
   selectedBidId: string = '';
   bidsData: any;
   userData: User | null = null;
+  winnerId: number | null = null;
 
   fetchAuctions(filters?: any) {
     if (filters) {
@@ -209,7 +210,7 @@ export class ViewAuction {
     });
   }
   onViewAttachements(auctionId: string) {
-    this.router.navigate(['/seller/view-auction-attachements/', auctionId], {
+    this.router.navigate(['/admin/view-auction-attachements/', auctionId], {
       queryParams: {
         page: this.page,
         ...this.currentFilters,
@@ -290,18 +291,19 @@ export class ViewAuction {
       this.showFilter = true;
     } else if (type === 'delete') {
       this.showDelete = true;
-      this.selectedAuctionId = auctionId;
+      this.selectedAuctionId = auctionId.id;
     } else if (type === 'cancel') {
-      this.auctionToCancel = auctionId;
+      this.auctionToCancel = auctionId.id;
       this.showCancelModel = true;
     } else if (type === 'bids') {
-      this.selectedAuctionId = auctionId;
+      this.selectedAuctionId = auctionId.id;
       this.showBidModel = true;
-      this.fetchBidsForAuction(auctionId);
+      this.winnerId = auctionId?.winnerId ?? null;
+      this.fetchBidsForAuction(auctionId.id);
     } else if (type === 'bidsData') {
-      this.selectedBidId = auctionId;
+      this.selectedBidId = auctionId.winnerId;
       this.showBidsData = true;
-      this.getBidsItem(auctionId);
+      this.getBidsItem(auctionId.winnerId);
     } else if (type === 'request-reason') {
       this.deleteRequest = auctionId;
       this.showRequestReason = true;
@@ -360,6 +362,10 @@ export class ViewAuction {
   }
 
   onDeleteBids(bidId: string) {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this bid?'
+    );
+    if (!confirmed) return;
     this.bidService.deleteBids(bidId).subscribe({
       next: () => {
         alert('Deleted');

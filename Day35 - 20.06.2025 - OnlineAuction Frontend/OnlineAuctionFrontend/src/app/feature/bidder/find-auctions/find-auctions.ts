@@ -56,7 +56,7 @@ export class FindAuctions implements OnInit {
   startPriceRange = { min: 0, max: 10000 };
   minStartPrice: number = 0;
   selectedEndDate: string | null = null;
-  
+
   constructor(
     private auctionService: AuctionService,
     private biddingService: BiddingService,
@@ -141,9 +141,16 @@ export class FindAuctions implements OnInit {
   }
 
   viewFile(auctionId: string, fileName: string) {
-    this.auctionService.getfile(auctionId, fileName).subscribe((blob) => {
-      const url = window.URL.createObjectURL(blob);
-      window.open(url);
+    this.auctionService.getfile(auctionId, fileName).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      error: (err) => {
+        this.snackBar.showError(
+          "Can't fetch this file. Please try again later."
+        );
+      },
     });
   }
 

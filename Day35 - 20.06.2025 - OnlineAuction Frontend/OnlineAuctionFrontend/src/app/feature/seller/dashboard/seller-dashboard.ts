@@ -19,6 +19,8 @@ import {
 } from '../../../shared/utils/dashboard-utils';
 import { observeThemeChanges } from '../../../shared/utils/theme-utils';
 import { SummaryCard } from '../../../shared/components/summary-card/summary-card';
+import { BiddingService } from '../../../core/services/bidding.service';
+import { forkJoin } from 'rxjs';
 
 export type ChartOptions = {
   series?: ApexAxisChartSeries;
@@ -59,6 +61,7 @@ export class SellerDashboard implements OnInit, AfterViewInit {
   filterationValue = 'createdAt';
   chartHeight = 300;
 
+  private auctionService = inject(AuctionService);
   filterEndingSoonAuctions() {
     const now = new Date();
     const twoDaysLater = new Date();
@@ -79,7 +82,7 @@ export class SellerDashboard implements OnInit, AfterViewInit {
   }
 
   status: string[] = ['Upcoming', 'Live', 'Completed', 'Closed', 'Cancelled'];
-  private auctionService = inject(AuctionService);
+
   private hasViewInitialized = false;
 
   ngOnInit(): void {

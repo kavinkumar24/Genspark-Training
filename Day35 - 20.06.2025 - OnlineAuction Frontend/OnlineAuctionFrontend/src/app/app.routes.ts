@@ -19,6 +19,7 @@ import { ForgetPassword } from './feature/auth/forget-password/forget-password';
 import { AdminDashboard } from './feature/admin/admin-dashboard/admin-dashboard';
 import { ChangePassword } from './feature/auth/change-password/change-password';
 import { ManageUsers } from './feature/admin/manage-users/manage-users';
+import { LoginSuperAdmin } from './feature/login-super-admin/login-super-admin';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,6 +32,7 @@ export const routes: Routes = [
     //   roles: ['Admin'],
     // },
   },
+  { path: 'login-super-admin', component: LoginSuperAdmin, canActivate: [LoginGuard] },
   {
     path: 'change-password',
     component: ChangePassword,
@@ -84,6 +86,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: AdminDashboard },
       { path: 'manage-users', component: ManageUsers },
       { path: 'manage-auctions', component: ViewAuction },
+      { path: 'view-auction-attachements/:auctionId', component: ViewAuctionAttachements },
     ],
     data: { roles: ['Admin'] },
   },
