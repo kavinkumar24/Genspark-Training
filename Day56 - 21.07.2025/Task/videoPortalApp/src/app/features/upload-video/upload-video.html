@@ -1,0 +1,47 @@
+<div class="upload-form-container">
+  <h2>Fill the details</h2>
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadVideo()">
+    <div>
+      <label for="title">Title:</label>
+      <input id="title" formControlName="title" type="text" required />
+      @if (uploadForm.get('title')?.invalid && uploadForm.get('title')?.touched)
+      {
+      <p class="error">Title is required.</p>
+      }
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        required
+      ></textarea>
+      @if (uploadForm.get('description')?.invalid &&
+      uploadForm.get('description')?.touched) {
+      <p class="error">Description is required.</p>
+      }
+    </div>
+    <div>
+      <label for="thumbnail">Thumbnail (optional):</label>
+      <input id="thumbnail" type="file" (change)="onThumbnailChange($event)" />
+      @if (thumbnailError) {
+      <p class="error">Thumbnail size must be less than 5MB.</p>
+      }
+    </div>
+    <div>
+      <label for="videoFile">Video File:</label>
+      <input
+        id="videoFile"
+        type="file"
+        (change)="onFileChange($event)"
+        required
+      />
+      @if (uploadForm.get('file')?.invalid && uploadForm.get('file')?.touched) {
+      <p class="error">Please select a video file.</p>
+      }
+    </div>
+    <button type="submit" [disabled]="loading || uploadForm.invalid">
+      Upload
+    </button>
+  </form>
+</div>

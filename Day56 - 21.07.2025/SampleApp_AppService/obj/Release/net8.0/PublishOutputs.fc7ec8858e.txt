@@ -1,0 +1,12 @@
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/SampleApp_AppService
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/appsettings.Development.json
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/appsettings.json
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/SampleApp_AppService.dll
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/SampleApp_AppService.deps.json
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/SampleApp_AppService.runtimeconfig.json
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/SampleApp_AppService.pdb
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/Microsoft.AspNetCore.OpenApi.dll
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/Microsoft.OpenApi.dll
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/Swashbuckle.AspNetCore.Swagger.dll
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/presidio/Documents/Genspark-Training/Day56 - 21.07.2025/SampleApp_AppService/publish/Swashbuckle.AspNetCore.SwaggerUI.dll

@@ -1,0 +1,63 @@
+.upload-form-container {
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 500px;
+}
+
+.upload-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #059669;
+}
+
+.upload-form-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.upload-form-container input[type="text"],
+.upload-form-container textarea,
+.upload-form-container input[type="file"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.upload-form-container textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.upload-form-container button[type="submit"] {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #059669;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.upload-form-container button[type="submit"]:disabled {
+    background-color: #a7f3d0;
+    cursor: not-allowed;
+}
+
+.upload-form-container .error {
+    color: #dc2626;
+    font-size: 0.95rem;
+    margin-top: -8px;
+    margin-bottom: 10px;
+}

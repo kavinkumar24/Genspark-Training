@@ -1,0 +1,46 @@
+<div class="videos-list-container">
+  <h2>Videos</h2>
+
+  @if (loading) {
+    <div class="loading-spinner">
+      <span>Loading videos...</span>
+    </div>
+  } @else if (error) {
+    <p class="error-message">Failed to load videos. Please try again later.</p>
+  } @else if (!videos || videos.length === 0) {
+    <p>No videos found.</p>
+  } @else {
+    <div class="videos-grid">
+      @for (video of videos; track $index) {
+        <div class="video-card" (click)="openModal(video)">
+          <img [src]="video.thumbnailUrl || 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'" alt="Video Thumbnail" class="video-thumbnail" />
+          <div class="video-info">
+            <h3>{{ video.title }}</h3>
+            <p>{{ video.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+@if (showModal && selectedVideo) {
+  <div class="modal-backdrop" (click)="closeModal()"></div>
+  <div class="modal">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <h3>{{ selectedVideo.title }}</h3>
+    @if (selectedVideo.blobUrl && selectedVideo.blobUrl.trim().length > 0) {
+      <video
+        width="100%"
+        height="320"
+        controls
+        [src]="selectedVideo.blobUrl"
+        autoplay
+      ></video>
+    } @else {
+      <div class="no-video">
+        <p>Video file not available.</p>
+      </div>
+    }
+    <p>{{ selectedVideo.description }}</p>
+  </div>
+}
+</div>

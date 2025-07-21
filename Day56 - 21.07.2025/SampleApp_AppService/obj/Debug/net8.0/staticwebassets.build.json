@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "KAVnLcHzpg0b45XNHeJFBz11wpYp2JNOHHXuFzLUfp0=",
+  "Source": "SampleApp_AppService",
+  "BasePath": "_content/SampleApp_AppService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

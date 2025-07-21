@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "mp8ZX/5VTYz3d5uWQdbEfuHE3AJ2QSS6wJRpukoNTA8=",
+  "Source": "SampleApp_AppService",
+  "BasePath": "_content/SampleApp_AppService",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
